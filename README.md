@@ -18,7 +18,7 @@ This bot works well, but it only works at the level of a repository, not an orga
 
 [The physiopy community](https://github.com/physiopy) is an organisation I am a part of. This organisation has multiple repositories. The [team page](https://physiopy.github.io/community/team/) on the website is out of date, and there is not an automated way to keep it up to date. This community wants an up to date picture of their contributors across the whole organisation, including all repositories. This can be used on this website, in publications/presentations and in grant applications etc. Maybe implement any solutions in this repo: https://github.com/physiopy/.github? (Can also be displayed in this README). 
 
-## Solution
+## Potential solution
 
 After combining across the .allcontributorsrc JSON files to create a organsiation .allcontributorsrc file, we'd want to:
 1. Validate it (e.g. has it combined across all the contributors, removed any duplicate contribution tags and only kept the unique ones)
