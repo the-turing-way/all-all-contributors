@@ -1,3 +1,5 @@
+# THIS WAS WRITTEN QUICKLY WITH HELP OF GITHUB CO-PILOT. WE SHOULD CHECK IT MORE. 
+
 import requests
 import os
 from datetime import datetime
