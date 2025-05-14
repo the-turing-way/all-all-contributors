@@ -29,15 +29,15 @@ After combining across the .allcontributorsrc JSON files to create a organsiatio
 
 See [combine_contributors.ipynb](combine_contributors.ipynb) as a starting place but there may be better ways to approach this
 
-### Oops, does it already exist?
+### Oops, let's not duplicate effort:
 
-See here: [merge-all-contributors](https://github.com/openclimatefix/merge-all-contributors) but finding it a bit hard to use. Installed node via https://nodejs.org/en/download/. 
+- Read this thread: https://github.com/all-contributors/all-contributors/issues/416
 
-Do we build on this or make something new? It would be good to validate the outputs.
+- See here: [merge-all-contributors](https://github.com/openclimatefix/merge-all-contributors) but finding it a bit hard to use. Installed node via https://nodejs.org/en/download/. 
 
 ---
 
-> add to this repo eventually: license, contribution guidelines etc. 
+> add to this repo eventually (if needed): license, contribution guidelines etc. 
 
 
 
