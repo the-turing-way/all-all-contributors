@@ -1,4 +1,4 @@
-# All All Contributors / Actually-All Contributors
+# All All Contributors / All Contributors at the level of a GitHub Org
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 
