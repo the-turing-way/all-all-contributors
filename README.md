@@ -27,7 +27,7 @@ After combining across the .allcontributorsrc JSON files to create a organsiatio
 4. Bonus: How to keep it up to date? Can it trigger to update everytime a .allcontributorsrc in any repo is changed?
 5. Bonus: Can we have different ways of sorting? E.g Default order, Alphabetical by author name, Contribution Type, institution/affiliation/countr (if exists)
 
-See [combine_contributors.ipynb](combine_contributors.ipynb) as a starting place but there may be better ways to approach this
+See [combine_contributors.ipynb](combine_contributors.ipynb) as a starting place but there may be better ways to approach this. I am relatively new to APIs and GitHub Actions!
 
 ### Oops, let's not duplicate effort:
 
