@@ -9,7 +9,7 @@ from .http_requests import get_request, patch_request, post_request
 
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-ORG_NAME = "the-turing-way"
+ORG_NAME = os.environ.get("ORG_NAME")
 
 HEADERS = {
     "Authorization": f"token {GITHUB_TOKEN}",
