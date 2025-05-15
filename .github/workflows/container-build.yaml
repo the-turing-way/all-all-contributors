@@ -46,4 +46,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ env.REPOSITORY }}:${{ steps.parse_image_tag.outputs.image_tag }}
+          tags: ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
