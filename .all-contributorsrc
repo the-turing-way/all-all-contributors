@@ -43,9 +43,18 @@
         "ideas",
         "code",
         "projectManagement"
-      ]
-    }
-  ],
+        ]
+    },
+    {
+      "login": "sgibson91",
+      "name": "Sarah Gibson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44771837?v=4",
+      "profile": "https://sgibson91.github.io/",
+      "contributions": [
+        "ideas",
+        "code"
+        ]
+    },
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
