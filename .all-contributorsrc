@@ -43,7 +43,7 @@
         "ideas",
         "code",
         "projectManagement"
-        ]
+      ]
     },
     {
       "login": "sgibson91",
@@ -53,8 +53,18 @@
       "contributions": [
         "ideas",
         "code"
-        ]
-      }
+      ]
+    },
+    {
+      "login": "akbanana7",
+      "name": "Akram Karoune",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116113592?v=4",
+      "profile": "https://github.com/akbanana7",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
