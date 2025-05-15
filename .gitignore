@@ -1,3 +1,4 @@
 .env
 cc-venv
 physiopy_*
+__pycache__
