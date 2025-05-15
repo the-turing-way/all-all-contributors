@@ -1,7 +1,6 @@
 .env
 cc-venv
 physiopy_*
-combine_contributors.ipynb
 test.physiopy_
 test.py
 .gitignore
