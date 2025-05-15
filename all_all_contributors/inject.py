@@ -1,5 +1,5 @@
 import json
-from Pathlib import Path
+from pathlib import Path
 from typing import Any
 
 
