@@ -13,7 +13,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/23616154?v=4",
       "profile": "https://blog.jmadge.com",
       "contributions": [
-        "code"
+        "code",
+        "ideas"
       ]
     },
     {
@@ -22,7 +23,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/20923448?v=4",
       "profile": "http://nikosirmpilatze.com",
       "contributions": [
-        "ideas"
+        "ideas",
+        "code"
       ]
     },
     {
@@ -31,7 +33,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/36264706?v=4",
       "profile": "https://thomaszwagerman.co.uk/",
       "contributions": [
-        "ideas"
+        "ideas",
+        "code"
       ]
     },
     {
@@ -41,9 +44,8 @@
       "profile": "https://github.com/RayStick",
       "contributions": [
         "ideas",
-        "code",
-        "projectManagement"
-        ]
+        "code"
+      ]
     },
     {
       "login": "sgibson91",
@@ -53,8 +55,29 @@
       "contributions": [
         "ideas",
         "code"
-        ]
+      ]
     },
+    {
+      "login": "akbanana7",
+      "name": "Akram Karoune",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116113592?v=4",
+      "profile": "https://github.com/akbanana7",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "Sahil590",
+      "name": "Sahil Raja",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56438860?v=4",
+      "profile": "https://github.com/Sahil590",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    }
+  ],
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
