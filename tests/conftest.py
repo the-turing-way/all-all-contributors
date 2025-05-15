@@ -8,9 +8,7 @@ def target_all_contributors_rc():
     return """
 {
   "_comment": "This JSON file controls the behaviour of the all contributors bot. A description of the keys can be found here: https://allcontributors.org/docs/en/bot/configuration",
-  "files": [
-    "README.md",
-  ],
+  "files": ["README.md"],
   "imageSize": 100,
   "contributorsPerLine": 7,
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg)](#contributors)",
@@ -38,7 +36,7 @@ def target_all_contributors_rc():
         "infra",
         "doc"
       ]
-    },
+    }
   ],
   "projectName": "my-project",
   "projectOwner": "my-org",
