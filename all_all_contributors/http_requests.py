@@ -21,6 +21,12 @@ def get_request(url, headers={}, params={}, output="default"):
         output (str): The format in which to output the response in. Currently
             accepts 'default', 'json' or 'text'. 'default' does not apply any
             format parsing of the response.
+
+    Returns:
+        resp: A formatted response from the HTTP request
+
+    Raises:
+        ValueError: An unexpected output format was chosen.
     """
     accepted_formats = ["default", "json", "text"]
     if output not in accepted_formats:
@@ -53,6 +59,12 @@ def patch_request(url, headers={}, json={}, return_json=False):
             the request. Defaults to an empty dictionary.
         return_json (bool, optional): Return the JSON payload response.
             Defaults to False.
+    
+    Returns:
+        resp: A JSON formatted response from a HTTP response
+    
+    Raises:
+        HTTPError: An error was returned by the HTTP request
     """
     resp = requests.patch(url, headers=headers, json=json)
 
@@ -74,6 +86,12 @@ def post_request(url, headers={}, json={}, return_json=False):
             the request. Defaults to an empty dictionary.
         return_json (bool, optional): Return the JSON payload response.
             Defaults to False.
+    
+    Returns:
+        resp: A JSON formatted response from a HTTP request
+    
+    Raises:
+        HTTPError: An error was returned by the HTTP request
     """
     resp = requests.post(url, headers=headers, json=json)
 
