@@ -83,7 +83,7 @@ def valid_contributor_2():
         "avatar_url": "https://github.com/user2.png",
         "profile": "https://github.com/user2",
         "contributions": [
-            "code ",
+            "code",
             "doc"
         ]
     }
