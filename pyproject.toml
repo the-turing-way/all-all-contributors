@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "all-all-contributors"
+dynamic = ["version"]
+description = 'Combine all contributors from across a GitHub organisation'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = []
+classifiers = []
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/RayStick/all-all-contributors#readme"
+Issues = "https://github.com/RayStick/all-all-contributors/issues"
+Source = "https://github.com/RayStick/all-all-contributors"
+
+[tool.hatch.version]
+path = "all_all_contributors/__about__.py"
