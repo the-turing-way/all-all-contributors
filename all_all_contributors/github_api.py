@@ -1,10 +1,20 @@
+import os
+import base64
+import json
 import random
 import string
-
 import jmespath
 from requests import put
-
 from .http_requests import get_request, patch_request, post_request
+
+
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+ORG_NAME = os.environ.get("ORG_NAME")
+
+HEADERS = {
+    "Authorization": f"token {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github.v3+json"
+}
 
 
 class GitHubAPI:
@@ -136,3 +146,66 @@ class GitHubAPI:
         print("Pulling info for ref: {}", ref)
         url = "/".join([self.api_url, "git", "ref", "heads", ref])
         return get_request(url, headers=self.inputs.headers, output="json")
+    
+    def get_all_repos(org, excluded):
+      """Get all repositories from a GitHub organization using the GitHub API
+      
+      Args:
+          org (str): The name of the GitHub organization
+          excluded (set): A set of repository names to exclude from the list
+      Returns:
+          list: A list of repository names
+      
+      """
+      repos = []
+      page = 1
+      while True:
+          url = f"https://api.github.com/orgs/{org}/repos"
+          params = {"type": "public", "per_page": 100, "page": page}
+          data = get_request(url, headers=HEADERS, params=params, output="json")
+          if not data:
+              break
+          for repo in data:
+              if repo["name"] not in excluded:
+                  repos.append(repo["name"])
+          if len(data) < 100:
+              break
+          page += 1
+      return repos
+
+    def get_contributors_from_repo(org, repo):
+        """Get contributors from a specific repository using the GitHub API
+        
+        Args:
+            org (str): The name of the GitHub organization
+            repo (str): The name of the repository
+        Returns:
+            list: A list of contributors from the repository
+        
+        """
+        url = f"https://api.github.com/repos/{org}/{repo}/contents/.all-contributorsrc"
+        try:
+            data = get_request(url, headers=HEADERS, output="json")
+            if "content" in data:
+                decoded = base64.b64decode(data["content"]).decode("utf-8")
+                contributors = json.loads(decoded).get("contributors", [])
+                return contributors
+        except Exception:
+            pass
+        return []
+
+    def load_excluded_repos(ignore_file=".repoignore"):
+        """Load excluded repositories from a file
+        Args:
+            ignore_file (str): The path to the file containing excluded repositories
+        Returns:
+            set: A set of excluded repository names
+        """
+        excluded = set()
+        if os.path.exists(ignore_file):
+            with open(ignore_file, "r") as f:
+                for line in f:
+                    repo = line.strip()
+                    if repo and not repo.startswith("#"):
+                        excluded.add(repo)
+        return excluded
