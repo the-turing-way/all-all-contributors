@@ -1,0 +1,6 @@
+# Folders to be ignored
+.git
+.github
+tests
+
+# Files to be ignored
