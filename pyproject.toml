@@ -12,7 +12,9 @@ license = "MIT"
 keywords = []
 authors = []
 classifiers = []
-dependencies = []
+dependencies = [
+    "requests",
+]
 
 [project.urls]
 Documentation = "https://github.com/RayStick/all-all-contributors#readme"
