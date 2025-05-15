@@ -1,3 +1,6 @@
 .env
 cc-venv
 physiopy_*
+
+# documention builds
+site/
