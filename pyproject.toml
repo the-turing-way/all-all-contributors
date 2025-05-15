@@ -14,7 +14,9 @@ authors = []
 classifiers = []
 dependencies = [
     "jsonschema",
+    "jmespath",
     "requests",
+    "ruamel.yaml",
     "responses",  # Testing dependencies
 ]
 
