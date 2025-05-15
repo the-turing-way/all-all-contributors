@@ -1,3 +1,11 @@
 .env
 cc-venv
 physiopy_*
+combine_contributors.ipynb
+test.physiopy_
+test.py
+.gitignore
+.gitignore
+combineContributorsTest.py
+__pycache__/combine_contributors_functions.cpython-311.pyc
+/__pycache__
