@@ -1,6 +1,7 @@
 site_name: all-all contributors
 nav:
   - Overview: index.md
+  - Workflow Overview: diagrams.md
   - Developer Guide:
     - Documentation: developer/documentation.md
   - License: license.md
