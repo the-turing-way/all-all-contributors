@@ -35,5 +35,7 @@ test = "python -m pytest {args:} ./tests"
 
 [tool.pytest.ini_options]
 addopts = [
+    "-vvv",
+    "--color=yes",
     "--import-mode=importlib",
 ]
