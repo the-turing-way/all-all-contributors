@@ -59,3 +59,40 @@ def target_all_contributors_rc_file(tmp_path, target_all_contributors_rc):
     with open(file, "w") as outfile:
         outfile.write(target_all_contributors_rc)
     return file
+
+
+@fixture()
+def valid_contributor_1():
+    return {
+      "login": "user1",
+      "name": "User One",
+      "avatar_url": "https://github.com/user1.png",
+      "profile": "https://github.com/user1",
+      "contributions": [
+        "infra",
+        "doc"
+      ]
+    }
+
+
+@fixture()
+def valid_contributor_2():
+
+    return {
+        "login": "user2",
+        "name": "User Two",
+        "avatar_url": "https://github.com/user2.png",
+        "profile": "https://github.com/user2",
+        "contributions": [
+            "code ",
+            "doc"
+        ]
+    }
+
+
+@fixture()
+def valid_contributors_dict(valid_contributor_1, valid_contributor_2):
+    return {
+          "contributors": [valid_contributor_1, valid_contributor_2]
+      }
+
