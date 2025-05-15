@@ -41,14 +41,3 @@ def get_contributors_from_repo(org, repo):
         pass
     return []
 
-def main():
-    repos = get_all_repos(ORG_NAME, EXCLUDED_REPOS)
-    all_contributors = {}
-    for repo in repos:
-        contributors = get_contributors_from_repo(ORG_NAME, repo)
-        all_contributors[repo] = contributors
-    print(all_contributors)
-
-if __name__ == "__main__":
-    main()
-    
