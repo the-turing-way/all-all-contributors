@@ -21,11 +21,10 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install dependencies and package
+      - name: Install hatch
         run: |
-          python -m pip install -U pytest
-          python -m pip install -e .
+          pip install hatch
 
       - name: Run tests
         run: |
-          python -m pytest -vvv --color=yes
+          hatch run test:test
