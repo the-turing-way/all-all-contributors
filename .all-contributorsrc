@@ -35,6 +35,17 @@
       ]
     },
     {
+      "login": "RayStick",
+      "name": "Rachael Stickland",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50215726?v=4",
+      "profile": "https://github.com/RayStick",
+      "contributions": [
+        "ideas",
+        "code",
+        "projectManagement"
+        ]
+    },
+    {
       "login": "sgibson91",
       "name": "Sarah Gibson",
       "avatar_url": "https://avatars.githubusercontent.com/u/44771837?v=4",
@@ -42,9 +53,8 @@
       "contributions": [
         "ideas",
         "code"
-      ]
-    }
-  ],
+        ]
+    },
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
