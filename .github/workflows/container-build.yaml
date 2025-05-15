@@ -26,7 +26,11 @@ jobs:
           tag = "${{ github.ref_name }}".replace("/", "-")
 
           with open(github_output, "w") as f:
-              f.write(f"image_tag={tag}")
+              f.write(f"image_tag={tag}\n")
+
+      - name: downcase repository name
+        run: |
+          echo "repository=${{ github.repository, , }}" >> ${GITHUB_ENV}
 
       - name: Login to GitHub Container Registry
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -40,4 +44,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
+          tags: ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
