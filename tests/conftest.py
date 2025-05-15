@@ -7,7 +7,6 @@ from pytest import fixture
 def target_all_contributors_rc():
     return """
 {
-  "_comment": "This JSON file controls the behaviour of the all contributors bot. A description of the keys can be found here: https://allcontributors.org/docs/en/bot/configuration",
   "files": ["README.md"],
   "imageSize": 100,
   "contributorsPerLine": 7,

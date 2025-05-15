@@ -13,6 +13,7 @@ keywords = []
 authors = []
 classifiers = []
 dependencies = [
+    "jsonschema",
     "requests",
     "responses",  # Testing dependencies
 ]
