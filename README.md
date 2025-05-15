@@ -1,6 +1,6 @@
 # All All Contributors / All Contributors at the level of a GitHub Org
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
@@ -62,6 +62,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/RayStick"><img src="https://avatars.githubusercontent.com/u/50215726?v=4?s=100" width="100px;" alt="Rachael Stickland"/><br /><sub><b>Rachael Stickland</b></sub></a><br /><a href="#ideas-RayStick" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/RayStick/all-all-contributors/commits?author=RayStick" title="Code">💻</a> <a href="#projectManagement-RayStick" title="Project Management">📆</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://sgibson91.github.io/"><img src="https://avatars.githubusercontent.com/u/44771837?v=4?s=100" width="100px;" alt="Sarah Gibson"/><br /><sub><b>Sarah Gibson</b></sub></a><br /><a href="#ideas-sgibson91" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/RayStick/all-all-contributors/commits?author=sgibson91" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/akbanana7"><img src="https://avatars.githubusercontent.com/u/116113592?v=4?s=100" width="100px;" alt="Akram Karoune"/><br /><sub><b>Akram Karoune</b></sub></a><br /><a href="#ideas-akbanana7" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/RayStick/all-all-contributors/commits?author=akbanana7" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sahil590"><img src="https://avatars.githubusercontent.com/u/56438860?v=4?s=100" width="100px;" alt="Sahil Raja"/><br /><sub><b>Sahil Raja</b></sub></a><br /><a href="#ideas-Sahil590" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/RayStick/all-all-contributors/commits?author=Sahil590" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
