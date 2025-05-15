@@ -23,6 +23,7 @@ Source = "https://github.com/RayStick/all-all-contributors"
 path = "all_all_contributors/__about__.py"
 
 [project.optional-dependencies]
+docs = [
     "mkdocs",
     "mkdocs-material",
     "mkdocstrings[python]",
