@@ -1,9 +1,8 @@
-# THIS WAS WRITTEN QUICKLY WITH HELP OF GITHUB CO-PILOT. WE SHOULD CHECK IT MORE. 
-
 import requests
 import os
 from datetime import datetime
 import json
+from pathlib import Path
 
 # define a function that fetches all contributors files from public repos in a GitHub organization and stores them in a folder 
 def fetch_all_contributors(org_name, github_token):
@@ -22,7 +21,8 @@ def fetch_all_contributors(org_name, github_token):
     repos = response.json()
     
     # Create a new folder with org_name and current date and time
-    folder_name = f"{org_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    folder_name = f"{org_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}" # Helpfull note - Creats folder in current running directory
+    # For UX, add some customization to the folder name/location
     os.makedirs(folder_name, exist_ok=True)
     
     for repo in repos:
@@ -43,3 +43,46 @@ def fetch_all_contributors(org_name, github_token):
                 file.write(file_content)
         else:
             print(f'.all-contributorsrc not found in {repo_name}')
+    return folder_name
+
+"""
+The below function (combineContributors) is assuming the JSON files in the have the structure 
+{
+    "projectName": "",
+    "projectOwner": "",
+    "repoType": "github",
+    "repoHost": "https://github.com",
+    "files": [
+        ""
+    ],
+    "imageSize": int,
+    "commit": boolean (true/false),
+    "commitConvention": str (god knows),
+    "contributors": [
+        {
+            "contributions": [
+                "testContributor"
+            ],
+            "login": "contributorUsername",
+            "name": "ContributorDisplayName"
+        },
+        {
+        etc.
+        }
+"""
+
+
+def combineContributors(folderName):
+    print(f"Attempting to locate directory {folderName}")
+    scanFolder = Path(folderName)
+    if not scanFolder.exists() or not scanFolder.is_dir():
+        print("Directory not found/initialised")
+        raise FileNotFoundError(f"Directory '{folderName}' not found or is not a directory.")
+    fileArray = []
+    for jsonFile in scanFolder.glob("*.json"):
+        with open(jsonFile, "r", encoding="utf-8") as f:
+            print("Opened file")
+            parsedJSON = json.loads(jsonFile)
+            print(parsedJSON)
+            fileArray.append(parsedJSON)
+    print(fileArray)
