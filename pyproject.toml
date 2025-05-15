@@ -28,6 +28,17 @@ Source = "https://github.com/RayStick/all-all-contributors"
 [tool.hatch.version]
 path = "all_all_contributors/__about__.py"
 
+[tool.hatch.envs.docs]
+extra-dependencies = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-autoapi"
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build"
+serve = "mkdocs serve"
 [tool.hatch.envs.test]
 extra-dependencies = [
   "pytest>=8.3.5",
