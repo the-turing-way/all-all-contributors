@@ -1,8 +1,19 @@
 import json
 
-from pytest import raises
+from pytest import fixture, raises
 
 from all_all_contributors.inject import inject, inject_file
+from all_all_contributors import inject as inject_mod
+
+
+@fixture()
+def skip_validation(monkeypatch):
+    monkeypatch.setattr(
+        inject_mod,
+        "validate_all_contributors_rc",
+        lambda x: None,
+    )
+
 
 class TestInject:
     def test_inject(self, target_all_contributors_rc_object):
@@ -20,7 +31,7 @@ class TestInject:
 
 
 class TestInjectFile:
-    def test_inject_file(self, target_all_contributors_rc_file):
+    def test_inject_file(self, target_all_contributors_rc_file, skip_validation):
         contributors = ["hello"]
         inject_file(target_all_contributors_rc_file, contributors)
 

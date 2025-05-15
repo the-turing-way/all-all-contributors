@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .validate import validate_all_contributors_rc
+
 
 def inject(all_contributors_rc: dict[Any], contributors: list[Any]) -> dict[Any]:
     """Replace the 'contributors' field of an all contributors configuration object with a new list"""
@@ -19,5 +21,7 @@ def inject_file(filepath: Path, contributors: list[Any]) -> None:
         all_contributors_rc = json.load(all_contributors_file)
 
     all_contributors_rc = inject(all_contributors_rc, contributors)
+    validate_all_contributors_rc(all_contributors_rc)
+
     with open(filepath, "w") as all_contributors_file:
         json.dump(all_contributors_rc, all_contributors_file)
