@@ -17,6 +17,7 @@ dependencies = [
     "requests",
     "ruamel.yaml",
     "responses",  # Testing dependencies
+    "typer",
 ]
 
 [project.urls]
