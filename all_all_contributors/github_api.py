@@ -2,15 +2,14 @@ import os
 import base64
 import json
 from http_requests import get_request
-
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-ORG_NAME = "the-turing-way"  
-EXCLUDED_REPOS = {"repo1", "repo2"}  
+ORG_NAME = "the-turing-way"
 
 HEADERS = {
     "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json"
 }
+
 
 def get_all_repos(org, excluded):
     repos = []
@@ -41,3 +40,12 @@ def get_contributors_from_repo(org, repo):
         pass
     return []
 
+def load_excluded_repos(ignore_file=".repoignore"):
+    excluded = set()
+    if os.path.exists(ignore_file):
+        with open(ignore_file, "r") as f:
+            for line in f:
+                repo = line.strip()
+                if repo and not repo.startswith("#"):
+                    excluded.add(repo)
+    return excluded
