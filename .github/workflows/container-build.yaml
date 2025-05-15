@@ -22,7 +22,7 @@ jobs:
         run: |
           import os
 
-          github_output = os.env["GITHUB_OUTPUT"]
+          github_output = os.environ["GITHUB_OUTPUT"]
           tag = "${{ github.ref_name }}".replace("/", "-")
 
           with open(github_output, "w") as f:
