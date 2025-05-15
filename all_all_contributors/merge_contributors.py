@@ -1,6 +1,9 @@
-"""Merge multiple lists of contributors into a single list"""
+"""Merge multiple .all-contributorsrc configurations into a single configuration.
 
-import json
+This module provides functionality to merge multiple .all-contributorsrc files
+into a single consolidated configuration that can be used at the organization level.
+"""
+
 from typing import List, Dict, Any
 import requests
 from jsonschema import validate, ValidationError
@@ -9,10 +12,8 @@ from jsonschema import validate, ValidationError
 def get_all_contributors_schema() -> Dict[str, Any]:
     """Fetch the All Contributors schema from JSON Schema Store.
 
-    Returns
-    -------
-    Dict[str, Any]
-        The JSON schema for All Contributors configuration.
+    Returns:
+        Dict[str, Any]: The JSON schema for All Contributors configuration.
     """
     schema_url = "https://json.schemastore.org/all-contributors.json"
     response = requests.get(schema_url)
@@ -21,71 +22,72 @@ def get_all_contributors_schema() -> Dict[str, Any]:
 
 
 def merge_contributors(
-    contributors_list: List[Dict[str, Any]]
-) -> List[Dict[str, Any]]:
-    """Merge multiple lists of contributors into a single list.
+    configs_list: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    """Merge multiple .all-contributorsrc configurations into a single config.
 
-    Merge contributors extracted from multiple .all-contributorsrc files
-    into a single list. Merge on the 'profile' field and make sure that
-    for each unique profile, the types of contributions are aggregated.
+    Takes a list of complete .all-contributorsrc configurations and merges them
+    into a single configuration that can be used at the organization level.
+    Contributors are merged based on their profile URL, and their contributions
+    types are aggregated.
 
-    Parameters
-    ----------
-    contributors_list : List[Dict[str, Any]]
-        List of contributor dictionaries. Each dictionary must contain
-        the required fields: login, name, avatar_url, profile, and
-        contributions. The contributions array must contain at least
-        one valid contribution type.
+    Args:
+        configs_list: List of complete .all-contributorsrc configurations.
+            Each config must be a valid All Contributors configuration object
+            containing at least a 'contributors' array.
 
-    Returns
-    -------
-    List[Dict[str, Any]]
-        Merged list of unique contributors with their types of contributions
-        aggregated.
-
-    Notes
-    -----
-    - Contributors are merged based on their profile URL
-    - Contribution types are deduplicated using a set
-    - The output maintains all required fields from the All Contributors schema
-    - Validates against the official All Contributors JSON schema
+    Returns:
+        Dict[str, Any]: A merged configuration object that follows the All
+            Contributors schema, with unique contributors and their aggregated
+            contributions.
     """
     # Get the schema for validation
     schema = get_all_contributors_schema()
-    contributor_schema = schema['properties']['contributors']['items']
 
     # Create a dictionary to store unique profiles and their contribution types
     unique_profiles = {}
 
-    # Process each contributor from the input list
-    for contributor in contributors_list:
+    # Process each configuration
+    for config in configs_list:
         try:
-            # Validate contributor against schema
-            validate(instance=contributor, schema=contributor_schema)
+            # Validate the entire config against schema
+            validate(instance=config, schema=schema)
         except ValidationError:
             continue
 
-        profile = contributor['profile']
-        if not profile:
-            continue
+        # Process each contributor in the config
+        for contributor in config.get('contributors', []):
+            try:
+                # Validate individual contributor against schema
+                validate(instance=contributor, schema=schema['properties']['contributors']['items'])
+            except ValidationError:
+                continue
 
-        if profile not in unique_profiles:
-            # Initialize new contributor entry with required fields
-            unique_profiles[profile] = {
-                'login': contributor['login'],
-                'name': contributor['name'],
-                'avatar_url': contributor['avatar_url'],
-                'profile': profile,
-                'contributions': set()
-            }
+            profile = contributor.get('profile')
+            if not profile:
+                continue
 
-        # Add contributions to the set
-        contributions = contributor['contributions']
-        if contributions:
-            unique_profiles[profile]['contributions'].update(contributions)
+            if profile not in unique_profiles:
+                # Initialize new contributor entry with required fields
+                unique_profiles[profile] = {
+                    'login': contributor['login'],
+                    'name': contributor['name'],
+                    'avatar_url': contributor['avatar_url'],
+                    'profile': profile,
+                    'contributions': set()
+                }
 
-    # Convert the dictionary back to a list and convert contribution sets to lists
-    merged_contributors = []
+            # Add contributions to the set
+            contributions = contributor.get('contributions', [])
+            if contributions:
+                unique_profiles[profile]['contributions'].update(contributions)
+
+    # Create the merged configuration
+    merged_config = {
+        'contributors': []
+    }
+
+    # Convert the dictionary to a list and convert contribution sets to lists
     for profile_data in unique_profiles.values():
         contributor = profile_data.copy()
         # Ensure at least one contribution exists
@@ -93,10 +95,6 @@ def merge_contributors(
             contributor['contributions'] = sorted(
                 list(contributor['contributions'])
             )
-            merged_contributors.append(contributor)
+            merged_config['contributors'].append(contributor)
 
-    return merged_contributors
-
-
-
-
+    return merged_config
