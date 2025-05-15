@@ -25,6 +25,7 @@ def fetch_all_contributors(org_name, github_token):
     # For UX, add some customization to the folder name/location
     os.makedirs(folder_name, exist_ok=True)
     
+    fileArray = []
     for repo in repos:
         repo_name = repo['name']
         default_branch = repo['default_branch']
@@ -37,16 +38,15 @@ def fetch_all_contributors(org_name, github_token):
             file_content = requests.get(download_url).text
             print(f'Success! .all-contributorsrc found in {repo_name}: {download_url}')
             
-            # Save the file content to a local file in the new folder
-            file_path = os.path.join(folder_name, f'{repo_name}_all-contributorsrc.json')
-            with open(file_path, 'w') as file:
-                file.write(file_content)
+            parsedJSON = json.loads(file_content)
+            fileArray.append(parsedJSON)
         else:
             print(f'.all-contributorsrc not found in {repo_name}')
-    return folder_name
+    print(fileArray)
+    return fileArray
 
 """
-The below function (combineContributors) is assuming the JSON files in the have the structure 
+The below function (combineContributors) is assuming the JSON objects (variables in single-dimension array) in the have the structure 
 {
     "projectName": "",
     "projectOwner": "",
@@ -73,16 +73,4 @@ The below function (combineContributors) is assuming the JSON files in the have 
 
 
 def combineContributors(folderName):
-    print(f"Attempting to locate directory {folderName}")
-    scanFolder = Path(folderName)
-    if not scanFolder.exists() or not scanFolder.is_dir():
-        print("Directory not found/initialised")
-        raise FileNotFoundError(f"Directory '{folderName}' not found or is not a directory.")
-    fileArray = []
-    for jsonFile in scanFolder.glob("*.json"):
-        with open(jsonFile, "r", encoding="utf-8") as f:
-            print("Opened file")
-            parsedJSON = json.loads(jsonFile)
-            print(parsedJSON)
-            fileArray.append(parsedJSON)
-    print(fileArray)
+    print("Please add to this function")
