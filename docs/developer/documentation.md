@@ -2,24 +2,15 @@
 
 The documentation is built using [mkdocs](https://www.mkdocs.org/). We use [mkdocstrings](https://mkdocstrings.github.io/) and [mkdocs-autoapi](https://mkdocs-autoapi.readthedocs.io/en/latest/) to automatically generate the API references.
 
-### Installing Dependencies
-To install the documentation dependencies:
-
-```bash
-source venv/bin/activate
-
-pip install -e .[docs]
-```
-
 ### Building the Docs
 To preview the documentation locally:
-```bash
-mkdocs serve
+```console
+hatch run docs:serve
 ```
 
 To build the documentation:
-```bash
-mkdocs build
+```console
+hatch run docs:build
 ```
 
 ### Navigation
