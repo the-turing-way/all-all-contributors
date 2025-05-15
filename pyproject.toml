@@ -14,6 +14,7 @@ authors = []
 classifiers = []
 dependencies = [
     "requests",
+    "responses",  # Testing dependencies
 ]
 
 [project.urls]
