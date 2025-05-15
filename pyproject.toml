@@ -12,7 +12,10 @@ license = "MIT"
 keywords = []
 authors = []
 classifiers = []
-dependencies = []
+dependencies = [
+    "requests",
+    "responses",  # Testing dependencies
+]
 
 [project.urls]
 Documentation = "https://github.com/RayStick/all-all-contributors#readme"
@@ -28,4 +31,19 @@ docs = [
     "mkdocs-material",
     "mkdocstrings[python]",
     "mkdocs-autoapi"
+]
+
+[tool.hatch.envs.test]
+extra-dependencies = [
+  "pytest>=8.3.5",
+]
+
+[tool.hatch.envs.test.scripts]
+test = "python -m pytest {args:} ./tests"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-vvv",
+    "--color=yes",
+    "--import-mode=importlib",
 ]

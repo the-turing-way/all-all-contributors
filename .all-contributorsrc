@@ -1,0 +1,87 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "JimMadge",
+      "name": "Jim Madge",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23616154?v=4",
+      "profile": "https://blog.jmadge.com",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "niksirbi",
+      "name": "Niko Sirmpilatze",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20923448?v=4",
+      "profile": "http://nikosirmpilatze.com",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "thomaszwagerman",
+      "name": "Thomas Zwagerman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36264706?v=4",
+      "profile": "https://thomaszwagerman.co.uk/",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "RayStick",
+      "name": "Rachael Stickland",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50215726?v=4",
+      "profile": "https://github.com/RayStick",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "sgibson91",
+      "name": "Sarah Gibson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44771837?v=4",
+      "profile": "https://sgibson91.github.io/",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "akbanana7",
+      "name": "Akram Karoune",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116113592?v=4",
+      "profile": "https://github.com/akbanana7",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "Sahil590",
+      "name": "Sahil Raja",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56438860?v=4",
+      "profile": "https://github.com/Sahil590",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "all-all-contributors",
+  "projectOwner": "RayStick"
+}
