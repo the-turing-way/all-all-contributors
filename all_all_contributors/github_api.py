@@ -148,6 +148,15 @@ class GitHubAPI:
         return get_request(url, headers=self.inputs.headers, output="json")
     
     def get_all_repos(org, excluded):
+      """Get all repositories from a GitHub organization using the GitHub API
+      
+      Args:
+          org (str): The name of the GitHub organization
+          excluded (set): A set of repository names to exclude from the list
+      Returns:
+          list: A list of repository names
+      
+      """
       repos = []
       page = 1
       while True:
@@ -165,6 +174,15 @@ class GitHubAPI:
       return repos
 
     def get_contributors_from_repo(org, repo):
+        """Get contributors from a specific repository using the GitHub API
+        
+        Args:
+            org (str): The name of the GitHub organization
+            repo (str): The name of the repository
+        Returns:
+            list: A list of contributors from the repository
+        
+        """
         url = f"https://api.github.com/repos/{org}/{repo}/contents/.all-contributorsrc"
         try:
             data = get_request(url, headers=HEADERS, output="json")
@@ -177,6 +195,12 @@ class GitHubAPI:
         return []
 
     def load_excluded_repos(ignore_file=".repoignore"):
+        """Load excluded repositories from a file
+        Args:
+            ignore_file (str): The path to the file containing excluded repositories
+        Returns:
+            set: A set of excluded repository names
+        """
         excluded = set()
         if os.path.exists(ignore_file):
             with open(ignore_file, "r") as f:
