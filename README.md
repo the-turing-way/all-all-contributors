@@ -56,7 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://blog.jmadge.com"><img src="https://avatars.githubusercontent.com/u/23616154?v=4?s=100" width="100px;" alt="Jim Madge"/><br /><sub><b>Jim Madge</b></sub></a><br /><a href="https://github.com/RayStick/all-all-contributors/commits?author=JimMadge" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://blog.jmadge.com"><img src="https://avatars.githubusercontent.com/u/23616154?v=4?s=100" width="100px;" alt="Jim Madge"/><br /><sub><b>Jim Madge</b></sub></a><br /><a href="https://github.com/RayStick/all-all-contributors/commits?author=JimMadge" title="Code">💻</a> <a href="#ideas-JimMadge" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
