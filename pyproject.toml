@@ -24,3 +24,18 @@ Source = "https://github.com/RayStick/all-all-contributors"
 
 [tool.hatch.version]
 path = "all_all_contributors/__about__.py"
+
+[tool.hatch.envs.test]
+extra-dependencies = [
+  "pytest>=8.3.5",
+]
+
+[tool.hatch.envs.test.scripts]
+test = "python -m pytest {args:} ./tests"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-vvv",
+    "--color=yes",
+    "--import-mode=importlib",
+]
