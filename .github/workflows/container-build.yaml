@@ -30,7 +30,9 @@ jobs:
 
       - name: downcase repository name
         run: |
-          echo "repository=${{ github.repository, , }}" >> ${GITHUB_ENV}
+          echo "repository=${REPOSITORY,,}" >> ${GITHUB_ENV}
+        env:
+          REPOSITORY: ${{ github.repository }}
 
       - name: Login to GitHub Container Registry
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -44,4 +46,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
+          tags: ghcr.io/${{ env.REPOSITORY }}:${{ steps.parse_image_tag.outputs.image_tag }}
