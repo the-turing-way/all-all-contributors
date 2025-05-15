@@ -30,7 +30,8 @@ def merge(
     repos = placeholder_get_org_repos(organisation, token)
     contributors = placeholder_get_contributors(repos, token)
     merged_contributors = placeholder_merge_contributors(contributors)
-    inject_file(target, merged_contributors)
+    if merged_contributors:
+        inject_file(target, merged_contributors)
 
 
 def get_github_token() -> str | None:
