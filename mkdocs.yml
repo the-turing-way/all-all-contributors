@@ -1,1 +1,53 @@
-site_name: My Docs
+site_name: all-all contributors
+nav:
+  - Overview: index.md
+repo_url: https://github.com/RayStick/all-all-contributors
+repo_name: all-all-contributors
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    # Enables copying of code blocks
+    - content.code.copy
+    # Enables "edit this page" to contribute to docs
+    - content.action.edit
+plugins:
+  - search
+  # Automatically generates API section from docstrings
+  - mkdocs-autoapi:
+      autoapi_add_nav_entry: API
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - .
+          options:
+            show_submodules: true
+            docstring_style: google
+            heading_level: 3
+markdown_extensions:
+  - admonition
+  # Enables code block highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.blocks.caption
+  - pymdownx.tabbed:
+      alternate_style: true
