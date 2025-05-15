@@ -10,7 +10,7 @@ app = typer.Typer()
 
 
 @app.command()
-def main(
+def merge(
     organisation: Annotated[
         str,
         typer.Argument(
@@ -50,3 +50,7 @@ def placeholder_get_contributors(repos: list[str], github_token: str) -> list[An
 
 def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]:
     ...
+
+
+def main():
+    app()
