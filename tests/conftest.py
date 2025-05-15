@@ -51,3 +51,11 @@ def target_all_contributors_rc():
 @fixture()
 def target_all_contributors_rc_object(target_all_contributors_rc):
     return json.loads(target_all_contributors_rc)
+
+
+@fixture()
+def target_all_contributors_rc_file(tmp_path, target_all_contributors_rc):
+    file = tmp_path / ".all_contributors.rc"
+    with open(file, "w") as outfile:
+        outfile.write(target_all_contributors_rc)
+    return file
