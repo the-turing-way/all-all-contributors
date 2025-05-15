@@ -21,3 +21,10 @@ Source = "https://github.com/RayStick/all-all-contributors"
 
 [tool.hatch.version]
 path = "all_all_contributors/__about__.py"
+
+[project.optional-dependencies]
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-autoapi"
+]
