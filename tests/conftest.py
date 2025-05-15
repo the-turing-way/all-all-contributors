@@ -77,7 +77,6 @@ def valid_contributor_1():
 
 @fixture()
 def valid_contributor_2():
-
     return {
         "login": "user2",
         "name": "User Two",
@@ -95,4 +94,3 @@ def valid_contributors_dict(valid_contributor_1, valid_contributor_2):
     return {
           "contributors": [valid_contributor_1, valid_contributor_2]
       }
-
