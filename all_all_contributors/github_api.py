@@ -5,7 +5,7 @@ import random
 import string
 import jmespath
 from requests import put
-from http_requests import get_request, patch_request, post_request
+from .http_requests import get_request, patch_request, post_request
 
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
