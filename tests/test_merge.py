@@ -16,3 +16,4 @@ def test_merge_contributors(valid_contributors_dict):
         valid_contributors_dict["contributors"][0],
         valid_contributors_dict["contributors"][1],
     ]
+    print(merged_contributors)

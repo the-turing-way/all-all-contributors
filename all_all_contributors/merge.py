@@ -5,17 +5,23 @@ from typing import List, Dict, Any
 
 def merge_contributors(
     contributors_list: List[Dict[str, Any]]
-) -> Dict[str, Any]:
-    """Merge multiple 'contributors' fields into a single list.
+) -> List[Dict[str, Any]]:
+    """Merge multiple lists of contributor dictionaries into a single list.
 
-    Takes a list of 'contributors' fields extracted from
-    multiple .all-contributorsrc files and merges them into a single list.
+    This function takes a list of contributor dictionaries (typically from
+    different .all-contributorsrc files) and merges them based on unique
+    profile URLs. When multiple entries exist for the same contributor, their
+    contributions are aggregated into a single entry.
 
     Args:
-        contributors_list: List of 'contributors' fields.
+        contributors_list: A list of dictionaries, each containing a
+            'contributors' key with a list of contributor dictionaries. Each
+            contributor dict should have at least 'profile' and 'contributions'
+            keys.
 
     Returns:
-        Dict[str, Any]: A merged 'contributors' list.
+        List[Dict[str, Any]]: A list of merged contributor dictionaries, where
+            each contributor appears only once with their combined contributions.
 
     Note:
         The function merges contributors based on their profile URL and
