@@ -13,7 +13,9 @@ keywords = []
 authors = []
 classifiers = []
 dependencies = [
+    "jmespath",
     "requests",
+    "ruamel.yaml",
     "responses",  # Testing dependencies
 ]
 
