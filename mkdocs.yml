@@ -3,6 +3,7 @@ nav:
   - Overview: index.md
   - Developer Guide:
     - Documentation: developer/documentation.md
+  - License: license.md
 repo_url: https://github.com/RayStick/all-all-contributors
 repo_name: all-all-contributors
 edit_uri: edit/main/docs/
