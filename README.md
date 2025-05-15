@@ -1,4 +1,4 @@
-# All All Contributors / All Contributors at the level of a GitHub Org
+# All All Contributors
 
 *All Contributors at the level of a GitHub Org*
 
