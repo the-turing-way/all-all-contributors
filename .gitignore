@@ -4,7 +4,6 @@ physiopy_*
 
 # documention builds
 site/
-
 combine_contributors.ipynb
 test.physiopy_
 test.py
