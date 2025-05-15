@@ -18,13 +18,9 @@ The navigation is handled in `mkdocs.yml`:
 ```yaml
 nav:
   - Overview: index.md
-  - User Guide:
-    - Getting Started: getting_started.md
   - Developer Guide:
-    - Documentation Guide: developer/contribution/documentation.md
-    - Code of Conduct: developer/contribution/code_of_conduct.md
-  - Change Log: change_log.md
-  - LICENSE: license.md
+    - Documentation: developer/documentation.md
+  - License: license.md
 ```
 The pages listed here can be edited manually.
 
