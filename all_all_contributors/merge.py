@@ -28,18 +28,14 @@ def merge_contributors(
         aggregates contributions types.
     """
 
-    unique_profiles = []
-    merged_contributors = []
+    all_contributors = {}
 
     for contributor in contributors_list:
-        if (key := contributor.get(_unique_key)) not in unique_profiles:
-            unique_profiles.append(key)
-            merged_contributors.append(contributor)
+        if (key := contributor.get(_unique_key)) not in all_contributors.keys():
+            all_contributors[key] = contributor
         else:
-            # find the index of the contributor in the list
-            index = unique_profiles.index(key)
-            merged_contributors[index]["contributions"].extend(
+            all_contributors[key]["contributions"].extend(
                 contributor["contributions"]
             )
 
-    return merged_contributors
+    return list(all_contributors.values())
