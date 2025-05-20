@@ -41,6 +41,12 @@ def merge_contributors(
         else:
             all_contributors[key] = contributor.copy()
 
+        # Sort the contributions alphabetically. This permits our tests to pass
+        # by enforcing an alphabetical order.
+        all_contributors[key]["contributions"] = sorted(
+            all_contributors[key]["contributions"]
+        )
+
     return list(all_contributors.values())
 
 
