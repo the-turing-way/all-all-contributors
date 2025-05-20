@@ -32,7 +32,7 @@ def merge_contributors(
 
     for contributor in contributors_list:
         if (key := contributor.get(_unique_key)) not in all_contributors.keys():
-            all_contributors[key] = contributor
+            all_contributors[key] = contributor.copy()
         else:
             all_contributors[key]["contributions"] = list(
                 set(all_contributors[key]["contributions"] + contributor["contributions"])
