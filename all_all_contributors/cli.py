@@ -35,9 +35,9 @@ def main(
 
 
 def get_github_token() -> str | None:
-    token = getenv("ACC_GITHUB_TOKEN")
+    token = getenv("AAC_GITHUB_TOKEN")
     if token is None:
-        print("Environment variable ACC_GITHUB_TOKEN is not defined")
+        print("Environment variable AAC_GITHUB_TOKEN is not defined")
         raise typer.Exit(code=1)
     return token
 

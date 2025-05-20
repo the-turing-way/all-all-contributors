@@ -14,12 +14,17 @@ def github_token(monkeypatch):
     monkeypatch.setenv("AAC_GITHUB_TOKEN", "dummy_token")
 
 
+@fixture()
+def unset_github_token(monkeypatch):
+    monkeypatch.delenv("AAC_GITHUB_TOKEN", raising=False)
+
+
 class TestCli:
     def test_cli(self, runner, github_token):
         result = runner.invoke(app, ["organisation", "./target.txt"])
         assert result.exit_code == 0
 
-    def test_cli_missing_env(self, runner):
+    def test_cli_missing_env(self, runner, unset_github_token):
         result = runner.invoke(app, ["organisation", "./target.txt"])
         assert result.exit_code == 1
-        assert "Environment variable ACC_GITHUB_TOKEN is not defined" in result.stdout
+        assert "Environment variable AAC_GITHUB_TOKEN is not defined" in result.stdout
