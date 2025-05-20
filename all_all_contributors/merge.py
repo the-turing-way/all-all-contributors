@@ -3,6 +3,7 @@
 from typing import List, Dict, Any
 
 _unique_key = "profile"
+_contributions = "contributions"
 
 
 def merge_contributors(
@@ -34,8 +35,8 @@ def merge_contributors(
         if (key := contributor.get(_unique_key)) not in all_contributors.keys():
             all_contributors[key] = contributor.copy()
         else:
-            all_contributors[key]["contributions"] = list(
-                set(all_contributors[key]["contributions"] + contributor["contributions"])
+            all_contributors[key][_contributions] = list(
+                set(all_contributors[key].get(_contributions) + contributor.get(_contributions))
             )
 
     return list(all_contributors.values())
