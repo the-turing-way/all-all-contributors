@@ -1,6 +1,8 @@
 """Test the merge_contributors function."""
 
-from all_all_contributors.merge import merge_contributors
+import pytest
+
+from all_all_contributors.merge import merge_contributors, or_set
 
 
 def test_merge_contributors(contributor_1, contributor_2):
@@ -30,3 +32,16 @@ def test_merge_contributors_duplicate(
     assert contributor_1 not in merged_contributors
     assert contributor_1_duplicate not in merged_contributors
     assert contributor_2 in merged_contributors
+
+
+class TestOrSet:
+    @pytest.mark.parametrize(
+        "first,second,result",
+        [
+            ([1, 2], [3, 4], [1, 2, 3, 4]),
+            ([1, 2], [2, 3, 4], [1, 2, 3, 4]),
+            ([1, 2], [2, 1], [1, 2]),
+        ]
+    )
+    def test_or_set(self, first, second, result):
+        assert sorted(or_set(first, second)) == sorted(result)
