@@ -1,14 +1,14 @@
 """Merge contributors from multiple .all-contributorsrc files into a single list."""
 
-from typing import List, Dict, Any
+from typing import Any
 
 _unique_key = "profile"
 _contributions = "contributions"
 
 
 def merge_contributors(
-    contributors_list: List[Dict[str, Any]]
-) -> List[Dict[str, Any]]:
+    contributors_list: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
     """Merge multiple lists of contributor dictionaries into a single list.
 
     This function takes a list of contributor dictionaries (typically from
@@ -21,7 +21,7 @@ def merge_contributors(
             dict should have at least 'profile' and 'contributions' keys.
 
     Returns:
-        List[Dict[str, Any]]: A list of merged contributor dictionaries, where
+        list[dict[str, Any]]: A list of merged contributor dictionaries, where
             each contributor appears only once with their combined contributions.
 
     Note:
