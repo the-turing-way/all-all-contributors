@@ -61,7 +61,7 @@ def target_all_contributors_rc_file(tmp_path, target_all_contributors_rc):
 
 
 @fixture()
-def valid_contributor_1():
+def contributor_1():
     return {
       "login": "user1",
       "name": "User One",
@@ -75,7 +75,21 @@ def valid_contributor_1():
 
 
 @fixture()
-def valid_contributor_2():
+def contributor_1_duplicate():
+    return {
+      "login": "user1",
+      "name": "User One",
+      "avatar_url": "https://github.com/user1.png",
+      "profile": "https://github.com/user1",
+      "contributions": [
+          "code",
+          "design"
+      ]
+    }
+
+
+@fixture()
+def contributor_2():
     return {
         "login": "user2",
         "name": "User Two",
@@ -86,8 +100,3 @@ def valid_contributor_2():
             "doc"
         ]
     }
-
-
-@fixture()
-def contributors_list(valid_contributor_1, valid_contributor_2):
-    return [valid_contributor_1, valid_contributor_2]
