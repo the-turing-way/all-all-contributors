@@ -32,12 +32,12 @@ def merge_contributors(
     merged_contributors = []
 
     for contributor in contributors_list:
-        if contributor.get(_unique_key) not in unique_profiles:
-            unique_profiles.append(contributor.get(_unique_key))
+        if (key := contributor.get(_unique_key)) not in unique_profiles:
+            unique_profiles.append(key)
             merged_contributors.append(contributor)
         else:
             # find the index of the contributor in the list
-            index = unique_profiles.index(contributor.get(_unique_key))
+            index = unique_profiles.index(key)
             merged_contributors[index]["contributions"].extend(
                 contributor["contributions"]
             )
