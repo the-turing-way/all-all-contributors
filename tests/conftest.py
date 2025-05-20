@@ -68,8 +68,8 @@ def contributor_1():
       "avatar_url": "https://github.com/user1.png",
       "profile": "https://github.com/user1",
       "contributions": [
-        "infra",
-        "doc"
+        "doc",
+        "infra"
       ]
     }
 
