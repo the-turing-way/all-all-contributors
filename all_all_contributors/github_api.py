@@ -148,30 +148,39 @@ class GitHubAPI:
         return get_request(url, headers=self.inputs.headers, output="json")
     
     def get_all_repos(org, excluded):
-      """Get all repositories from a GitHub organization using the GitHub API
+        """Get all repositories from a GitHub organization using the GitHub API
       
-      Args:
-          org (str): The name of the GitHub organization
-          excluded (set): A set of repository names to exclude from the list
-      Returns:
-          list: A list of repository names
-      
-      """
-      repos = []
-      page = 1
-      while True:
-          url = f"https://api.github.com/orgs/{org}/repos"
-          params = {"type": "public", "per_page": 100, "page": page}
-          data = get_request(url, headers=HEADERS, params=params, output="json")
-          if not data:
-              break
-          for repo in data:
+        Args:
+            org (str): The name of the GitHub organization
+            excluded (set): A set of repository names to exclude from the list
+
+        Returns:
+            list: A list of repository names
+        """
+        repos = []
+
+        # First API call
+        url = f"https://api.github.com/orgs/{org}/repos"
+        params = {"type": "public", "per_page": 100}
+        resp = get_request(url, headers=self.inputs.headers, params=params)
+        for repo in resp.json():
+            if repo["name"] not in excluded:
+                repos.append(repo["name"])
+
+        # Paginate over results using the 'link' and rel['next'] parameters from
+        # the API response
+        # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
+        while "link" in resp.headers:
+            resp = get_request(
+                resp.links["next"]["url"],
+                headers=self.inputs.headers,
+                params=params
+            )
+            for repo in resp.json:
               if repo["name"] not in excluded:
                   repos.append(repo["name"])
-          if len(data) < 100:
-              break
-          page += 1
-      return repos
+
+        return repos
 
     def get_contributors_from_repo(org, repo):
         """Get contributors from a specific repository using the GitHub API
