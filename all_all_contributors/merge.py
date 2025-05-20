@@ -34,8 +34,8 @@ def merge_contributors(
         if (key := contributor.get(_unique_key)) not in all_contributors.keys():
             all_contributors[key] = contributor
         else:
-            all_contributors[key]["contributions"].extend(
-                contributor["contributions"]
+            all_contributors[key]["contributions"] = list(
+                set(all_contributors[key]["contributions"] + contributor["contributions"])
             )
 
     return list(all_contributors.values())
