@@ -89,7 +89,5 @@ def valid_contributor_2():
 
 
 @fixture()
-def valid_contributors_dict(valid_contributor_1, valid_contributor_2):
-    return {
-          "contributors": [valid_contributor_1, valid_contributor_2]
-      }
+def contributors_list(valid_contributor_1, valid_contributor_2):
+    return [valid_contributor_1, valid_contributor_2]

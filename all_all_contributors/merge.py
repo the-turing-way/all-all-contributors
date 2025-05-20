@@ -14,10 +14,8 @@ def merge_contributors(
     contributions are aggregated into a single entry.
 
     Args:
-        contributors_list: A list of dictionaries, each containing a
-            'contributors' key with a list of contributor dictionaries. Each
-            contributor dict should have at least 'profile' and 'contributions'
-            keys.
+        contributors_list: A list of contributor dictionaries. Each contributor
+            dict should have at least 'profile' and 'contributions' keys.
 
     Returns:
         List[Dict[str, Any]]: A list of merged contributor dictionaries, where
@@ -31,16 +29,15 @@ def merge_contributors(
     unique_profiles = []
     merged_contributors = []
 
-    for contributors_dict in contributors_list:
-        for contributor in contributors_dict["contributors"]:
-            if contributor["profile"] not in unique_profiles:
-                unique_profiles.append(contributor["profile"])
-                merged_contributors.append(contributor)
-            else:
-                # find the index of the contributor in the list
-                index = unique_profiles.index(contributor["profile"])
-                merged_contributors[index]["contributions"].extend(
-                    contributor["contributions"]
-                )
+    for contributor in contributors_list:
+        if contributor["profile"] not in unique_profiles:
+            unique_profiles.append(contributor["profile"])
+            merged_contributors.append(contributor)
+        else:
+            # find the index of the contributor in the list
+            index = unique_profiles.index(contributor["profile"])
+            merged_contributors[index]["contributions"].extend(
+                contributor["contributions"]
+            )
 
     return merged_contributors
