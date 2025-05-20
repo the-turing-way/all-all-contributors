@@ -18,12 +18,16 @@ dependencies = [
     "requests",
     "ruamel.yaml",
     "responses",  # Testing dependencies
+    "typer",
 ]
 
 [project.urls]
 Documentation = "https://github.com/RayStick/all-all-contributors#readme"
 Issues = "https://github.com/RayStick/all-all-contributors/issues"
 Source = "https://github.com/RayStick/all-all-contributors"
+
+[project.scripts]
+all-all-contributors = "all_all_contributors.cli:cli"
 
 [tool.hatch.version]
 path = "all_all_contributors/__about__.py"
