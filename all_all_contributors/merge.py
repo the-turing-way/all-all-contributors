@@ -41,21 +41,17 @@ def merge_contributors(
         else:
             all_contributors[key] = contributor.copy()
 
-        # Sort the contributions alphabetically. This permits our tests to pass
-        # by enforcing an alphabetical order.
-        all_contributors[key]["contributions"] = sorted(
-            all_contributors[key]["contributions"]
-        )
-
     return list(all_contributors.values())
 
 
 def merge_contributions(first: Contributor, second: Contributor) -> Contributor:
-    return or_set(
+    """Return a sorted list of the contribution types for two contributor entries"""
+    return sorted(or_set(
         first.get(_contributions),
         second.get(_contributions),
-    )
+    ))
 
 
 def or_set(first: list[Any], second: list[Any]) -> list[Any]:
+    """Return list of values that appear in `first` or `second`"""
     return list(set(first + second))
