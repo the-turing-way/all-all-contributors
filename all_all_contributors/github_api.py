@@ -7,14 +7,7 @@ import jmespath
 from requests import put
 from .http_requests import get_request, patch_request, post_request
 
-
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 ORG_NAME = os.environ.get("ORG_NAME")
-
-HEADERS = {
-    "Authorization": f"token {GITHUB_TOKEN}",
-    "Accept": "application/vnd.github.v3+json"
-}
 
 
 class GitHubAPI:
@@ -188,20 +181,14 @@ class GitHubAPI:
         Args:
             org (str): The name of the GitHub organization
             repo (str): The name of the repository
+
         Returns:
             list: A list of contributors from the repository
-        
         """
         url = f"https://api.github.com/repos/{org}/{repo}/contents/.all-contributorsrc"
-        try:
-            data = get_request(url, headers=HEADERS, output="json")
-            if "content" in data:
-                decoded = base64.b64decode(data["content"]).decode("utf-8")
-                contributors = json.loads(decoded).get("contributors", [])
-                return contributors
-        except Exception:
-            pass
-        return []
+        resp = get_request(url, headers=self.inputs.headers, output="json")
+        resp = get_request(resp["download_url"], headers=self.input.headers, output="json")
+        return resp["contributors"]
 
     def load_excluded_repos(ignore_file=".repoignore"):
         """Load excluded repositories from a file
