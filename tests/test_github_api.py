@@ -17,12 +17,14 @@ class TestInputs():
         filepath,
         base_branch="main",
         head_branch="merge-all-contributors",
+        ignore_file=".repoignore",
     ):
         self.repository = repository
         self.github_token = github_token
         self.filepath = filepath
         self.base_branch = base_branch
         self.head_branch = head_branch
+        self.ignore_file = ignore_file
 
         self.headers = {
             "Accept": "application/vnd.github.v3+json",

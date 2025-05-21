@@ -13,7 +13,6 @@ class GitHubAPI:
 
     def __init__(self, inputs):
         self.inputs = inputs
-        self.excluded_repos = _load_excluded_repos(ignore_file=inputs["ignore_file"])
         self.api_url = "/".join(
             ["https://api.github.com", "repos", self.inputs.repository]
         )
@@ -144,6 +143,7 @@ class GitHubAPI:
         Get all repositories from a GitHub organization using the GitHub API
         """
         self.org_repos = []
+        self.excluded_repos = _load_excluded_repos(ignore_file=self.inputs.ignore_file)
 
         # First API call
         url = f"https://api.github.com/orgs/{self.org_name}/repos"
