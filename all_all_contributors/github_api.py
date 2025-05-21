@@ -192,16 +192,18 @@ class GitHubAPI:
 
     def load_excluded_repos(ignore_file=".repoignore"):
         """Load excluded repositories from a file
+
         Args:
             ignore_file (str): The path to the file containing excluded repositories
+
         Returns:
             set: A set of excluded repository names
         """
-        excluded = set()
         if os.path.exists(ignore_file):
-            with open(ignore_file, "r") as f:
-                for line in f:
-                    repo = line.strip()
-                    if repo and not repo.startswith("#"):
-                        excluded.add(repo)
-        return excluded
+            with open(ignore_file) as f:
+                excluded = filter(lambda line: not line.startswith("#"), f.readlines())
+        else:
+            print(f"(skipping] No file found: {ignore_file}.")
+            excluded = []
+
+        return set(excluded)
