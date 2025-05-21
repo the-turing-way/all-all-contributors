@@ -68,8 +68,8 @@ def contributor_1():
       "avatar_url": "https://github.com/user1.png",
       "profile": "https://github.com/user1",
       "contributions": [
-        "doc",
-        "infra"
+          "doc",
+          "infra"
       ]
     }
 
@@ -82,8 +82,24 @@ def contributor_1_duplicate():
       "avatar_url": "https://github.com/user1.png",
       "profile": "https://github.com/user1",
       "contributions": [
+          "design",
+          "code"
+      ]
+    }
+
+
+@fixture()
+def contributor_1_merged():
+    return {
+      "login": "user1",
+      "name": "User One",
+      "avatar_url": "https://github.com/user1.png",
+      "profile": "https://github.com/user1",
+      "contributions": [
+          "design",
           "code",
-          "design"
+          "doc",
+          "infra"
       ]
     }
 
