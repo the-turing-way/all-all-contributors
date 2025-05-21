@@ -17,7 +17,6 @@ dependencies = [
     "jmespath",
     "requests",
     "ruamel.yaml",
-    "responses",  # Testing dependencies
     "typer",
 ]
 
@@ -46,6 +45,7 @@ serve = "mkdocs serve"
 [tool.hatch.envs.test]
 extra-dependencies = [
   "pytest>=8.3.5",
+  "responses",
 ]
 
 [tool.hatch.envs.test.scripts]

@@ -1,11 +1,16 @@
 """Merge contributors from multiple .all-contributorsrc files into a single list."""
 
-from typing import List, Dict, Any
+from typing import Any, TypeAlias
+
+_unique_key = "profile"
+_contributions = "contributions"
+
+Contributor: TypeAlias = dict[str, Any]
 
 
 def merge_contributors(
-    contributors_list: List[Dict[str, Any]]
-) -> List[Dict[str, Any]]:
+    contributors_list: list[Contributor]
+) -> list[Contributor]:
     """Merge multiple lists of contributor dictionaries into a single list.
 
     This function takes a list of contributor dictionaries (typically from
@@ -14,33 +19,39 @@ def merge_contributors(
     contributions are aggregated into a single entry.
 
     Args:
-        contributors_list: A list of dictionaries, each containing a
-            'contributors' key with a list of contributor dictionaries. Each
-            contributor dict should have at least 'profile' and 'contributions'
-            keys.
+        contributors_list: A list of contributor dictionaries. Each contributor
+            dict should have at least 'profile' and 'contributions' keys.
 
     Returns:
-        List[Dict[str, Any]]: A list of merged contributor dictionaries, where
+        list[dict[str, Any]]: A list of merged contributor dictionaries, where
             each contributor appears only once with their combined contributions.
 
     Note:
-        The function merges contributors based on their profile URL and
-        aggregates contributions for each unique profile.
+        The function merges contributors based on merge._unique_key and
+        aggregates contributions types.
     """
 
-    unique_profiles = []
-    merged_contributors = []
+    all_contributors = {}
 
-    for contributors_dict in contributors_list:
-        for contributor in contributors_dict["contributors"]:
-            if contributor["profile"] not in unique_profiles:
-                unique_profiles.append(contributor["profile"])
-                merged_contributors.append(contributor)
-            else:
-                # find the index of the contributor in the list
-                index = unique_profiles.index(contributor["profile"])
-                merged_contributors[index]["contributions"].extend(
-                    contributor["contributions"]
-                )
+    for contributor in contributors_list:
+        if (key := contributor.get(_unique_key)) in all_contributors.keys():
+            all_contributors[key][_contributions] = merge_contributions(
+                all_contributors[key], contributor
+            )
+        else:
+            all_contributors[key] = contributor.copy()
 
-    return merged_contributors
+    return list(all_contributors.values())
+
+
+def merge_contributions(first: Contributor, second: Contributor) -> Contributor:
+    """Return a sorted list of the contribution types for two contributor entries"""
+    return sorted(or_set(
+        first.get(_contributions),
+        second.get(_contributions),
+    ))
+
+
+def or_set(first: list[Any], second: list[Any]) -> list[Any]:
+    """Return list of values that appear in `first` or `second`"""
+    return list(set(first + second))
