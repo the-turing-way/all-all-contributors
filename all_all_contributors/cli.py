@@ -54,5 +54,24 @@ def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]:
     ...
 
 
+def load_excluded_repos(ignore_file=".repoignore"):
+    """Load excluded repositories from a file
+
+    Args:
+        ignore_file (str): The path to the file containing excluded repositories
+
+    Returns:
+        set: A set of excluded repository names
+    """
+    if os.path.exists(ignore_file):
+        with open(ignore_file) as f:
+            excluded = filter(lambda line: not line.startswith("#"), f.readlines())
+    else:
+        print(f"[skipping] No file found: {ignore_file}.")
+        excluded = []
+
+    return set(excluded)
+
+
 def cli():
     app()

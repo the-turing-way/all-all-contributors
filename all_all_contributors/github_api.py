@@ -6,6 +6,7 @@ import string
 import jmespath
 from requests import put
 from .http_requests import get_request, patch_request, post_request
+from .cli import load_excluded_repos
 
 
 class GitHubAPI:
@@ -143,7 +144,7 @@ class GitHubAPI:
         Get all repositories from a GitHub organization using the GitHub API
         """
         self.org_repos = []
-        excluded_repos = _load_excluded_repos(ignore_file=self.inputs.ignore_file)
+        excluded_repos = load_excluded_repos(ignore_file=self.inputs.ignore_file)
 
         # First API call
         url = f"https://api.github.com/orgs/{self.org_name}/repos"
@@ -180,21 +181,3 @@ class GitHubAPI:
         resp = get_request(url, headers=self.inputs.headers, output="json")
         resp = get_request(resp["download_url"], headers=self.input.headers, output="json")
         return resp["contributors"]
-
-    def _load_excluded_repos(self, ignore_file=".repoignore"):
-        """Load excluded repositories from a file
-
-        Args:
-            ignore_file (str): The path to the file containing excluded repositories
-
-        Returns:
-            set: A set of excluded repository names
-        """
-        if os.path.exists(ignore_file):
-            with open(ignore_file) as f:
-                excluded = filter(lambda line: not line.startswith("#"), f.readlines())
-        else:
-            print(f"[skipping] No file found: {ignore_file}.")
-            excluded = []
-
-        return set(excluded)
