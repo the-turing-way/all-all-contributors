@@ -194,7 +194,7 @@ class GitHubAPI:
             with open(ignore_file) as f:
                 excluded = filter(lambda line: not line.startswith("#"), f.readlines())
         else:
-            print(f"(skipping] No file found: {ignore_file}.")
+            print(f"[skipping] No file found: {ignore_file}.")
             excluded = []
 
         return set(excluded)
