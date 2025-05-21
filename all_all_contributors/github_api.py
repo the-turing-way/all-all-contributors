@@ -7,14 +7,13 @@ import jmespath
 from requests import put
 from .http_requests import get_request, patch_request, post_request
 
-ORG_NAME = os.environ.get("ORG_NAME")
-
 
 class GitHubAPI:
     """Interact with the GitHub API and perform various git-flow tasks"""
 
     def __init__(self, inputs):
         self.inputs = inputs
+        self.excluded_repos = _load_excluded_repos(ignore_file=inputs["ignore_file"])
         self.api_url = "/".join(
             ["https://api.github.com", "repos", self.inputs.repository]
         )
@@ -140,25 +139,19 @@ class GitHubAPI:
         url = "/".join([self.api_url, "git", "ref", "heads", ref])
         return get_request(url, headers=self.inputs.headers, output="json")
     
-    def get_all_repos(org, excluded):
-        """Get all repositories from a GitHub organization using the GitHub API
-      
-        Args:
-            org (str): The name of the GitHub organization
-            excluded (set): A set of repository names to exclude from the list
-
-        Returns:
-            list: A list of repository names
+    def get_all_repos(self):
         """
-        repos = []
+        Get all repositories from a GitHub organization using the GitHub API
+        """
+        self.org_repos = []
 
         # First API call
-        url = f"https://api.github.com/orgs/{org}/repos"
+        url = f"https://api.github.com/orgs/{self.org_name}/repos"
         params = {"type": "public", "per_page": 100}
         resp = get_request(url, headers=self.inputs.headers, params=params)
         for repo in resp.json():
             if repo["name"] not in excluded:
-                repos.append(repo["name"])
+                self.org_repos.append(repo["name"])
 
         # Paginate over results using the 'link' and rel['next'] parameters from
         # the API response
@@ -171,26 +164,24 @@ class GitHubAPI:
             )
             for repo in resp.json:
               if repo["name"] not in excluded:
-                  repos.append(repo["name"])
+                  self.org_repos.append(repo["name"])
 
-        return repos
-
-    def get_contributors_from_repo(org, repo):
+    def get_contributors_from_repo(self, repo, filepath=".all-contributorsrc"):
         """Get contributors from a specific repository using the GitHub API
         
         Args:
-            org (str): The name of the GitHub organization
-            repo (str): The name of the repository
+            repo (str): The name of the repository to extract contributors from
+            filepath (str): The filepath to extract contributors from (default: .all-contributorsrc)
 
         Returns:
             list: A list of contributors from the repository
         """
-        url = f"https://api.github.com/repos/{org}/{repo}/contents/.all-contributorsrc"
+        url = f"https://api.github.com/repos/{self.org_name}/{repo}/contents/{filepath}"
         resp = get_request(url, headers=self.inputs.headers, output="json")
         resp = get_request(resp["download_url"], headers=self.input.headers, output="json")
         return resp["contributors"]
 
-    def load_excluded_repos(ignore_file=".repoignore"):
+    def _load_excluded_repos(self, ignore_file=".repoignore"):
         """Load excluded repositories from a file
 
         Args:
