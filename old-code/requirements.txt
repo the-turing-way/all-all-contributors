@@ -6,7 +6,7 @@ charset-normalizer==3.4.1
 idna==3.10
 python-dotenv==1.1.0
 
-# Jupyter-related dependencies 
+# Jupyter-related dependencies
 appnope==0.1.4
 comm==0.2.2
 debugpy==1.8.14

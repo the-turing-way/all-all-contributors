@@ -63,45 +63,33 @@ def target_all_contributors_rc_file(tmp_path, target_all_contributors_rc):
 @fixture()
 def contributor_1():
     return {
-      "login": "user1",
-      "name": "User One",
-      "avatar_url": "https://github.com/user1.png",
-      "profile": "https://github.com/user1",
-      "contributions": [
-          "doc",
-          "infra"
-      ]
+        "login": "user1",
+        "name": "User One",
+        "avatar_url": "https://github.com/user1.png",
+        "profile": "https://github.com/user1",
+        "contributions": ["doc", "infra"],
     }
 
 
 @fixture()
 def contributor_1_duplicate():
     return {
-      "login": "user1",
-      "name": "User One",
-      "avatar_url": "https://github.com/user1.png",
-      "profile": "https://github.com/user1",
-      "contributions": [
-          "design",
-          "doc",
-          "code"
-      ]
+        "login": "user1",
+        "name": "User One",
+        "avatar_url": "https://github.com/user1.png",
+        "profile": "https://github.com/user1",
+        "contributions": ["design", "doc", "code"],
     }
 
 
 @fixture()
 def contributor_1_merged():
     return {
-      "login": "user1",
-      "name": "User One",
-      "avatar_url": "https://github.com/user1.png",
-      "profile": "https://github.com/user1",
-      "contributions": [
-          "design",
-          "code",
-          "doc",
-          "infra"
-      ]
+        "login": "user1",
+        "name": "User One",
+        "avatar_url": "https://github.com/user1.png",
+        "profile": "https://github.com/user1",
+        "contributions": ["design", "code", "doc", "infra"],
     }
 
 
@@ -112,8 +100,5 @@ def contributor_2():
         "name": "User Two",
         "avatar_url": "https://github.com/user2.png",
         "profile": "https://github.com/user2",
-        "contributions": [
-            "code",
-            "doc"
-        ]
+        "contributions": ["code", "doc"],
     }

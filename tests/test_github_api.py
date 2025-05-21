@@ -1,4 +1,3 @@
-
 import base64
 import unittest
 from unittest.mock import call, patch
@@ -9,7 +8,7 @@ from all_all_contributors.yaml_parser import YamlParser
 yaml = YamlParser()
 
 
-class TestInputs():
+class TestInputs:
     def __init__(
         self,
         repository,
@@ -146,9 +145,7 @@ class TestGitHubAPI(unittest.TestCase):
                 output="json",
             )
             self.assertFalse(github.pr_exists)
-            self.assertTrue(
-                inputs.head_branch.startswith("merge-all-contributors")
-            )
+            self.assertTrue(inputs.head_branch.startswith("merge-all-contributors"))
 
     def test_find_existing_pull_request_match(self):
         inputs = TestInputs(
@@ -181,9 +178,7 @@ class TestGitHubAPI(unittest.TestCase):
                 output="json",
             )
             self.assertTrue(github.pr_exists)
-            self.assertEqual(
-                inputs.head_branch, "merge-all-contributors"
-            )
+            self.assertEqual(inputs.head_branch, "merge-all-contributors")
             self.assertEqual(github.pr_number, 1)
 
     def test_get_ref(self):
@@ -196,7 +191,8 @@ class TestGitHubAPI(unittest.TestCase):
         test_ref = "test_ref"
 
         mock_get = patch(
-            "all_all_contributors.github_api.get_request", return_value={"object": {"sha": "sha"}}
+            "all_all_contributors.github_api.get_request",
+            return_value={"object": {"sha": "sha"}},
         )
 
         with mock_get as mock:
