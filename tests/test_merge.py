@@ -31,34 +31,38 @@ def contributor_in(contributor, contributor_list):
     return False
 
 
-def test_merge_contributors(contributor_1, contributor_2):
-    """Test that the merge_contributors function merges contributors correctly."""
-    contributors_list = [contributor_1, contributor_2]
-    # Merge a list with duplicates
-    merged_contributors = merge_contributors(
-        contributors_list + contributors_list
-    )
-    # the merged list should just have 2 contributors
-    assert len(merged_contributors) == 2
-    # the merged list should have the same contributors as the original lists
-    assert contributor_in(contributor_1, merged_contributors)
-    assert contributor_in(contributor_2, merged_contributors)
+class TestMergeContributors:
+    def test_merge_contributors(self, contributor_1, contributor_2):
+        """Test that the merge_contributors function merges contributors correctly."""
+        contributors_list = [contributor_1, contributor_2]
+        # Merge a list with duplicates
+        merged_contributors = merge_contributors(
+            contributors_list + contributors_list
+        )
+        # the merged list should just have 2 contributors
+        assert len(merged_contributors) == 2
+        # the merged list should have the same contributors as the original lists
+        assert contributor_in(contributor_1, merged_contributors)
+        assert contributor_in(contributor_2, merged_contributors)
 
-
-def test_merge_contributors_duplicate(
-    contributor_1, contributor_1_duplicate, contributor_1_merged, contributor_2
-):
-    """Test that the merge_contributors function merges contributors correctly."""
-    contributors_list = [contributor_1, contributor_1_duplicate, contributor_2]
-    # Merge a list with duplicates
-    merged_contributors = merge_contributors(contributors_list)
-    # the merged list should just have 2 contributors
-    assert len(merged_contributors) == 2
-    # the merged list should have contributor 2, but a merged entry for contributor 1
-    assert not contributor_in(contributor_1, merged_contributors)
-    assert not contributor_in(contributor_1_duplicate, merged_contributors)
-    assert contributor_in(contributor_1_merged, merged_contributors)
-    assert contributor_in(contributor_2, merged_contributors)
+    def test_merge_contributors_duplicate(
+        self,
+        contributor_1,
+        contributor_1_duplicate,
+        contributor_1_merged,
+        contributor_2
+    ):
+        """Test that the merge_contributors function merges contributors correctly."""
+        contributors_list = [contributor_1, contributor_1_duplicate, contributor_2]
+        # Merge a list with duplicates
+        merged_contributors = merge_contributors(contributors_list)
+        # the merged list should just have 2 contributors
+        assert len(merged_contributors) == 2
+        # the merged list should have contributor 2, but a merged entry for contributor 1
+        assert not contributor_in(contributor_1, merged_contributors)
+        assert not contributor_in(contributor_1_duplicate, merged_contributors)
+        assert contributor_in(contributor_1_merged, merged_contributors)
+        assert contributor_in(contributor_2, merged_contributors)
 
 
 class TestOrSet:
