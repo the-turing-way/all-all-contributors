@@ -143,14 +143,14 @@ class GitHubAPI:
         Get all repositories from a GitHub organization using the GitHub API
         """
         self.org_repos = []
-        self.excluded_repos = _load_excluded_repos(ignore_file=self.inputs.ignore_file)
+        excluded_repos = _load_excluded_repos(ignore_file=self.inputs.ignore_file)
 
         # First API call
         url = f"https://api.github.com/orgs/{self.org_name}/repos"
         params = {"type": "public", "per_page": 100}
         resp = get_request(url, headers=self.inputs.headers, params=params)
         for repo in resp.json():
-            if repo["name"] not in excluded:
+            if repo["name"] not in excluded_repos:
                 self.org_repos.append(repo["name"])
 
         # Paginate over results using the 'link' and rel['next'] parameters from
@@ -163,7 +163,7 @@ class GitHubAPI:
                 params=params
             )
             for repo in resp.json:
-              if repo["name"] not in excluded:
+              if repo["name"] not in excluded_repos:
                   self.org_repos.append(repo["name"])
 
     def get_contributors_from_repo(self, repo, filepath=".all-contributorsrc"):
