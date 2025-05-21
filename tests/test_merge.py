@@ -3,7 +3,11 @@
 import pytest
 
 from all_all_contributors.merge import (
-    merge_contributors, or_set, _unique_key, _contributions
+    merge_contributors,
+    merge_contributions,
+    or_set,
+    _unique_key,
+    _contributions
 )
 
 
@@ -63,6 +67,30 @@ class TestMergeContributors:
         assert not contributor_in(contributor_1_duplicate, merged_contributors)
         assert contributor_in(contributor_1_merged, merged_contributors)
         assert contributor_in(contributor_2, merged_contributors)
+
+
+class TestMergeContributions:
+    def test_merge_contributions(
+        self,
+        contributor_1,
+        contributor_1_duplicate,
+        contributor_1_merged
+    ):
+        assert (
+            merge_contributions(contributor_1, contributor_1_duplicate) ==
+            sorted(contributor_1_merged.get(_contributions))
+        )
+
+    def test_merge_contributions_reverse(
+        self,
+        contributor_1,
+        contributor_1_duplicate,
+        contributor_1_merged
+    ):
+        assert (
+            merge_contributions(contributor_1_duplicate, contributor_1) ==
+            sorted(contributor_1_merged.get(_contributions))
+        )
 
 
 class TestOrSet:
