@@ -1,6 +1,10 @@
 # Folders to be ignored
 .git
 .github
+docs
+old-code
 tests
 
 # Files to be ignored
+.all-contributorsrc
+mkdocs.yml
