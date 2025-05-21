@@ -83,6 +83,7 @@ def contributor_1_duplicate():
       "profile": "https://github.com/user1",
       "contributions": [
           "design",
+          "doc",
           "code"
       ]
     }
