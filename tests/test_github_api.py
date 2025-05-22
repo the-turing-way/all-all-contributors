@@ -9,37 +9,16 @@ from all_all_contributors.yaml_parser import YamlParser
 yaml = YamlParser()
 
 
-class TestInputs():
-    def __init__(
-        self,
-        repository,
-        github_token,
-        filepath,
-        base_branch="main",
-        head_branch="merge-all-contributors",
-    ):
-        self.repository = repository
-        self.github_token = github_token
-        self.filepath = filepath
-        self.base_branch = base_branch
-        self.head_branch = head_branch
-
-        self.headers = {
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"token {github_token}",
-        }
-
-
 class TestGitHubAPI(unittest.TestCase):
     def test_create_commit(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
 
-        inputs.sha = "test_sha"
+        github.sha = "test_sha"
         commit_msg = "This is a commit message"
         contents = {"key1": "This is a test"}
 
@@ -50,8 +29,8 @@ class TestGitHubAPI(unittest.TestCase):
         body = {
             "message": commit_msg,
             "content": contents,
-            "sha": inputs.sha,
-            "branch": inputs.head_branch,
+            "sha": github.sha,
+            "branch": github.head_branch,
         }
 
         with patch("all_all_contributors.github_api.put") as mock:
@@ -62,25 +41,25 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "contents", inputs.filepath]),
+                "/".join([github.api_url, "repos", github.target_repo_name, "contents", github.target_filepath]),
                 json=body,
-                headers=inputs.headers,
+                headers=github.headers,
             )
 
     def test_create_update_pull_request(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
         github.pr_exists = False
 
         expected_pr = {
             "title": "Merging all-contributors across the org",
             "body": "",
-            "base": inputs.base_branch,
-            "head": inputs.head_branch,
+            "base": github.base_branch,
+            "head": github.head_branch,
         }
 
         with patch("all_all_contributors.github_api.post_request") as mock:
@@ -88,19 +67,19 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "pulls"]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                headers=github.headers,
                 json=expected_pr,
                 return_json=True,
             )
 
     def test_create_ref(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
         test_ref = "test_ref"
         test_sha = "test_sha"
 
@@ -111,18 +90,18 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "git", "refs"]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "git", "refs"]),
+                headers=github.headers,
                 json=test_body,
             )
 
     def test_find_existing_pull_request_no_matches(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
 
         mock_get = patch(
             "all_all_contributors.github_api.get_request",
@@ -140,23 +119,24 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "pulls"]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                headers=github.headers,
                 params={"state": "open", "sort": "created", "direction": "desc"},
                 output="json",
             )
             self.assertFalse(github.pr_exists)
             self.assertTrue(
-                inputs.head_branch.startswith("merge-all-contributors")
+                github.head_branch.startswith("merge-all-contributors")
             )
 
     def test_find_existing_pull_request_match(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
+            #head_branch="merge-all-contributors",
         )
-        github = GitHubAPI(inputs)
 
         mock_get = patch(
             "all_all_contributors.github_api.get_request",
@@ -172,27 +152,29 @@ class TestGitHubAPI(unittest.TestCase):
 
         with mock_get as mock:
             github.find_existing_pull_request()
+            print(github.head_branch)
+            print(github.pr_exists)
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "pulls"]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                headers=github.headers,
                 params={"state": "open", "sort": "created", "direction": "desc"},
                 output="json",
             )
             self.assertTrue(github.pr_exists)
             self.assertEqual(
-                inputs.head_branch, "merge-all-contributors"
+                github.head_branch, "merge-all-contributors"
             )
             self.assertEqual(github.pr_number, 1)
 
     def test_get_ref(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
         test_ref = "test_ref"
 
         mock_get = patch(
@@ -204,26 +186,26 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "git", "ref", "heads", test_ref]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "git", "ref", "heads", test_ref]),
+                headers=github.headers,
                 output="json",
             )
             self.assertDictEqual(resp, {"object": {"sha": "sha"}})
 
     def test_update_existing_pr(self):
-        inputs = TestInputs(
-            "octocat/octocat",
+        github = GitHubAPI(
+            "octocat",
+            "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
         )
-        github = GitHubAPI(inputs)
         github.pr_exists = True
         github.pr_number = 1
 
         expected_pr = {
             "title": "Merging all-contributors across the org",
             "body": "",
-            "base": inputs.base_branch,
+            "base": github.base_branch,
             "state": "open",
         }
 
@@ -235,8 +217,8 @@ class TestGitHubAPI(unittest.TestCase):
             github.create_update_pull_request()
 
             mock.assert_called_with(
-                "/".join([github.api_url, "pulls", str(github.pr_number)]),
-                headers=inputs.headers,
+                "/".join([github.api_url, "repos", github.target_repo_name, "pulls", str(github.pr_number)]),
+                headers=github.headers,
                 json=expected_pr,
                 return_json=True,
             )
