@@ -17,7 +17,7 @@ class GitHubAPI:
         github_token: str,
         target_filepath: str = ".all-contributorsrc",
         base_branch: str = "main",
-        head_branch: str = "all-all-contributors",
+        head_branch: str = "merge-all-contributors",
     ):
         """
         Args:
