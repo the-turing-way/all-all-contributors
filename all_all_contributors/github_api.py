@@ -12,11 +12,41 @@ from .cli import load_excluded_repos
 class GitHubAPI:
     """Interact with the GitHub API and perform various git-flow tasks"""
 
-    def __init__(self, inputs):
-        self.inputs = inputs
-        self.api_url = "/".join(
-            ["https://api.github.com", "repos", self.inputs.repository]
-        )
+    def __init__(self,
+        org_name: str,
+        target_repo_name: str,
+        github_token: str,
+        target_filepath: str = ".all-contributorsrc",
+        base_branch: str = "main",
+        head_branch: str = "all-all-contributors",
+    ):
+        """
+        Args:
+            org_name (str): The name of the GitHub organisation to target
+            target_repo_name (str): The name of the repo within `org_name` that
+                will host the combined .all-contributorsrc file
+            github_token (str): A GitHub token to authenticate API calls
+            target_filepath (str, optional): The filepath within `target_repo_name`
+                to the combined `.all-contributorsrc` file.
+                (default: ".all-contributorsrc")
+            base_branch (str, optional): The name of the default branch in
+                `target_repo_name`. (default: "main")
+            head_branch (str, optional): A prefix for branches created in
+                `target_repo_name` for pull requests.
+                (default: "all-all-contributors")
+        """
+        self.org_name = org_name
+        self.target_repo_name = target_repo_name
+        self.target_filepath = target_filepath
+        self.base_branch = base_branch
+        self.head_branch = head_branch
+
+        self.headers = {
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {github_token}",
+        }
+
+        self.api_url = "https://api.github.com"
 
     def create_commit(self, commit_msg, contents):
         """Create a commit over the GitHub API by creating or updating a file
