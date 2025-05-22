@@ -1,4 +1,4 @@
-from os import getenv
+from os import getenv, path
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -26,7 +26,7 @@ def load_excluded_repos() -> set:
         set: A set of excluded repository names
     """
     ignore_file = getenv("AAC_IGNORE_FILE", ".repoignore")
-    if os.path.exists(ignore_file):
+    if path.exists(ignore_file):
         with open(ignore_file) as f:
             excluded = filter(lambda line: not line.startswith("#"), f.readlines())
     else:
