@@ -4,6 +4,7 @@ from typing import Annotated, Any
 
 import typer
 
+from .github_api import GitHubAPI
 from .inject import inject_file
 
 app = typer.Typer()
@@ -44,26 +45,24 @@ def main(
             help="Name of the GitHub organisation",
         ),
     ],
-    target: Annotated[
+    target_repo: Annotated[
         Path,
         typer.Argument(
-            envvar="AAC_TARGET",
-            help="Target .all-contributorsrc file to write a merged contributors list to",
+            envvar="AAC_TARGET_REPO",
+            help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
 ) -> None:
     token = get_github_token()
     excluded_repos = load_excluded_repos()
-    repos = placeholder_get_org_repos(organisation, token)
+
+    gh_api = GitHubAPI(organisation, target_repo, github_token)
+    repos = gh_api.get_all_repos(excluded_repos)
+
     contributors = placeholder_get_contributors(repos, token)
     merged_contributors = placeholder_merge_contributors(contributors)
     if merged_contributors:
         inject_file(target, merged_contributors)
-
-
-
-def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]:
-    ...
 
 
 def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]:
