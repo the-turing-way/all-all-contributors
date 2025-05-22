@@ -59,14 +59,14 @@ def main(
     gh_api = GitHubAPI(organisation, target_repo, github_token)
     repos = gh_api.get_all_repos(excluded_repos)
 
-    contributors = placeholder_get_contributors(repos, token)
+    all_contributors = []
+    for repo in repos:
+        contributors = github_api.get_contributors_from_repo(repo)
+        all_contributors.append(contributors)
+
     merged_contributors = placeholder_merge_contributors(contributors)
     if merged_contributors:
         inject_file(target, merged_contributors)
-
-
-def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]:
-    ...
 
 
 def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]:
