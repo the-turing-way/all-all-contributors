@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 permissions:
   contents: write
 
@@ -35,3 +39,6 @@ jobs:
         run: |
           pip install mkdocs-material mkdocstrings[python] mkdocs-autoapi 
 
+      - name: Deploy docs if not PR
+        if: ${{ github.event_name }} != 'pull_request'
+        run: mkdocs gh-deploy --force
