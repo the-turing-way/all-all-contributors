@@ -74,7 +74,7 @@ class GitHubAPI:
             sha (str): The SHA of the parent commit to point the new reference to
         """
         print("Creating new branch: {}", ref)
-        url = "/".join([self.api_url, "git", "refs"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "refs"])
         body = {
             "ref": f"refs/heads/{ref}",
             "sha": sha,
@@ -83,7 +83,7 @@ class GitHubAPI:
 
     def create_update_pull_request(self):
         """Create or update a Pull Request via the GitHub API"""
-        url = "/".join([self.api_url, "pulls"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
         pr = {
             "title": "Merging all-contributors across the org",
             "body": "",  # FIXME: Add a descriptove PR body here
@@ -122,7 +122,7 @@ class GitHubAPI:
             "Finding Pull Requests previously opened to merge all contributors files"
         )
 
-        url = "/".join([self.api_url, "pulls"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
         params = {"state": "open", "sort": "created", "direction": "desc"}
         resp = get_request(
             url, headers=self.headers, params=params, output="json"
@@ -166,7 +166,7 @@ class GitHubAPI:
             dict: The JSON payload response of the request
         """
         print("Pulling info for ref: {}", ref)
-        url = "/".join([self.api_url, "git", "ref", "heads", ref])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref])
         return get_request(url, headers=self.headers, output="json")
     
     def get_all_repos(self):
@@ -177,7 +177,7 @@ class GitHubAPI:
         excluded_repos = load_excluded_repos(ignore_file=self.inputs.ignore_file)
 
         # First API call
-        url = f"https://api.github.com/orgs/{self.org_name}/repos"
+        url = "/".join([self.api_url, "orgs", self.org_name, "repos"])
         params = {"type": "public", "per_page": 100}
         resp = get_request(url, headers=self.headers, params=params)
         for repo in resp.json():
@@ -207,7 +207,7 @@ class GitHubAPI:
         Returns:
             list: A list of contributors from the repository
         """
-        url = f"https://api.github.com/repos/{self.org_name}/{repo}/contents/{filepath}"
+        url = "/".join([self.api_url, "repos", self.org_name, repo, "contents", filepath])
         resp = get_request(url, headers=self.headers, output="json")
         resp = get_request(resp["download_url"], headers=self.input.headers, output="json")
         return resp["contributors"]
