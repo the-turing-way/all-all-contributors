@@ -48,7 +48,7 @@ class GitHubAPI:
 
         self.api_url = "https://api.github.com"
 
-    def create_commit(self, commit_msg, contents):
+    def create_commit(self, commit_msg: str, contents: str):
         """Create a commit over the GitHub API by creating or updating a file
 
         Args:
@@ -65,7 +65,7 @@ class GitHubAPI:
         }
         put(url, json=body, headers=self.headers)
 
-    def create_ref(self, ref, sha):
+    def create_ref(self, ref: str, sha: str):
         """Create a new git reference (specifically, a branch) with GitHub's git
         database API endpoint
 
@@ -155,7 +155,7 @@ class GitHubAPI:
             self.pr_number = resp[indx]["number"]
             self.pr_exists = True
 
-    def get_ref(self, ref):
+    def get_ref(self, ref: str) -> dict:
         """Get a git reference (specifically, a HEAD ref) using GitHub's git
         database API endpoint
 
@@ -197,7 +197,7 @@ class GitHubAPI:
               if repo["name"] not in excluded_repos:
                   self.org_repos.append(repo["name"])
 
-    def get_contributors_from_repo(self, repo, filepath=".all-contributorsrc"):
+    def get_contributors_from_repo(self, repo: str, filepath=".all-contributorsrc") -> list:
         """Get contributors from a specific repository using the GitHub API
         
         Args:
