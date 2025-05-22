@@ -6,7 +6,6 @@ import string
 import jmespath
 from requests import put
 from .http_requests import get_request, patch_request, post_request
-from .cli import load_excluded_repos
 
 
 class GitHubAPI:
@@ -169,12 +168,17 @@ class GitHubAPI:
         url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref])
         return get_request(url, headers=self.headers, output="json")
     
-    def get_all_repos(self):
+    def get_all_repos(self, excluded_repos: list) -> list:
         """
         Get all repositories from a GitHub organization using the GitHub API
+
+        Args:
+            excluded_repos (list): A list of excluded repos to skip
+        
+        Returns:
+            list: A list of remaining repos in the organisation
         """
-        self.org_repos = []
-        excluded_repos = load_excluded_repos(ignore_file=self.inputs.ignore_file)
+        org_repos = []
 
         # First API call
         url = "/".join([self.api_url, "orgs", self.org_name, "repos"])
@@ -196,6 +200,8 @@ class GitHubAPI:
             for repo in resp.json:
               if repo["name"] not in excluded_repos:
                   self.org_repos.append(repo["name"])
+
+        return org_repos
 
     def get_contributors_from_repo(self, repo: str, filepath=".all-contributorsrc") -> list:
         """Get contributors from a specific repository using the GitHub API
