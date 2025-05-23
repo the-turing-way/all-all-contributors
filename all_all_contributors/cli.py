@@ -42,16 +42,13 @@ def get_github_token() -> str | None:
     return token
 
 
-def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]:
-    ...
+def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]: ...
 
 
-def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]:
-    ...
+def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]: ...
 
 
-def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]:
-    ...
+def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]: ...
 
 
 def load_excluded_repos(ignore_file=".repoignore"):

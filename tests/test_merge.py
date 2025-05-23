@@ -7,7 +7,7 @@ from all_all_contributors.merge import (
     merge_contributions,
     or_set,
     _unique_key,
-    _contributions
+    _contributions,
 )
 
 
@@ -24,8 +24,9 @@ def contributor_in(contributor, contributor_list):
                 # Ensure length of contributions lists are identical
                 len(contributions) == len(contributions_b)
                 # and that all contributions feature in each list
-                and
-                all([contribution in contributions_b for contribution in contributions])
+                and all(
+                    [contribution in contributions_b for contribution in contributions]
+                )
             ):
                 return True
             else:
@@ -40,9 +41,7 @@ class TestMergeContributors:
         """Test that the merge_contributors function merges contributors correctly."""
         contributors_list = [contributor_1, contributor_2]
         # Merge a list with duplicates
-        merged_contributors = merge_contributors(
-            contributors_list + contributors_list
-        )
+        merged_contributors = merge_contributors(contributors_list + contributors_list)
         # the merged list should just have 2 contributors
         assert len(merged_contributors) == 2
         # the merged list should have the same contributors as the original lists
@@ -54,7 +53,7 @@ class TestMergeContributors:
         contributor_1,
         contributor_1_duplicate,
         contributor_1_merged,
-        contributor_2
+        contributor_2,
     ):
         """Test that the merge_contributors function merges contributors correctly."""
         contributors_list = [contributor_1, contributor_1_duplicate, contributor_2]
@@ -71,25 +70,17 @@ class TestMergeContributors:
 
 class TestMergeContributions:
     def test_merge_contributions(
-        self,
-        contributor_1,
-        contributor_1_duplicate,
-        contributor_1_merged
+        self, contributor_1, contributor_1_duplicate, contributor_1_merged
     ):
-        assert (
-            merge_contributions(contributor_1, contributor_1_duplicate) ==
-            sorted(contributor_1_merged.get(_contributions))
+        assert merge_contributions(contributor_1, contributor_1_duplicate) == sorted(
+            contributor_1_merged.get(_contributions)
         )
 
     def test_merge_contributions_reverse(
-        self,
-        contributor_1,
-        contributor_1_duplicate,
-        contributor_1_merged
+        self, contributor_1, contributor_1_duplicate, contributor_1_merged
     ):
-        assert (
-            merge_contributions(contributor_1_duplicate, contributor_1) ==
-            sorted(contributor_1_merged.get(_contributions))
+        assert merge_contributions(contributor_1_duplicate, contributor_1) == sorted(
+            contributor_1_merged.get(_contributions)
         )
 
 
@@ -100,7 +91,7 @@ class TestOrSet:
             ([1, 2], [3, 4], [1, 2, 3, 4]),
             ([1, 2], [2, 3, 4], [1, 2, 3, 4]),
             ([1, 2], [2, 1], [1, 2]),
-        ]
+        ],
     )
     def test_or_set(self, first, second, result):
         assert sorted(or_set(first, second)) == sorted(result)
