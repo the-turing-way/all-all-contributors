@@ -8,9 +8,7 @@ _contributions = "contributions"
 Contributor: TypeAlias = dict[str, Any]
 
 
-def merge_contributors(
-    contributors_list: list[Contributor]
-) -> list[Contributor]:
+def merge_contributors(contributors_list: list[Contributor]) -> list[Contributor]:
     """Merge multiple lists of contributor dictionaries into a single list.
 
     This function takes a list of contributor dictionaries (typically from
@@ -46,10 +44,12 @@ def merge_contributors(
 
 def merge_contributions(first: Contributor, second: Contributor) -> Contributor:
     """Return a sorted list of the contribution types for two contributor entries"""
-    return sorted(or_set(
-        first.get(_contributions),
-        second.get(_contributions),
-    ))
+    return sorted(
+        or_set(
+            first.get(_contributions),
+            second.get(_contributions),
+        )
+    )
 
 
 def or_set(first: list[Any], second: list[Any]) -> list[Any]:

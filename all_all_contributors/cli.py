@@ -69,8 +69,21 @@ def main(
         inject_file(target, merged_contributors)
 
 
-def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]:
-    ...
+def get_github_token() -> str | None:
+    token = getenv("AAC_GITHUB_TOKEN")
+    if token is None:
+        print("Environment variable AAC_GITHUB_TOKEN is not defined")
+        raise typer.Exit(code=1)
+    return token
+
+
+def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]: ...
+
+
+def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]: ...
+
+
+def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]: ...
 
 
 def cli():

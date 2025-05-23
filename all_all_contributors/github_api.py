@@ -11,7 +11,8 @@ from .http_requests import get_request, patch_request, post_request
 class GitHubAPI:
     """Interact with the GitHub API and perform various git-flow tasks"""
 
-    def __init__(self,
+    def __init__(
+        self,
         org_name: str,
         target_repo_name: str,
         github_token: str,
@@ -55,7 +56,15 @@ class GitHubAPI:
             contents (str): The content of the file to be updated, encoded in base64
         """
         print("Committing changes to file: {}", self.target_filepath)
-        url = "/".join([self.api_url, "repos", self.target_repo_name, "contents", self.target_filepath])
+        url = "/".join(
+            [
+                self.api_url,
+                "repos",
+                self.target_repo_name,
+                "contents",
+                self.target_filepath,
+            ]
+        )
         body = {
             "message": commit_msg,
             "content": contents,
@@ -117,15 +126,11 @@ class GitHubAPI:
 
     def find_existing_pull_request(self):
         """Check if the bot already has an open Pull Request"""
-        print(
-            "Finding Pull Requests previously opened to merge all contributors files"
-        )
+        print("Finding Pull Requests previously opened to merge all contributors files")
 
         url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
         params = {"state": "open", "sort": "created", "direction": "desc"}
-        resp = get_request(
-            url, headers=self.headers, params=params, output="json"
-        )
+        resp = get_request(url, headers=self.headers, params=params, output="json")
 
         # Expression to match the head ref
         matches = jmespath.search("[*].head.label", resp)
@@ -139,9 +144,7 @@ class GitHubAPI:
         )
 
         if (indx is None) and (match is None):
-            print(
-                "No relevant Pull Requests found. A new Pull Request will be opened."
-            )
+            print("No relevant Pull Requests found. A new Pull Request will be opened.")
             random_id = "".join(random.sample(string.ascii_letters, 4))
             self.head_branch = "/".join([self.head_branch, random_id])
             self.pr_exists = False
@@ -165,16 +168,18 @@ class GitHubAPI:
             dict: The JSON payload response of the request
         """
         print("Pulling info for ref: {}", ref)
-        url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref])
+        url = "/".join(
+            [self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref]
+        )
         return get_request(url, headers=self.headers, output="json")
-    
+
     def get_all_repos(self, excluded_repos: list) -> list:
         """
         Get all repositories from a GitHub organization using the GitHub API
 
         Args:
             excluded_repos (list): A list of excluded repos to skip
-        
+
         Returns:
             list: A list of remaining repos in the organisation
         """
@@ -193,19 +198,19 @@ class GitHubAPI:
         # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
         while "link" in resp.headers:
             resp = get_request(
-                resp.links["next"]["url"],
-                headers=self.headers,
-                params=params
+                resp.links["next"]["url"], headers=self.headers, params=params
             )
             for repo in resp.json:
-              if repo["name"] not in excluded_repos:
-                  self.org_repos.append(repo["name"])
+                if repo["name"] not in excluded_repos:
+                    self.org_repos.append(repo["name"])
 
         return org_repos
 
-    def get_contributors_from_repo(self, repo: str, filepath=".all-contributorsrc") -> list:
+    def get_contributors_from_repo(
+        self, repo: str, filepath=".all-contributorsrc"
+    ) -> list:
         """Get contributors from a specific repository using the GitHub API
-        
+
         Args:
             repo (str): The name of the repository to extract contributors from
             filepath (str): The filepath to extract contributors from (default: .all-contributorsrc)
@@ -213,7 +218,11 @@ class GitHubAPI:
         Returns:
             list: A list of contributors from the repository
         """
-        url = "/".join([self.api_url, "repos", self.org_name, repo, "contents", filepath])
+        url = "/".join(
+            [self.api_url, "repos", self.org_name, repo, "contents", filepath]
+        )
         resp = get_request(url, headers=self.headers, output="json")
-        resp = get_request(resp["download_url"], headers=self.input.headers, output="json")
+        resp = get_request(
+            resp["download_url"], headers=self.input.headers, output="json"
+        )
         return resp["contributors"]

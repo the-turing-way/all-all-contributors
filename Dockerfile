@@ -1,4 +1,4 @@
-# Dockerfile copied from: 
+# Dockerfile copied from:
 # - https://github.com/sgibson91/bump-helm-deps-action/blob/main/Dockerfile
 
 # Use a Python slim image
