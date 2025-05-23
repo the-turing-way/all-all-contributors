@@ -53,11 +53,11 @@ def main(
         ),
     ],
 ) -> None:
-    token = get_github_token()
+    github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
-    gh_api = GitHubAPI(organisation, target_repo, github_token)
-    repos = gh_api.get_all_repos(excluded_repos)
+    github_api = GitHubAPI(organisation, target_repo, github_token)
+    repos = github_api.get_all_repos(excluded_repos)
 
     all_contributors = []
     for repo in repos:
@@ -66,15 +66,7 @@ def main(
 
     merged_contributors = placeholder_merge_contributors(contributors)
     if merged_contributors:
-        inject_file(target, merged_contributors)
-
-
-def get_github_token() -> str | None:
-    token = getenv("AAC_GITHUB_TOKEN")
-    if token is None:
-        print("Environment variable AAC_GITHUB_TOKEN is not defined")
-        raise typer.Exit(code=1)
-    return token
+        inject_file(..., merged_contributors)
 
 
 def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]: ...
