@@ -6,36 +6,74 @@ import string
 import jmespath
 from requests import put
 from .http_requests import get_request, patch_request, post_request
-from .cli import load_excluded_repos
 
 
 class GitHubAPI:
     """Interact with the GitHub API and perform various git-flow tasks"""
 
-    def __init__(self, inputs):
-        self.inputs = inputs
-        self.api_url = "/".join(
-            ["https://api.github.com", "repos", self.inputs.repository]
-        )
+    def __init__(
+        self,
+        org_name: str,
+        target_repo_name: str,
+        github_token: str,
+        target_filepath: str = ".all-contributorsrc",
+        base_branch: str = "main",
+        head_branch: str = "merge-all-contributors",
+    ):
+        """
+        Args:
+            org_name (str): The name of the GitHub organisation to target
+            target_repo_name (str): The name of the repo within `org_name` that
+                will host the combined .all-contributorsrc file
+            github_token (str): A GitHub token to authenticate API calls
+            target_filepath (str, optional): The filepath within `target_repo_name`
+                to the combined `.all-contributorsrc` file.
+                (default: ".all-contributorsrc")
+            base_branch (str, optional): The name of the default branch in
+                `target_repo_name`. (default: "main")
+            head_branch (str, optional): A prefix for branches created in
+                `target_repo_name` for pull requests.
+                (default: "all-all-contributors")
+        """
+        self.org_name = org_name
+        self.target_repo_name = target_repo_name
+        self.target_filepath = target_filepath
+        self.base_branch = base_branch
+        self.head_branch = head_branch
 
-    def create_commit(self, commit_msg, contents):
+        self.headers = {
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {github_token}",
+        }
+
+        self.api_url = "https://api.github.com"
+
+    def create_commit(self, commit_msg: str, contents: str):
         """Create a commit over the GitHub API by creating or updating a file
 
         Args:
             commit_msg (str): A message describing the changes the commit applies
             contents (str): The content of the file to be updated, encoded in base64
         """
-        print("Committing changes to file: {}", self.inputs.filepath)
-        url = "/".join([self.api_url, "contents", self.inputs.filepath])
+        print("Committing changes to file: {}", self.target_filepath)
+        url = "/".join(
+            [
+                self.api_url,
+                "repos",
+                self.target_repo_name,
+                "contents",
+                self.target_filepath,
+            ]
+        )
         body = {
             "message": commit_msg,
             "content": contents,
-            "sha": self.inputs.sha,
-            "branch": self.inputs.head_branch,
+            "sha": self.sha,
+            "branch": self.head_branch,
         }
-        put(url, json=body, headers=self.inputs.headers)
+        put(url, json=body, headers=self.headers)
 
-    def create_ref(self, ref, sha):
+    def create_ref(self, ref: str, sha: str):
         """Create a new git reference (specifically, a branch) with GitHub's git
         database API endpoint
 
@@ -44,20 +82,20 @@ class GitHubAPI:
             sha (str): The SHA of the parent commit to point the new reference to
         """
         print("Creating new branch: {}", ref)
-        url = "/".join([self.api_url, "git", "refs"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "refs"])
         body = {
             "ref": f"refs/heads/{ref}",
             "sha": sha,
         }
-        post_request(url, headers=self.inputs.headers, json=body)
+        post_request(url, headers=self.headers, json=body)
 
     def create_update_pull_request(self):
         """Create or update a Pull Request via the GitHub API"""
-        url = "/".join([self.api_url, "pulls"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
         pr = {
             "title": "Merging all-contributors across the org",
             "body": "",  # FIXME: Add a descriptove PR body here
-            "base": self.inputs.base_branch,
+            "base": self.base_branch,
         }
 
         if self.pr_exists:
@@ -67,7 +105,7 @@ class GitHubAPI:
             pr["state"] = "open"
             resp = patch_request(
                 url,
-                headers=self.inputs.headers,
+                headers=self.headers,
                 json=pr,
                 return_json=True,
             )
@@ -76,10 +114,10 @@ class GitHubAPI:
         else:
             print("Creating Pull Request...")
 
-            pr["head"] = self.inputs.head_branch
+            pr["head"] = self.head_branch
             resp = post_request(
                 url,
-                headers=self.inputs.headers,
+                headers=self.headers,
                 json=pr,
                 return_json=True,
             )
@@ -90,11 +128,9 @@ class GitHubAPI:
         """Check if the bot already has an open Pull Request"""
         print("Finding Pull Requests previously opened to merge all contributors files")
 
-        url = "/".join([self.api_url, "pulls"])
+        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
         params = {"state": "open", "sort": "created", "direction": "desc"}
-        resp = get_request(
-            url, headers=self.inputs.headers, params=params, output="json"
-        )
+        resp = get_request(url, headers=self.headers, params=params, output="json")
 
         # Expression to match the head ref
         matches = jmespath.search("[*].head.label", resp)
@@ -102,7 +138,7 @@ class GitHubAPI:
             (
                 (indx, match)
                 for (indx, match) in enumerate(matches)
-                if self.inputs.head_branch in match
+                if self.head_branch in match
             ),
             (None, None),
         )
@@ -110,18 +146,18 @@ class GitHubAPI:
         if (indx is None) and (match is None):
             print("No relevant Pull Requests found. A new Pull Request will be opened.")
             random_id = "".join(random.sample(string.ascii_letters, 4))
-            self.inputs.head_branch = "/".join([self.inputs.head_branch, random_id])
+            self.head_branch = "/".join([self.head_branch, random_id])
             self.pr_exists = False
         else:
             print(
                 "Relevant Pull Request found. Will push new commits to this Pull Request."
             )
 
-            self.inputs.head_branch = match.split(":")[-1]
+            self.head_branch = match.split(":")[-1]
             self.pr_number = resp[indx]["number"]
             self.pr_exists = True
 
-    def get_ref(self, ref):
+    def get_ref(self, ref: str) -> dict:
         """Get a git reference (specifically, a HEAD ref) using GitHub's git
         database API endpoint
 
@@ -132,20 +168,27 @@ class GitHubAPI:
             dict: The JSON payload response of the request
         """
         print("Pulling info for ref: {}", ref)
-        url = "/".join([self.api_url, "git", "ref", "heads", ref])
-        return get_request(url, headers=self.inputs.headers, output="json")
+        url = "/".join(
+            [self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref]
+        )
+        return get_request(url, headers=self.headers, output="json")
 
-    def get_all_repos(self):
+    def get_all_repos(self, excluded_repos: list) -> list:
         """
         Get all repositories from a GitHub organization using the GitHub API
+
+        Args:
+            excluded_repos (list): A list of excluded repos to skip
+
+        Returns:
+            list: A list of remaining repos in the organisation
         """
-        self.org_repos = []
-        excluded_repos = load_excluded_repos(ignore_file=self.inputs.ignore_file)
+        org_repos = []
 
         # First API call
-        url = f"https://api.github.com/orgs/{self.org_name}/repos"
+        url = "/".join([self.api_url, "orgs", self.org_name, "repos"])
         params = {"type": "public", "per_page": 100}
-        resp = get_request(url, headers=self.inputs.headers, params=params)
+        resp = get_request(url, headers=self.headers, params=params)
         for repo in resp.json():
             if repo["name"] not in excluded_repos:
                 self.org_repos.append(repo["name"])
@@ -155,13 +198,17 @@ class GitHubAPI:
         # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
         while "link" in resp.headers:
             resp = get_request(
-                resp.links["next"]["url"], headers=self.inputs.headers, params=params
+                resp.links["next"]["url"], headers=self.headers, params=params
             )
             for repo in resp.json:
                 if repo["name"] not in excluded_repos:
                     self.org_repos.append(repo["name"])
 
-    def get_contributors_from_repo(self, repo, filepath=".all-contributorsrc"):
+        return org_repos
+
+    def get_contributors_from_repo(
+        self, repo: str, filepath=".all-contributorsrc"
+    ) -> list:
         """Get contributors from a specific repository using the GitHub API
 
         Args:
@@ -171,8 +218,10 @@ class GitHubAPI:
         Returns:
             list: A list of contributors from the repository
         """
-        url = f"https://api.github.com/repos/{self.org_name}/{repo}/contents/{filepath}"
-        resp = get_request(url, headers=self.inputs.headers, output="json")
+        url = "/".join(
+            [self.api_url, "repos", self.org_name, repo, "contents", filepath]
+        )
+        resp = get_request(url, headers=self.headers, output="json")
         resp = get_request(
             resp["download_url"], headers=self.input.headers, output="json"
         )
