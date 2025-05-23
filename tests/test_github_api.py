@@ -142,7 +142,6 @@ class TestGitHubAPI(unittest.TestCase):
             "octocat",
             "ThIs_Is_A_t0k3n",
             ".all-contributorsrc",
-            # head_branch="merge-all-contributors",
         )
 
         mock_get = patch(
