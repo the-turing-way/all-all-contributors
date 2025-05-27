@@ -1,5 +1,4 @@
 from os import getenv, path
-from pathlib import Path
 from typing import Annotated, Any
 
 import typer
@@ -47,14 +46,14 @@ def main(
         ),
     ],
     target_repo: Annotated[
-        Path,
+        str,
         typer.Argument(
             envvar="AAC_TARGET_REPO",
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
     target_filepath: Annotated[
-        Path,
+        str,
         typer.Argument(
             envvar="AAC_TARGET_FILEPATH",
             help="Target filepath where the merged .all-contributorsrc will be written",
