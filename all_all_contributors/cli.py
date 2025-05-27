@@ -53,11 +53,18 @@ def main(
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
+    target_filepath: Annotated[
+        Path,
+        typer.Argument(
+            envvar="AAC_TARGET_FILEPATH",
+            help="Target filepath where the merged .all-contributorsrc will be written",
+        ),
+    ] = ".all-contributorsrc",
 ) -> None:
     github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
-    github_api = GitHubAPI(organisation, target_repo, github_token)
+    github_api = GitHubAPI(organisation, target_repo, github_token, target_filepath)
     repos = github_api.get_all_repos(excluded_repos)
 
     all_contributors = []
@@ -67,7 +74,8 @@ def main(
 
     merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
-        inject_file(..., merged_contributors)
+        all_contributors_rc = github_api.get_target_file_contents()
+        # inject_file(..., merged_contributors)
 
 
 def cli():
