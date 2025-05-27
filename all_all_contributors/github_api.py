@@ -230,9 +230,12 @@ class GitHubAPI:
         resp = get_request(resp["download_url"], headers=self.headers, output="json")
         return resp["contributors"]
 
-    def get_target_file_contents(self):
+    def get_target_file_contents(self, ref):
         """Download the JSON-formatted contents of a target filepath in a target
         repository inside a target GitHub org.
+
+        Args:
+            ref (str): The reference (branch) the file is stored on
 
         Returns:
             dict: The JSON formatted contents of the target filepath
@@ -247,6 +250,8 @@ class GitHubAPI:
                 self.target_filepath,
             ]
         )
-        resp = get_request(url, headers=self.headers, output="json")
+        resp = get_request(
+            url, headers=self.headers, params={"ref": ref}, output="json"
+        )
         resp = get_ref(resp["download_url"], headers=self.headers, output="json")
         return resp
