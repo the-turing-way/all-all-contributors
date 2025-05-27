@@ -69,14 +69,5 @@ def main(
         inject_file(..., merged_contributors)
 
 
-def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]: ...
-
-
-def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]: ...
-
-
-def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]: ...
-
-
 def cli():
     app()
