@@ -48,12 +48,17 @@ class GitHubAPI:
 
         self.api_url = "https://api.github.com"
 
-    def create_commit(self, commit_msg: str, contents: str):
+    def create_commit(
+        self,
+        contents: str,
+        commit_msg: str = "Merging all contributors info from across the org",
+    ):
         """Create a commit over the GitHub API by creating or updating a file
 
         Args:
-            commit_msg (str): A message describing the changes the commit applies
             contents (str): The content of the file to be updated, encoded in base64
+            commit_msg (str): A message describing the changes the commit applies.
+                (default: "Merging all contributors info from across the org")
         """
         print("Committing changes to file: {}", self.target_filepath)
         url = "/".join(
