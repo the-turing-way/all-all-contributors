@@ -1,3 +1,5 @@
+import base64
+
 from os import getenv, path
 from typing import Annotated, Any
 
@@ -6,8 +8,10 @@ import typer
 from .github_api import GitHubAPI
 from .inject import inject_config
 from .merge import merge_contributors
+from .yaml_parser import YamlParser
 
 app = typer.Typer()
+yaml = YamlParser()
 
 
 def get_github_token() -> str | None:
@@ -93,8 +97,38 @@ def main(
 
     merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
-        all_contributors_rc = github_api.get_target_file_contents()
+        # Check if a PR exists
+        github_api.find_existing_pull_request()
+
+        # We want to work against the most up-to-date version of the target file
+        if github_api.pr_exists:
+            # If a PR exists, pull the file from there
+            all_contributors_rc = github_api.get_target_file_contents(
+                github_api.head_branch
+            )
+        else:
+            # Otherwise, pull from the base of the repo
+            all_contributors_rc = github_api.get_target_file_contents(
+                github_api.base_branch
+            )
+
         all_contributors_rc = inject_config(all_contributors_rc, merged_contributors)
+
+        if not github_api.pr_exists:
+            # Create a branch to open a PR from
+            resp = github_api.get_ref(github_api.base_branch)
+            github_api.create_ref(github_api.head_brach, resp["object"]["sha"])
+
+        # base64 encode the updated config file
+        encoded_all_contributors_rc = yaml.object_to_yaml_str(
+            all_contributors_rc
+        ).encode("utf-8")
+        base64_bytes = base64.b64encode(encoded_all_contributors_rc)
+        all_contributors_rc = base64_bytes.decode("utf-8")
+
+        # Create a commit and open a pull request
+        github_api.create_commit(all_contributors_rc)
+        github_api.create_update_pull_request()
 
 
 def cli():
