@@ -5,7 +5,7 @@ from typing import Annotated, Any
 import typer
 
 from .github_api import GitHubAPI
-from .inject import inject_file
+from .inject import inject_config
 from .merge import merge_contributors
 
 app = typer.Typer()
@@ -75,7 +75,7 @@ def main(
     merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
         all_contributors_rc = github_api.get_target_file_contents()
-        # inject_file(..., merged_contributors)
+        all_contributors_rc = inject_config(all_contributors_rc, merged_contributors)
 
 
 def cli():
