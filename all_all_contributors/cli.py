@@ -59,11 +59,31 @@ def main(
             help="Target filepath where the merged .all-contributorsrc will be written",
         ),
     ] = ".all-contributorsrc",
+    base_branch: Annotated[
+        str,
+        typer.Argument(
+            envvar="AAC_BASE_BRANCH",
+            help="The name of the default branch of the target repository",
+        ),
+    ] = "main",
+    head_branch: Annotated[
+        str,
+        typer.Argument(
+            envvar="AAC_HEAD_BRANCH",
+            help="The name of the head branch to create in the target repository to open a Pull Request",
+        ),
+    ] = "merged-all-contributors",
 ) -> None:
     github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
-    github_api = GitHubAPI(organisation, target_repo, github_token, target_filepath)
+    github_api = GitHubAPI(
+        organisation,
+        target_repo,
+        github_token,
+        target_filepath=target_filepath,
+        base_branch=base_branch,
+    )
     repos = github_api.get_all_repos(excluded_repos)
 
     all_contributors = []
