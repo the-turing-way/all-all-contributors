@@ -6,6 +6,7 @@ import typer
 
 from .github_api import GitHubAPI
 from .inject import inject_file
+from .merge import merge_contributors
 
 app = typer.Typer()
 
@@ -64,7 +65,7 @@ def main(
         contributors = github_api.get_contributors_from_repo(repo)
         all_contributors.append(contributors)
 
-    merged_contributors = placeholder_merge_contributors(contributors)
+    merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
         inject_file(..., merged_contributors)
 
