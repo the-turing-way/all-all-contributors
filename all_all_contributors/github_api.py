@@ -222,7 +222,5 @@ class GitHubAPI:
             [self.api_url, "repos", self.org_name, repo, "contents", filepath]
         )
         resp = get_request(url, headers=self.headers, output="json")
-        resp = get_request(
-            resp["download_url"], headers=self.input.headers, output="json"
-        )
+        resp = get_request(resp["download_url"], headers=self.headers, output="json")
         return resp["contributors"]
