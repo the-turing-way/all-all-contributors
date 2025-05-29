@@ -35,9 +35,8 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - name: Install dependencies
-        run: |
-          pip install mkdocs-material mkdocstrings[python] mkdocs-autoapi 
+      - name: Install hatch
+        run: pip install hatch
 
       - name: Build docs in PR
         if: ${{ github.event_name }} == 'pull_request'
