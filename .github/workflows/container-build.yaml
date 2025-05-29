@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - "*"
   pull_request:
     branches:
       - main
@@ -22,7 +24,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Parse image tag
+      - name: Parse image tag from git ref
         id: parse_image_tag
         shell: python
         run: |
@@ -52,4 +54,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
+          tags: |
+            ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
+            ghcr.io/${{ env.repository }}:${{ github.sha }}
