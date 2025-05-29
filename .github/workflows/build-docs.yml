@@ -37,6 +37,9 @@ jobs:
       - name: Build docs
         run: hatch run docs:build
 
-      - name: Deploy docs if not PR
-        if: ${{ github.event_name }} != 'pull_request'
-        run: mkdocs gh-deploy --force
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v4
+        if: ${{ github.event_name }} == 'push' && ${{ github.ref }} == 'main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
