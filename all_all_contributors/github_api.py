@@ -5,7 +5,12 @@ import random
 import string
 import jmespath
 from requests import put
+
 from .http_requests import get_request, patch_request, post_request
+from .inject import inject_config
+from .yaml_parser import YamlParser
+
+yaml = YamlParser()
 
 
 class GitHubAPI:
@@ -255,3 +260,32 @@ class GitHubAPI:
         )
         resp = get_ref(resp["download_url"], headers=self.headers, output="json")
         return resp
+
+    def run(self) -> None:
+        """Run git flow to make a branch, commit a file, and open a PR"""
+        # Check if a PR exists
+        github_api.find_existing_pull_request()
+
+        # We want to work against the most up-to-date version of the target file
+        if github_api.pr_exists:
+            # If a PR exists, pull the file from there
+            file_contents = github_api.get_target_file_contents(github_api.head_branch)
+        else:
+            # Otherwise, pull from the base of the repo
+            file_contents = github_api.get_target_file_contents(github_api.base_branch)
+
+        file_contents = inject_config(file_contents, merged_contributors)
+
+        if not github_api.pr_exists:
+            # Create a branch to open a PR from
+            resp = github_api.get_ref(github_api.base_branch)
+            github_api.create_ref(github_api.head_brach, resp["object"]["sha"])
+
+        # base64 encode the updated config file
+        encoded_file_contents = yaml.object_to_yaml_str(file_contents).encode("utf-8")
+        base64_bytes = base64.b64encode(encoded_file_contents)
+        file_contents = base64_bytes.decode("utf-8")
+
+        # Create a commit and open a pull request
+        github_api.create_commit(file_contents)
+        github_api.create_update_pull_request()
