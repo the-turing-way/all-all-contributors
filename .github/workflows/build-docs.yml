@@ -39,9 +39,8 @@ jobs:
       - name: Install hatch
         run: pip install hatch
 
-      - name: Build docs in PR
-        if: ${{ github.event_name }} == 'pull_request'
-        run: mkdocs build --clean
+      - name: Build docs
+        run: hatch run docs:build
 
       - name: Deploy docs if not PR
         if: ${{ github.event_name }} != 'pull_request'
