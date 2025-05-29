@@ -34,8 +34,8 @@ class TestGitHubAPI(unittest.TestCase):
 
         with patch("all_all_contributors.github_api.put") as mock:
             github.create_commit(
-                commit_msg,
                 contents,
+                commit_msg=commit_msg,
             )
 
             self.assertEqual(mock.call_count, 1)
