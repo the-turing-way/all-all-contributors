@@ -1,11 +1,12 @@
+import base64
+
 from os import getenv, path
-from pathlib import Path
 from typing import Annotated, Any
 
 import typer
 
 from .github_api import GitHubAPI
-from .inject import inject_file
+from .merge import merge_contributors
 
 app = typer.Typer()
 
@@ -46,17 +47,44 @@ def main(
         ),
     ],
     target_repo: Annotated[
-        Path,
+        str,
         typer.Argument(
             envvar="AAC_TARGET_REPO",
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
+    target_filepath: Annotated[
+        str,
+        typer.Argument(
+            envvar="AAC_TARGET_FILEPATH",
+            help="Target filepath where the merged .all-contributorsrc will be written",
+        ),
+    ] = ".all-contributorsrc",
+    base_branch: Annotated[
+        str,
+        typer.Argument(
+            envvar="AAC_BASE_BRANCH",
+            help="The name of the default branch of the target repository",
+        ),
+    ] = "main",
+    head_branch: Annotated[
+        str,
+        typer.Argument(
+            envvar="AAC_HEAD_BRANCH",
+            help="The name of the head branch to create in the target repository to open a Pull Request",
+        ),
+    ] = "merged-all-contributors",
 ) -> None:
     github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
-    github_api = GitHubAPI(organisation, target_repo, github_token)
+    github_api = GitHubAPI(
+        organisation,
+        target_repo,
+        github_token,
+        target_filepath=target_filepath,
+        base_branch=base_branch,
+    )
     repos = github_api.get_all_repos(excluded_repos)
 
     all_contributors = []
@@ -64,18 +92,9 @@ def main(
         contributors = github_api.get_contributors_from_repo(repo)
         all_contributors.append(contributors)
 
-    merged_contributors = placeholder_merge_contributors(contributors)
+    merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
-        inject_file(..., merged_contributors)
-
-
-def placeholder_get_org_repos(organisation: str, github_token: str) -> list[str]: ...
-
-
-def placeholder_get_contributors(repos: list[str], github_token: str) -> list[Any]: ...
-
-
-def placeholder_merge_contributors(contributors: list[Any]) -> list[Any]: ...
+        github_api.run()
 
 
 def cli():
