@@ -59,10 +59,10 @@ def patch_request(url, headers={}, json={}, return_json=False):
             the request. Defaults to an empty dictionary.
         return_json (bool, optional): Return the JSON payload response.
             Defaults to False.
-    
+
     Returns:
         resp: A JSON formatted response from a HTTP response
-    
+
     Raises:
         HTTPError: An error was returned by the HTTP request
     """
@@ -86,10 +86,10 @@ def post_request(url, headers={}, json={}, return_json=False):
             the request. Defaults to an empty dictionary.
         return_json (bool, optional): Return the JSON payload response.
             Defaults to False.
-    
+
     Returns:
         resp: A JSON formatted response from a HTTP request
-    
+
     Raises:
         HTTPError: An error was returned by the HTTP request
     """

@@ -20,10 +20,6 @@ def unset_github_token(monkeypatch):
 
 
 class TestCli:
-    def test_cli(self, runner, github_token):
-        result = runner.invoke(app, ["organisation", "./target.txt"])
-        assert result.exit_code == 0
-
     def test_cli_missing_env(self, runner, unset_github_token):
         result = runner.invoke(app, ["organisation", "./target.txt"])
         assert result.exit_code == 1

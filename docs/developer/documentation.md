@@ -47,4 +47,3 @@ Therefore, there is no need to create or edit `.md` files when you make a change
 
 ### Docstrings Style
 For the docstrings, please follow the [Google Style Guide][https://google.github.io/styleguide/pyguide.html#383-functions-and-methods]. For more information on `mkdocstrings`, see their [Docstring Options][https://mkdocstrings.github.io/python/usage/configuration/docstrings/].
-
