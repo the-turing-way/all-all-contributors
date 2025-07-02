@@ -12,9 +12,9 @@ app = typer.Typer()
 
 def get_github_token() -> str | None:
     """Read a GitHub token from the environment"""
-    token = getenv("AAC_GITHUB_TOKEN")
+    token = getenv("INPUT_GITHUB_TOKEN")
     if token is None:
-        print("Environment variable AAC_GITHUB_TOKEN is not defined")
+        print("Environment variable INPUT_GITHUB_TOKEN is not defined")
         raise typer.Exit(code=1)
     return token
 
@@ -25,7 +25,7 @@ def load_excluded_repos() -> set:
     Returns:
         set: A set of excluded repository names
     """
-    ignore_file = getenv("AAC_IGNORE_FILE", ".repoignore")
+    ignore_file = getenv("INPUT_IGNORE_FILE", ".repoignore")
     if path.exists(ignore_file):
         with open(ignore_file) as f:
             excluded = filter(lambda line: not line.startswith("#"), f.readlines())
@@ -41,14 +41,14 @@ def main(
     organisation: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_ORGANISATION",
+            envvar="INPUT_ORGANISATION",
             help="Name of the GitHub organisation",
         ),
     ],
     target_repo: Annotated[
         Path,
         typer.Argument(
-            envvar="AAC_TARGET_REPO",
+            envvar="INPUT_TARGET_REPO",
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
