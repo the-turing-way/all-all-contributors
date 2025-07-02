@@ -1,0 +1,45 @@
+name: "all-all-contributors"
+description: >-
+  A GitHub Action that merges all-contributors files (https://allcontributors.org)
+  from repos within an organisation and opens a Pull Request to a chosen repo to
+  host the full list of contributors in.
+
+  Developed at the Software Sustainability Institute's Collaboration Workshop
+  hackday in 2025 (https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
+inputs:
+  organisation:
+    description: >-
+      The name of the GitHub organisation to collect all-contributors from
+    required: true
+  target_repo:
+    description: >-
+      The name of the repository within the GitHub organisation where the merged
+      all-contributors file will live
+    required: true
+  github_token:
+    description: >-
+      A GitHub token with permissions to write to the contents of the target
+      repo and open pull requests.
+    required: true
+  target_filepath:
+    description: >-
+      The filepath to the .all-contributorsrc file in the target repo. Defaults
+      to: .all-contributorsrc
+  ignore_file:
+    description: >-
+      Path to a plain text file containing a list of repos within the organisation
+      to exclude from the merge. Defaults to: .repoignore
+  base_branch:
+    description: >-
+      The name of the branch on the target repo to open pull requests against.
+      Defaults to: main
+  head_branch:
+    description: >-
+      A prefix to prepend to head branches when opening pull requests.
+      Defaults to: merge-all-contributors
+runs:
+  using: "docker"
+  image: "ghcr.io/the-turing-way/all-all-contributors:main"
+branding:
+  icon: "award"
+  color: "blue"
