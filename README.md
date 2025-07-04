@@ -32,6 +32,31 @@ See our [Project Board](https://github.com/users/RayStick/projects/2/views/1) fo
 
 We don't want to duplicate effort, but we do want to be able to understand what we've made and maintain it! There are some previous discussions and efforts in this area (see this [issue thread](https://github.com/all-contributors/all-contributors/issues/416) and this [repository](https://github.com/openclimatefix/merge-all-contributors)) and it would be good to combine efforts with people in the future, where possible.
 
+## Usage
+
+### Inputs
+
+| Input Name | Input Description | Required? |
+| :--- | :--- | :--- |
+| `organisation` | The name of the GitHub organisation to collect all-contributors from | **YES** |
+| `target_repo` | The name of the repository within the GitHub organisation where the merged all-contributors file will live | **YES** |
+| `github_token` | A GitHub token with permissions to write to the contents of the target repo and open pull requests. Defaults to: `GITHUB_TOKEN`. | no |
+| `target_filepath` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
+| `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
+| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
+
+### Permissions
+
+This Action will need permission to read the contents of a files stored in repositories in an organisation, create a new branch, commit to that branch, and open a Pull Request.
+The [default permissive settings of `GITHUB_TOKEN`](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) should provide the relevant permissions.
+
+If instead your repository is using the default restricted settings of `GITHUB_TOKEN`, you could grant just enough permissions to the Action using a [`permissions`](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idpermissions) config, such as the one below:
+
+```yaml
+permissions:
+  contents: write
+  pull-requests: write
+```
 
 ## Contributors ✨
 
