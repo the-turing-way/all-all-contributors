@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
@@ -1001,7 +1001,7 @@
 
 
   
-    <a href="https://github.com/home/runner/work/all-all-contributors/all-all-contributors/all_all_contributors/cli.py" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/home/runner/work/all-all-contributors/all-all-contributors/all_all_contributors/cli.py" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1052,19 +1052,19 @@
 
             <details class="quote">
               <summary>Source code in <code>all_all_contributors/cli.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-14">14</a></span>
 <span class="normal"><a href="#__codelineno-0-15">15</a></span>
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span>
 <span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_github_token</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a GitHub token from the environment&quot;&quot;&quot;</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;AAC_GITHUB_TOKEN&quot;</span><span class="p">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment variable AAC_GITHUB_TOKEN is not defined&quot;</span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="k">return</span> <span class="n">token</span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_github_token</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a GitHub token from the environment&quot;&quot;&quot;</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;INPUT_GITHUB_TOKEN&quot;</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment variable INPUT_GITHUB_TOKEN is not defined&quot;</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">return</span> <span class="n">token</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1110,8 +1110,7 @@
 
             <details class="quote">
               <summary>Source code in <code>all_all_contributors/cli.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-23">23</a></span>
 <span class="normal"><a href="#__codelineno-0-24">24</a></span>
 <span class="normal"><a href="#__codelineno-0-25">25</a></span>
 <span class="normal"><a href="#__codelineno-0-26">26</a></span>
@@ -1124,21 +1123,22 @@
 <span class="normal"><a href="#__codelineno-0-33">33</a></span>
 <span class="normal"><a href="#__codelineno-0-34">34</a></span>
 <span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_excluded_repos</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load excluded repositories from a file</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">        set: A set of excluded repository names</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="n">ignore_file</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;AAC_IGNORE_FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;.repoignore&quot;</span><span class="p">)</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">):</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>            <span class="n">excluded</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[skipping] No file found: </span><span class="si">{</span><span class="n">ignore_file</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="n">excluded</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_excluded_repos</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load excluded repositories from a file</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">        set: A set of excluded repository names</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="n">ignore_file</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;INPUT_IGNORE_FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;.repoignore&quot;</span><span class="p">)</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">):</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>            <span class="n">excluded</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[skipping] No file found: </span><span class="si">{</span><span class="n">ignore_file</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="n">excluded</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1203,7 +1203,7 @@
       <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>

@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
@@ -907,7 +907,7 @@
 
 
   
-    <a href="https://github.com/RayStick/all-all-contributors/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/RayStick/all-all-contributors/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -939,6 +939,57 @@
 <p>See our <a href="https://github.com/users/RayStick/projects/2/views/1">Project Board</a> for more incremental steps, and future enhancements.</p>
 <h3 id="oops-lets-not-duplicate-effort">Oops, let's not duplicate effort</h3>
 <p>We don't want to duplicate effort, but we do want to be able to understand what we've made and maintain it! There are some previous discussions and efforts in this area (see this <a href="https://github.com/all-contributors/all-contributors/issues/416">issue thread</a> and this <a href="https://github.com/openclimatefix/merge-all-contributors">repository</a>) and it would be good to combine efforts with people in the future, where possible.</p>
+<h2 id="usage">Usage</h2>
+<h3 id="inputs">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input Name</th>
+<th style="text-align: left;">Input Description</th>
+<th style="text-align: left;">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>organisation</code></td>
+<td style="text-align: left;">The name of the GitHub organisation to collect all-contributors from</td>
+<td style="text-align: left;"><strong>YES</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>target_repo</code></td>
+<td style="text-align: left;">The name of the repository within the GitHub organisation where the merged all-contributors file will live</td>
+<td style="text-align: left;"><strong>YES</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>github_token</code></td>
+<td style="text-align: left;">A GitHub token with permissions to write to the contents of the target repo and open pull requests. Defaults to: <code>GITHUB_TOKEN</code>.</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>target_filepath</code></td>
+<td style="text-align: left;">Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: <code>.repoignore</code>.</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>base_branch</code></td>
+<td style="text-align: left;">The name of the branch on the target repo to open pull requests against. Defaults to: <code>main</code>.</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>head_branch</code></td>
+<td style="text-align: left;">A prefix to prepend to head branches when opening pull requests. Defaults to: <code>merge-all-contributors</code>.</td>
+<td style="text-align: left;">no</td>
+</tr>
+</tbody>
+</table>
+<h3 id="permissions">Permissions</h3>
+<p>This Action will need permission to read the contents of a files stored in repositories in an organisation, create a new branch, commit to that branch, and open a Pull Request.
+The <a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token">default permissive settings of <code>GITHUB_TOKEN</code></a> should provide the relevant permissions.</p>
+<p>If instead your repository is using the default restricted settings of <code>GITHUB_TOKEN</code>, you could grant just enough permissions to the Action using a <a href="https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idpermissions"><code>permissions</code></a> config, such as the one below:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">permissions</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">pull-requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+</span></code></pre></div>
 <h2 id="contributors">Contributors ✨</h2>
 <p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -1019,7 +1070,7 @@
       <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "content.action.edit"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>
