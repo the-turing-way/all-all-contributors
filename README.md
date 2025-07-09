@@ -8,11 +8,11 @@
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 
-This project is being developed as a part of the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25). 
+This project is being developed as a part of the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
 
-### Introduction 
+### Introduction
 
-Many communities that host their work on GitHub use the [All Contributor](https://allcontributors.org) specification for 
+Many communities that host their work on GitHub use the [All Contributor](https://allcontributors.org) specification for
 
 > "recognizing contributors to an open-source project in a way that rewards every contribution, not just code", https://allcontributors.org/docs/en/overview
 
@@ -20,18 +20,43 @@ There is a bot that helps a community use this specification in an automated way
 
 > "The bot will automatically pull a user's profile, grab the contribution type emoji, update the project README and then open a Pull Request against the project ✨", https://allcontributors.org/docs/en/tooling
 
-This bot works well, but it only works at the level of a repository, not an organisation. When an organisation has multiple repositories, there is a need to capture all contributors (and their contribution types) at the level of the organisation. 
+This bot works well, but it only works at the level of a repository, not an organisation. When an organisation has multiple repositories, there is a need to capture all contributors (and their contribution types) at the level of the organisation.
 
 ## Goals of this repo
 
 This repo will provide a way to fetch all of the `.all-contributorsrc` files from each repo contained with an organisation. Once fetched, it will combine them together and summarise each contributor and all of their unique contributions.
 
-See our [Project Board](https://github.com/users/RayStick/projects/2/views/1) for more incremental steps, and future enhancements. 
+See our [Project Board](https://github.com/users/RayStick/projects/2/views/1) for more incremental steps, and future enhancements.
 
 ### Oops, let's not duplicate effort
 
-We don't want to duplicate effort, but we do want to be able to understand what we've made and maintain it! There are some previous discussions and efforts in this area (see this [issue thread](https://github.com/all-contributors/all-contributors/issues/416) and this [repository](https://github.com/openclimatefix/merge-all-contributors)) and it would be good to combine efforts with people in the future, where possible. 
+We don't want to duplicate effort, but we do want to be able to understand what we've made and maintain it! There are some previous discussions and efforts in this area (see this [issue thread](https://github.com/all-contributors/all-contributors/issues/416) and this [repository](https://github.com/openclimatefix/merge-all-contributors)) and it would be good to combine efforts with people in the future, where possible.
 
+## Usage
+
+### Inputs
+
+| Input Name | Input Description | Required? |
+| :--- | :--- | :--- |
+| `organisation` | The name of the GitHub organisation to collect all-contributors from | **YES** |
+| `target_repo` | The name of the repository within the GitHub organisation where the merged all-contributors file will live | **YES** |
+| `github_token` | A GitHub token with permissions to write to the contents of the target repo and open pull requests. Defaults to: `GITHUB_TOKEN`. | no |
+| `target_filepath` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
+| `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
+| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
+
+### Permissions
+
+This Action will need permission to read the contents of a files stored in repositories in an organisation, create a new branch, commit to that branch, and open a Pull Request.
+The [default permissive settings of `GITHUB_TOKEN`](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) should provide the relevant permissions.
+
+If instead your repository is using the default restricted settings of `GITHUB_TOKEN`, you could grant just enough permissions to the Action using a [`permissions`](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idpermissions) config, such as the one below:
+
+```yaml
+permissions:
+  contents: write
+  pull-requests: write
+```
 
 ## Contributors ✨
 
@@ -61,5 +86,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-## Citation & License 
+## Citation & License
 > fill
