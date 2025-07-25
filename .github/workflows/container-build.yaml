@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - "*"
+      - "v*"
   pull_request:
     branches:
       - main
@@ -24,36 +24,41 @@ jobs:
       id-token: write
 
     steps:
-      - name: Parse image tag from git ref
-        id: parse_image_tag
-        shell: python
-        run: |
-          import os
-
-          github_output = os.environ["GITHUB_OUTPUT"]
-          tag = "${{ github.ref_name }}".replace("/", "-")
-
-          with open(github_output, "w") as f:
-              f.write(f"image_tag={tag}\n")
-
-      - name: downcase repository name
-        run: |
-          echo "repository=${REPOSITORY,,}" >> ${GITHUB_ENV}
-        env:
-          REPOSITORY: ${{ github.repository }}
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
       - name: Login to GitHub Container Registry
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract metadata (tags, labels) for Docker
+        if: github.event_name != 'pull_request'
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            # Full version v1.2.3
+            type=semver,pattern=v{{version}}
+            # Major.minor version v1.2
+            type=semver,pattern=v{{major}}.{{minor}}
+            # Major version v1
+            type=semver,pattern=v{{major}}
+            # commit hash
+            type=sha
+            # Latest commit on main branch
+            type=edge,branch=main
+
       - name: Build and push image to registry
         uses: docker/build-push-action@v6
         with:
+          # Don't push builds to ghcr on pull requests
+          # However, build will be always tested
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            ghcr.io/${{ env.repository }}:${{ steps.parse_image_tag.outputs.image_tag }}
-            ghcr.io/${{ env.repository }}:${{ github.sha }}
+          tags: ${{ steps.meta.output.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
