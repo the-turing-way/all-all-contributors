@@ -51,6 +51,8 @@ jobs:
             type=semver,pattern=v{{major}}
             # commit hash
             type=sha
+            # Latest commit on main branch
+            type=edge,branch=main
 
       - name: Build and push image to registry
         uses: docker/build-push-action@v6
