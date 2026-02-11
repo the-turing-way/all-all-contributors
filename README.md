@@ -77,9 +77,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome! 
 
 Please refer to [The Turing Way Code of Conduct](https://book.the-turing-way.org/community-handbook/coc/) and [Contributing guide](https://book.the-turing-way.org/community-handbook/contributing/).
-
-## Citation & License
-
-The contents of this repository are shared under an [MIT License](LICENSE).
-
-> Citation.cff fill
