@@ -54,7 +54,8 @@
       "profile": "https://sgibson91.github.io/",
       "contributions": [
         "ideas",
-        "code"
+        "code",
+        "infra"
       ]
     },
     {
@@ -83,5 +84,5 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "projectName": "all-all-contributors",
-  "projectOwner": "RayStick"
+  "projectOwner": "the-turing-way"
 }
