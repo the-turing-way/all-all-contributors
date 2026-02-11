@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Gibson"
+  given-names: "Sarah"
+- family-names: "Karoune"
+  given-names: "Akram"
+- family-names: "Madge"
+  given-names: "Jim"
+- family-names: "Raja"
+  given-names: "Sahil"
+- family-names: "Sirmpilatze"
+  given-names: "Niko"
+- family-names: "Stickland"
+  given-names: "Rachael"
+- family-names: "Zwagerman"
+  given-names: "Thomas"
+title: "All All Contributors"
+version: 1.0.0
+doi: "pending"
+date-released: 2025-07-02
+url: "https://github.com/the-turing-way/all-all-contributors"

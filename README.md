@@ -1,16 +1,13 @@
 # All All Contributors
 
-*All Contributors at the level of a GitHub Org*
+*All Contributors at the level of a GitHub Organisation*
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-) <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
-This project is being developed as a part of the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
-
-### Introduction
+## Introduction and project goals
 
 Many communities that host their work on GitHub use the [All Contributor](https://allcontributors.org) specification for
 
@@ -22,15 +19,7 @@ There is a bot that helps a community use this specification in an automated way
 
 This bot works well, but it only works at the level of a repository, not an organisation. When an organisation has multiple repositories, there is a need to capture all contributors (and their contribution types) at the level of the organisation.
 
-## Goals of this repo
-
-This repo will provide a way to fetch all of the `.all-contributorsrc` files from each repo contained with an organisation. Once fetched, it will combine them together and summarise each contributor and all of their unique contributions.
-
-See our [Project Board](https://github.com/users/RayStick/projects/2/views/1) for more incremental steps, and future enhancements.
-
-### Oops, let's not duplicate effort
-
-We don't want to duplicate effort, but we do want to be able to understand what we've made and maintain it! There are some previous discussions and efforts in this area (see this [issue thread](https://github.com/all-contributors/all-contributors/issues/416) and this [repository](https://github.com/openclimatefix/merge-all-contributors)) and it would be good to combine efforts with people in the future, where possible.
+This project will provide a way to fetch all of the `.all-contributorsrc` files from each repo contained with an organisation. Once fetched, it will combine them together and summarise each contributor and all of their unique contributions.
 
 ## Usage
 
@@ -60,6 +49,8 @@ permissions:
 
 ## Contributors ✨
 
+This project started at the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
+
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -85,6 +76,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Citation & License
-> fill
