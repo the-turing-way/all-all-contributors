@@ -1,6 +1,7 @@
 .env
 cc-venv
 physiopy_*
+.repoignore
 
 # documention builds
 site/
