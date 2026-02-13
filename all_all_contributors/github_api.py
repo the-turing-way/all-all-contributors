@@ -42,6 +42,7 @@ class GitHubAPI:
         """
         self.org_name = org_name
         self.target_repo_name = target_repo_name
+        self.org_repos = [ ]
         self.target_filepath = target_filepath
         self.base_branch = base_branch
         self.head_branch = head_branch
