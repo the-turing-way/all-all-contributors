@@ -284,7 +284,7 @@ class GitHubAPI:
         resp = get_request(
             url, headers=self.headers, params={"ref": ref}, output="json"
         )
-        resp = get_ref(resp["download_url"], headers=self.headers, output="json")
+        resp = get_request(resp["download_url"], headers=self.headers, output="json")
         return resp
 
     def run(self, merged_contributors: list) -> None:
