@@ -310,7 +310,7 @@ class GitHubAPI:
             self.create_ref(self.head_branch, resp["object"]["sha"])
 
         # base64 encode the updated config file
-        encoded_file_contents = yaml.object_to_yaml_str(file_contents).encode("utf-8")
+        encoded_file_contents = json.dumps(file_contents, indent=2).encode("utf-8")
         base64_bytes = base64.b64encode(encoded_file_contents)
         file_contents = base64_bytes.decode("utf-8")
 
