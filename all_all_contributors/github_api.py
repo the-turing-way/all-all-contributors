@@ -201,7 +201,7 @@ class GitHubAPI:
         resp = get_request(url, headers=self.headers, params=params)
         for repo in resp.json():
             if repo["name"] not in excluded_repos:
-                self.org_repos.append(repo["name"])
+                org_repos.append(repo["name"])
 
         # Paginate over results using the 'link' and rel['next'] parameters from
         # the API response
@@ -212,7 +212,7 @@ class GitHubAPI:
             )
             for repo in resp.json:
                 if repo["name"] not in excluded_repos:
-                    self.org_repos.append(repo["name"])
+                    org_repos.append(repo["name"])
 
         return org_repos
 
