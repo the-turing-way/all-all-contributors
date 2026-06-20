@@ -44,6 +44,7 @@ class TestGitHubAPI(unittest.TestCase):
                     [
                         github.api_url,
                         "repos",
+                        github.org_name,
                         github.target_repo_name,
                         "contents",
                         github.target_filepath,
@@ -74,7 +75,7 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                "/".join([github.api_url, "repos", github.org_name, github.target_repo_name, "pulls"]),
                 headers=github.headers,
                 json=expected_pr,
                 return_json=True,
@@ -98,7 +99,7 @@ class TestGitHubAPI(unittest.TestCase):
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
                 "/".join(
-                    [github.api_url, "repos", github.target_repo_name, "git", "refs"]
+                    [github.api_url, "repos", github.org_name, github.target_repo_name, "git", "refs"]
                 ),
                 headers=github.headers,
                 json=test_body,
@@ -128,7 +129,7 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                "/".join([github.api_url, "repos", github.org_name, github.target_repo_name, "pulls"]),
                 headers=github.headers,
                 params={"state": "open", "sort": "created", "direction": "desc"},
                 output="json",
@@ -163,7 +164,7 @@ class TestGitHubAPI(unittest.TestCase):
 
             self.assertEqual(mock.call_count, 1)
             mock.assert_called_with(
-                "/".join([github.api_url, "repos", github.target_repo_name, "pulls"]),
+                "/".join([github.api_url, "repos", github.org_name, github.target_repo_name, "pulls"]),
                 headers=github.headers,
                 params={"state": "open", "sort": "created", "direction": "desc"},
                 output="json",
@@ -195,6 +196,7 @@ class TestGitHubAPI(unittest.TestCase):
                     [
                         github.api_url,
                         "repos",
+                        github.org_name,
                         github.target_repo_name,
                         "git",
                         "ref",
@@ -236,6 +238,7 @@ class TestGitHubAPI(unittest.TestCase):
                     [
                         github.api_url,
                         "repos",
+                        github.org_name,
                         github.target_repo_name,
                         "pulls",
                         str(github.pr_number),

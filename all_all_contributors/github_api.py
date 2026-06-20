@@ -71,6 +71,7 @@ class GitHubAPI:
             [
                 self.api_url,
                 "repos",
+                self.org_name,
                 self.target_repo_name,
                 "contents",
                 self.target_filepath,
@@ -93,7 +94,7 @@ class GitHubAPI:
             sha (str): The SHA of the parent commit to point the new reference to
         """
         print("Creating new branch: {}", ref)
-        url = "/".join([self.api_url, "repos", self.target_repo_name, "git", "refs"])
+        url = "/".join([self.api_url, "repos", self.org_name, self.target_repo_name, "git", "refs"])
         body = {
             "ref": f"refs/heads/{ref}",
             "sha": sha,
@@ -102,7 +103,7 @@ class GitHubAPI:
 
     def create_update_pull_request(self):
         """Create or update a Pull Request via the GitHub API"""
-        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
+        url = "/".join([self.api_url, "repos", self.org_name, self.target_repo_name, "pulls"])
         pr = {
             "title": "Merging all-contributors across the org",
             "body": "",  # FIXME: Add a descriptove PR body here
@@ -139,7 +140,7 @@ class GitHubAPI:
         """Check if the bot already has an open Pull Request"""
         print("Finding Pull Requests previously opened to merge all contributors files")
 
-        url = "/".join([self.api_url, "repos", self.target_repo_name, "pulls"])
+        url = "/".join([self.api_url, "repos", self.org_name, self.target_repo_name, "pulls"])
         params = {"state": "open", "sort": "created", "direction": "desc"}
         resp = get_request(url, headers=self.headers, params=params, output="json")
 
@@ -180,7 +181,7 @@ class GitHubAPI:
         """
         print("Pulling info for ref: {}", ref)
         url = "/".join(
-            [self.api_url, "repos", self.target_repo_name, "git", "ref", "heads", ref]
+            [self.api_url, "repos", self.org_name, self.target_repo_name, "git", "ref", "heads", ref]
         )
         return get_request(url, headers=self.headers, output="json")
 
