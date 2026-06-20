@@ -4,6 +4,10 @@ description: >-
   from repos within an organisation and opens a Pull Request to a chosen repo to
   host the full list of contributors in.
 
+  IMPORTANT: This action requires the repository to be checked out first using
+  actions/checkout@v4. Git authentication is handled automatically by actions/checkout
+  when you pass the token parameter. See the README for complete usage examples.
+
   Developed at the Software Sustainability Institute's Collaboration Workshop
   hackday in 2025 (https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
 inputs:
@@ -37,6 +41,10 @@ inputs:
     description: >-
       A prefix to prepend to head branches when opening pull requests.
       Defaults to: merge-all-contributors
+  working_dir:
+    description: >-
+      Path to the checked-out git repository. This should match the path used
+      in actions/checkout if a custom path was specified. Defaults to: . (current directory)
 runs:
   using: "docker"
   image: "docker://ghcr.io/the-turing-way/all-all-contributors:main"
