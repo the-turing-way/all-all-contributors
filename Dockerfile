@@ -2,7 +2,7 @@
 # - https://github.com/sgibson91/bump-helm-deps-action/blob/main/Dockerfile
 
 # Use a Python slim image
-FROM python:3.13.3-slim
+FROM python:3.14.6-slim
 
 # Install gcc
 # NOTE: Sarah can't remember why she needed this line... Let's see what breaks without it!
