@@ -1,5 +1,3 @@
-import os
-import base64
 import json
 import random
 import string
@@ -7,210 +5,178 @@ import jmespath
 import requests
 
 from .http_requests import get_request, patch_request, post_request
-from .inject import inject_config
-from .yaml_parser import YamlParser
 
-yaml = YamlParser()
+API_URL = "https://api.github.com"
 
 
-class GitHubAPI:
-    """Interact with the GitHub API and perform various git-flow tasks"""
+def _get_headers(github_token: str) -> dict:
+    """Get headers for GitHub API requests"""
+    return {
+        "Accept": "application/vnd.github.v3+json",
+        "Authorization": f"token {github_token}",
+    }
 
-    def __init__(
-        self,
-        org_name: str,
-        target_repo_name: str,
-        github_token: str,
-        target_filepath: str = ".all-contributorsrc",
-        base_branch: str = "main",
-        head_branch: str = "merge-all-contributors",
-    ):
-        """
-        Args:
-            org_name (str): The name of the GitHub organisation to target
-            target_repo_name (str): The name of the repo within `org_name` that
-                will host the combined .all-contributorsrc file
-            github_token (str): A GitHub token to authenticate API calls
-            target_filepath (str, optional): The filepath within `target_repo_name`
-                to the combined `.all-contributorsrc` file.
-                (default: ".all-contributorsrc")
-            base_branch (str, optional): The name of the default branch in
-                `target_repo_name`. (default: "main")
-            head_branch (str, optional): A prefix for branches created in
-                `target_repo_name` for pull requests.
-                (default: "all-all-contributors")
-        """
-        self.org_name = org_name
-        self.target_repo_name = target_repo_name
-        self.target_filepath = target_filepath
-        self.base_branch = base_branch
-        self.head_branch = head_branch
 
-        self.headers = {
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"token {github_token}",
-        }
+def get_all_repos(org_name: str, github_token: str, excluded_repos: list) -> list:
+    """
+    Get all repositories from a GitHub organization using the GitHub API
 
-        self.api_url = "https://api.github.com"
+    Args:
+        org_name: The name of the GitHub organisation
+        github_token: GitHub token for authentication
+        excluded_repos: A list of excluded repos to skip
 
-    def create_update_pull_request(self):
-        """Create or update a Pull Request via the GitHub API"""
-        url = "/".join(
-            [self.api_url, "repos", self.org_name, self.target_repo_name, "pulls"]
+    Returns:
+        list: A list of remaining repos in the organisation
+    """
+    headers = _get_headers(github_token)
+    org_repos = []
+
+    # First API call
+    url = "/".join([API_URL, "orgs", org_name, "repos"])
+    params = {"type": "public", "per_page": 100}
+    resp = get_request(url, headers=headers, params=params)
+    for repo in resp.json():
+        if repo["name"] not in excluded_repos:
+            org_repos.append(repo["name"])
+
+    # Paginate over results using the 'link' and rel['next'] parameters from
+    # the API response
+    # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
+    while "link" in resp.headers:
+        resp = get_request(
+            resp.links["next"]["url"], headers=headers, params=params
         )
-        pr = {
-            "title": "Merging all-contributors across the org",
-            "body": "",  # FIXME: Add a descriptove PR body here
-            "base": self.base_branch,
-        }
-
-        if self.pr_exists:
-            print("Updating Pull Request...")
-
-            url = "/".join([url, str(self.pr_number)])
-            pr["state"] = "open"
-            resp = patch_request(
-                url,
-                headers=self.headers,
-                json=pr,
-                return_json=True,
-            )
-
-            print(f"Pull Request #{resp['number']} updated!")
-        else:
-            print("Creating Pull Request...")
-
-            pr["head"] = self.head_branch
-            resp = post_request(
-                url,
-                headers=self.headers,
-                json=pr,
-                return_json=True,
-            )
-
-            print(f"Pull Request #{resp['number']} created!")
-
-    def find_existing_pull_request(self):
-        """Check if the bot already has an open Pull Request"""
-        print("Finding Pull Requests previously opened to merge all contributors files")
-
-        url = "/".join(
-            [self.api_url, "repos", self.org_name, self.target_repo_name, "pulls"]
-        )
-        params = {"state": "open", "sort": "created", "direction": "desc"}
-        resp = get_request(url, headers=self.headers, params=params, output="json")
-
-        # Expression to match the head ref
-        matches = jmespath.search("[*].head.label", resp)
-        indx, match = next(
-            (
-                (indx, match)
-                for (indx, match) in enumerate(matches)
-                if self.head_branch in match
-            ),
-            (None, None),
-        )
-
-        if (indx is None) and (match is None):
-            print("No relevant Pull Requests found. A new Pull Request will be opened.")
-            random_id = "".join(random.sample(string.ascii_letters, 4))
-            self.head_branch = "/".join([self.head_branch, random_id])
-            self.pr_exists = False
-        else:
-            print(
-                "Relevant Pull Request found. Will push new commits to this Pull Request."
-            )
-
-            self.head_branch = match.split(":")[-1]
-            self.pr_number = resp[indx]["number"]
-            self.pr_exists = True
-
-    def get_all_repos(self, excluded_repos: list) -> list:
-        """
-        Get all repositories from a GitHub organization using the GitHub API
-
-        Args:
-            excluded_repos (list): A list of excluded repos to skip
-
-        Returns:
-            list: A list of remaining repos in the organisation
-        """
-        org_repos = []
-
-        # First API call
-        url = "/".join([self.api_url, "orgs", self.org_name, "repos"])
-        params = {"type": "public", "per_page": 100}
-        resp = get_request(url, headers=self.headers, params=params)
         for repo in resp.json():
             if repo["name"] not in excluded_repos:
                 org_repos.append(repo["name"])
 
-        # Paginate over results using the 'link' and rel['next'] parameters from
-        # the API response
-        # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
-        while "link" in resp.headers:
-            resp = get_request(
-                resp.links["next"]["url"], headers=self.headers, params=params
-            )
-            for repo in resp.json:
-                if repo["name"] not in excluded_repos:
-                    org_repos.append(repo["name"])
+    return org_repos
 
-        return org_repos
 
-    def get_contributors_from_repo(
-        self, repo: str, filepath=".all-contributorsrc"
-    ) -> list:
-        """Get contributors from a specific repository using the GitHub API
+def get_contributors_from_repo(
+    org_name: str, repo: str, github_token: str, filepath: str = ".all-contributorsrc"
+) -> list:
+    """Get contributors from a specific repository using the GitHub API
 
-        Args:
-            repo (str): The name of the repository to extract contributors from
-            filepath (str): The filepath to extract contributors from (default: .all-contributorsrc)
+    Args:
+        org_name: The name of the GitHub organisation
+        repo: The name of the repository to extract contributors from
+        github_token: GitHub token for authentication
+        filepath: The filepath to extract contributors from (default: .all-contributorsrc)
 
-        Returns:
-            list: A list of contributors from the repository, or an empty list if the file doesn't exist
-        """
-        url = "/".join(
-            [self.api_url, "repos", self.org_name, repo, "contents", filepath]
-        )
-        try:
-            resp = get_request(url, headers=self.headers, output="json")
-            resp = get_request(
-                resp["download_url"], headers=self.headers, output="json"
-            )
-            return resp["contributors"]
-        except requests.HTTPError as e:
-            if "404" in str(e):
-                print(f"Skipping {repo}: {filepath} not found")
-                return []
-            else:
-                raise
-
-    def run(self, merged_contributors: list) -> None:
-        """Run git flow to make a branch, commit a file, and open a PR"""
-        # Check if a PR exists
-        self.find_existing_pull_request()
-
-        # We want to work against the most up-to-date version of the target file
-        if self.pr_exists:
-            # If a PR exists, pull the file from there
-            file_contents = self.get_target_file_contents(self.head_branch)
+    Returns:
+        list: A list of contributors from the repository, or an empty list if the file doesn't exist
+    """
+    headers = _get_headers(github_token)
+    url = "/".join([API_URL, "repos", org_name, repo, "contents", filepath])
+    try:
+        resp = get_request(url, headers=headers, output="json")
+        resp = get_request(resp["download_url"], headers=headers, output="json")
+        return resp["contributors"]
+    except requests.HTTPError as e:
+        if "404" in str(e):
+            print(f"Skipping {repo}: {filepath} not found")
+            return []
         else:
-            # Otherwise, pull from the base of the repo
-            file_contents = self.get_target_file_contents(self.base_branch)
+            raise
 
-        file_contents = inject_config(file_contents, merged_contributors)
 
-        if not self.pr_exists:
-            # Create a branch to open a PR from
-            resp = self.get_ref(self.base_branch)
-            self.create_ref(self.head_branch, resp["object"]["sha"])
+def find_existing_pull_request(
+    org_name: str, repo_name: str, head_branch: str, github_token: str
+) -> tuple[bool, str, int | None]:
+    """Check if the bot already has an open Pull Request
 
-        # base64 encode the updated config file
-        encoded_file_contents = json.dumps(file_contents, indent=2).encode("utf-8")
-        base64_bytes = base64.b64encode(encoded_file_contents)
-        file_contents = base64_bytes.decode("utf-8")
+    Args:
+        org_name: The name of the GitHub organisation
+        repo_name: The name of the repository
+        head_branch: The head branch to search for
+        github_token: GitHub token for authentication
 
-        # Create a commit and open a pull request
-        self.create_commit(file_contents)
-        self.create_update_pull_request()
+    Returns:
+        tuple: (pr_exists, actual_head_branch, pr_number)
+            pr_exists: True if PR exists, False otherwise
+            actual_head_branch: The actual head branch name (may have random suffix)
+            pr_number: The PR number if exists, None otherwise
+    """
+    headers = _get_headers(github_token)
+    print("Finding Pull Requests previously opened to merge all contributors files")
+
+    url = "/".join([API_URL, "repos", org_name, repo_name, "pulls"])
+    params = {"state": "open", "sort": "created", "direction": "desc"}
+    resp = get_request(url, headers=headers, params=params, output="json")
+
+    # Expression to match the head ref
+    matches = jmespath.search("[*].head.label", resp)
+    indx, match = next(
+        (
+            (indx, match)
+            for (indx, match) in enumerate(matches)
+            if head_branch in match
+        ),
+        (None, None),
+    )
+
+    if (indx is None) and (match is None):
+        print("No relevant Pull Requests found. A new Pull Request will be opened.")
+        random_id = "".join(random.sample(string.ascii_letters, 4))
+        actual_head_branch = "/".join([head_branch, random_id])
+        return False, actual_head_branch, None
+    else:
+        print(
+            "Relevant Pull Request found. Will push new commits to this Pull Request."
+        )
+        actual_head_branch = match.split(":")[-1]
+        pr_number = resp[indx]["number"]
+        return True, actual_head_branch, pr_number
+
+
+def create_update_pull_request(
+    org_name: str,
+    repo_name: str,
+    base_branch: str,
+    head_branch: str,
+    pr_exists: bool,
+    pr_number: int | None,
+    github_token: str,
+) -> None:
+    """Create or update a Pull Request via the GitHub API
+
+    Args:
+        org_name: The name of the GitHub organisation
+        repo_name: The name of the repository
+        base_branch: The base branch for the PR
+        head_branch: The head branch for the PR
+        pr_exists: Whether the PR already exists
+        pr_number: The PR number if it exists
+        github_token: GitHub token for authentication
+    """
+    headers = _get_headers(github_token)
+    url = "/".join([API_URL, "repos", org_name, repo_name, "pulls"])
+    pr = {
+        "title": "Merging all-contributors across the org",
+        "body": "",  # FIXME: Add a descriptive PR body here
+        "base": base_branch,
+    }
+
+    if pr_exists:
+        print("Updating Pull Request...")
+        url = "/".join([url, str(pr_number)])
+        pr["state"] = "open"
+        resp = patch_request(
+            url,
+            headers=headers,
+            json=pr,
+            return_json=True,
+        )
+        print(f"Pull Request #{resp['number']} updated!")
+    else:
+        print("Creating Pull Request...")
+        pr["head"] = head_branch
+        resp = post_request(
+            url,
+            headers=headers,
+            json=pr,
+            return_json=True,
+        )
+        print(f"Pull Request #{resp['number']} created!")
