@@ -94,7 +94,7 @@ def main(
 
     merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
-        github_api.run()
+        github_api.run(merged_contributors)
 
 
 def cli():
