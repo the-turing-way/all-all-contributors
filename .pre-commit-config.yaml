@@ -1,4 +1,9 @@
 exclude: .svg$
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+  autoupdate_schedule: monthly
+  autoupdate_commit_msg: 'chore: update pre-commit hook versions'
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
