@@ -234,7 +234,9 @@ class GitHubAPI:
         )
         try:
             resp = get_request(url, headers=self.headers, output="json")
-            resp = get_request(resp["download_url"], headers=self.headers, output="json")
+            resp = get_request(
+                resp["download_url"], headers=self.headers, output="json"
+            )
             return resp["contributors"]
         except requests.HTTPError as e:
             if "404" in str(e):
