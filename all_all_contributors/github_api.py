@@ -66,7 +66,7 @@ class GitHubAPI:
             commit_msg (str): A message describing the changes the commit applies.
                 (default: "Merging all contributors info from across the org")
         """
-        print("Committing changes to file: {}", self.target_filepath)
+        print(f"Committing changes to file: {self.target_filepath}")
         url = "/".join(
             [
                 self.api_url,
@@ -93,7 +93,7 @@ class GitHubAPI:
             ref (str): The reference or branch name to create
             sha (str): The SHA of the parent commit to point the new reference to
         """
-        print("Creating new branch: {}", ref)
+        print(f"Creating new branch: {ref}")
         url = "/".join(
             [self.api_url, "repos", self.org_name, self.target_repo_name, "git", "refs"]
         )
@@ -185,7 +185,7 @@ class GitHubAPI:
         Returns:
             dict: The JSON payload response of the request
         """
-        print("Pulling info for ref: {}", ref)
+        print(f"Pulling info for ref: {ref}")
         url = "/".join(
             [
                 self.api_url,
