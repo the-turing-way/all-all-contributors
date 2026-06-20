@@ -47,6 +47,49 @@ permissions:
   pull-requests: write
 ```
 
+#### Allow GitHub Actions to Create Pull Requests
+
+By default, GitHub Actions is not permitted to create or approve pull requests. You must enable this in your repository settings:
+
+1. Go to your repository **Settings**
+2. Navigate to **Actions** → **General**
+3. Scroll down to **Workflow permissions**
+4. Check the box **"Allow GitHub Actions to create and approve pull requests"**
+5. Click **Save**
+
+**Note:** If your repository is part of an organization, this setting may be controlled at the organization level. Organization owners can configure this in the organization's **Settings** → **Actions** → **General** settings. If the organization policy prevents this, see the alternative solution below.
+
+Without this setting enabled, the action will fail with a 403 error when attempting to create a pull request.
+
+#### Alternative: Using a Personal Access Token (PAT)
+
+If you cannot enable GitHub Actions to create pull requests (due to organization policies or security requirements), you can use a Personal Access Token instead:
+
+1. **Create a PAT:**
+   - Go to GitHub **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+   - Click **Generate new token (classic)**
+   - Give it a descriptive name (e.g., "all-all-contributors")
+   - Select the `repo` scope (full control of private repositories)
+   - Click **Generate token** and copy the token value
+
+2. **Add the PAT as a repository secret:**
+   - Go to your repository **Settings** → **Secrets and variables** → **Actions**
+   - Click **New repository secret**
+   - Name: `PAT_TOKEN` (or your preferred name)
+   - Value: Paste the PAT you copied
+   - Click **Add secret**
+
+3. **Update your workflow to use the PAT:**
+   ```yaml
+   - uses: the-turing-way/all-all-contributors@main
+     with:
+       organisation: your-org-name
+       target_repo: your-repo-name
+       github_token: ${{ secrets.PAT_TOKEN }}  # Use PAT instead of GITHUB_TOKEN
+   ```
+
+**Security Note:** Personal Access Tokens have broader permissions than `GITHUB_TOKEN`. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.
+
 ## Contributors ✨
 
 This project started at the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
