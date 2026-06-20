@@ -4,6 +4,7 @@ import json
 import random
 import string
 import jmespath
+import requests
 from requests import put
 
 from .http_requests import get_request, patch_request, post_request
@@ -226,14 +227,23 @@ class GitHubAPI:
             filepath (str): The filepath to extract contributors from (default: .all-contributorsrc)
 
         Returns:
-            list: A list of contributors from the repository
+            list: A list of contributors from the repository, or an empty list if the file doesn't exist
         """
         url = "/".join(
             [self.api_url, "repos", self.org_name, repo, "contents", filepath]
         )
-        resp = get_request(url, headers=self.headers, output="json")
-        resp = get_request(resp["download_url"], headers=self.headers, output="json")
-        return resp["contributors"]
+        try:
+            resp = get_request(url, headers=self.headers, output="json")
+            resp = get_request(
+                resp["download_url"], headers=self.headers, output="json"
+            )
+            return resp["contributors"]
+        except requests.HTTPError as e:
+            if "404" in str(e):
+                print(f"Skipping {repo}: {filepath} not found")
+                return []
+            else:
+                raise
 
     def get_target_file_contents(self, ref):
         """Download the JSON-formatted contents of a target filepath in a target
