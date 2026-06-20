@@ -1117,6 +1117,49 @@ The <a href="https://docs.github.com/en/actions/security-guides/automatic-token-
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">pull-requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
 </span></code></pre></div>
+<h4 id="allow-github-actions-to-create-pull-requests">Allow GitHub Actions to Create Pull Requests</h4>
+<p>By default, GitHub Actions is not permitted to create or approve pull requests. You must enable this in your repository settings:</p>
+<ol>
+<li>Go to your repository <strong>Settings</strong></li>
+<li>Navigate to <strong>Actions</strong> → <strong>General</strong></li>
+<li>Scroll down to <strong>Workflow permissions</strong></li>
+<li>Check the box <strong>"Allow GitHub Actions to create and approve pull requests"</strong></li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<p><strong>Note:</strong> If your repository is part of an organization, this setting may be controlled at the organization level. Organization owners can configure this in the organization's <strong>Settings</strong> → <strong>Actions</strong> → <strong>General</strong> settings. If the organization policy prevents this, see the alternative solution below.</p>
+<p>Without this setting enabled, the action will fail with a 403 error when attempting to create a pull request.</p>
+<h4 id="alternative-using-a-personal-access-token-pat">Alternative: Using a Personal Access Token (PAT)</h4>
+<p>If you cannot enable GitHub Actions to create pull requests (due to organization policies or security requirements), you can use a Personal Access Token instead:</p>
+<ol>
+<li><strong>Create a PAT:</strong></li>
+<li>Go to GitHub <strong>Settings</strong> → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></li>
+<li>Click <strong>Generate new token (classic)</strong></li>
+<li>Give it a descriptive name (e.g., "all-all-contributors")</li>
+<li>Select the <code>repo</code> scope (full control of private repositories)</li>
+<li>
+<p>Click <strong>Generate token</strong> and copy the token value</p>
+</li>
+<li>
+<p><strong>Add the PAT as a repository secret:</strong></p>
+</li>
+<li>Go to your repository <strong>Settings</strong> → <strong>Secrets and variables</strong> → <strong>Actions</strong></li>
+<li>Click <strong>New repository secret</strong></li>
+<li>Name: <code>PAT_TOKEN</code> (or your preferred name)</li>
+<li>Value: Paste the PAT you copied</li>
+<li>
+<p>Click <strong>Add secret</strong></p>
+</li>
+<li>
+<p><strong>Update your workflow to use the PAT:</strong>
+   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the-turing-way/all-all-contributors@main</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">organisation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-org-name</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">target_repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-repo-name</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PAT_TOKEN }}</span><span class="w">  </span><span class="c1"># Use PAT instead of GITHUB_TOKEN</span>
+</span></code></pre></div></p>
+</li>
+</ol>
+<p><strong>Security Note:</strong> Personal Access Tokens have broader permissions than <code>GITHUB_TOKEN</code>. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.</p>
 <h2 id="contributors">Contributors ✨</h2>
 <p>This project started at the <a href="https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25">2025 SSI Collaboration Workshop Hack Day</a>.</p>
 <p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>
