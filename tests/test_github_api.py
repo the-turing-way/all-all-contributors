@@ -1,4 +1,5 @@
 import base64
+import json
 import unittest
 from unittest.mock import call, patch
 
@@ -21,7 +22,7 @@ class TestGitHubAPI(unittest.TestCase):
         commit_msg = "This is a commit message"
         contents = {"key1": "This is a test"}
 
-        contents = yaml.object_to_yaml_str(contents).encode("utf-8")
+        contents = json.dumps(contents, indent=2).encode("utf-8")
         contents = base64.b64encode(contents)
         contents = contents.decode("utf-8")
 

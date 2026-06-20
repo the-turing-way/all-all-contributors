@@ -66,7 +66,7 @@ class GitHubAPI:
             commit_msg (str): A message describing the changes the commit applies.
                 (default: "Merging all contributors info from across the org")
         """
-        print("Committing changes to file: {}", self.target_filepath)
+        print(f"Committing changes to file: {self.target_filepath}")
         url = "/".join(
             [
                 self.api_url,
@@ -93,7 +93,7 @@ class GitHubAPI:
             ref (str): The reference or branch name to create
             sha (str): The SHA of the parent commit to point the new reference to
         """
-        print("Creating new branch: {}", ref)
+        print(f"Creating new branch: {ref}")
         url = "/".join(
             [self.api_url, "repos", self.org_name, self.target_repo_name, "git", "refs"]
         )
@@ -185,7 +185,7 @@ class GitHubAPI:
         Returns:
             dict: The JSON payload response of the request
         """
-        print("Pulling info for ref: {}", ref)
+        print(f"Pulling info for ref: {ref}")
         url = "/".join(
             [
                 self.api_url,
@@ -284,6 +284,8 @@ class GitHubAPI:
         resp = get_request(
             url, headers=self.headers, params={"ref": ref}, output="json"
         )
+        # Store the SHA for later use in create_commit
+        self.sha = resp["sha"]
         resp = get_request(resp["download_url"], headers=self.headers, output="json")
         return resp
 
@@ -308,7 +310,7 @@ class GitHubAPI:
             self.create_ref(self.head_branch, resp["object"]["sha"])
 
         # base64 encode the updated config file
-        encoded_file_contents = yaml.object_to_yaml_str(file_contents).encode("utf-8")
+        encoded_file_contents = json.dumps(file_contents, indent=2).encode("utf-8")
         base64_bytes = base64.b64encode(encoded_file_contents)
         file_contents = base64_bytes.decode("utf-8")
 
