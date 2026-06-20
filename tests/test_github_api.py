@@ -33,14 +33,15 @@ class TestGetAllRepos:
         mock_response.headers = {}  # No pagination
         mock_get.return_value = mock_response
 
-        result = github_api.get_all_repos(
-            "test-org", "test-token", {"excluded-repo"}
-        )
+        result = github_api.get_all_repos("test-org", "test-token", {"excluded-repo"})
 
         assert result == ["repo1", "repo2", "repo3"]
         mock_get.assert_called_once_with(
             "https://api.github.com/orgs/test-org/repos",
-            headers={"Accept": "application/vnd.github.v3+json", "Authorization": "token test-token"},
+            headers={
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "token test-token",
+            },
             params={"type": "public", "per_page": 100},
         )
 
@@ -115,9 +116,7 @@ class TestGetContributorsFromRepo:
         mock_get.side_effect = requests.HTTPError("500 Server Error")
 
         with pytest.raises(requests.HTTPError):
-            github_api.get_contributors_from_repo(
-                "test-org", "test-repo", "test-token"
-            )
+            github_api.get_contributors_from_repo("test-org", "test-repo", "test-token")
 
     @patch("all_all_contributors.github_api.get_request")
     def test_uses_custom_filepath(self, mock_get):
@@ -144,8 +143,10 @@ class TestFindExistingPullRequest:
         ]
 
         with patch.object(random, "sample", return_value=list("ABCD")):
-            pr_exists, actual_head_branch, pr_number = github_api.find_existing_pull_request(
-                "test-org", "test-repo", "merged-all-contributors", "test-token"
+            pr_exists, actual_head_branch, pr_number = (
+                github_api.find_existing_pull_request(
+                    "test-org", "test-repo", "merged-all-contributors", "test-token"
+                )
             )
 
         assert pr_exists is False
@@ -153,7 +154,10 @@ class TestFindExistingPullRequest:
         assert pr_number is None
         mock_get.assert_called_once_with(
             "https://api.github.com/repos/test-org/test-repo/pulls",
-            headers={"Accept": "application/vnd.github.v3+json", "Authorization": "token test-token"},
+            headers={
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "token test-token",
+            },
             params={"state": "open", "sort": "created", "direction": "desc"},
             output="json",
         )
@@ -165,8 +169,10 @@ class TestFindExistingPullRequest:
             {"head": {"label": "test-org:merged-all-contributors/WXYZ"}, "number": 42}
         ]
 
-        pr_exists, actual_head_branch, pr_number = github_api.find_existing_pull_request(
-            "test-org", "test-repo", "merged-all-contributors", "test-token"
+        pr_exists, actual_head_branch, pr_number = (
+            github_api.find_existing_pull_request(
+                "test-org", "test-repo", "merged-all-contributors", "test-token"
+            )
         )
 
         assert pr_exists is True
@@ -181,8 +187,10 @@ class TestFindExistingPullRequest:
             {"head": {"label": "test-org:merged-all-contributors/TEST"}, "number": 10},
         ]
 
-        pr_exists, actual_head_branch, pr_number = github_api.find_existing_pull_request(
-            "test-org", "test-repo", "merged-all-contributors", "test-token"
+        pr_exists, actual_head_branch, pr_number = (
+            github_api.find_existing_pull_request(
+                "test-org", "test-repo", "merged-all-contributors", "test-token"
+            )
         )
 
         assert pr_exists is True
@@ -208,7 +216,10 @@ class TestCreateUpdatePullRequest:
 
         mock_post.assert_called_once_with(
             "https://api.github.com/repos/test-org/test-repo/pulls",
-            headers={"Accept": "application/vnd.github.v3+json", "Authorization": "token test-token"},
+            headers={
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "token test-token",
+            },
             json={
                 "title": "Merging all-contributors across the org",
                 "body": "",
@@ -235,7 +246,10 @@ class TestCreateUpdatePullRequest:
 
         mock_patch.assert_called_once_with(
             "https://api.github.com/repos/test-org/test-repo/pulls/42",
-            headers={"Accept": "application/vnd.github.v3+json", "Authorization": "token test-token"},
+            headers={
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "token test-token",
+            },
             json={
                 "title": "Merging all-contributors across the org",
                 "body": "",

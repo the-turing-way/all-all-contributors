@@ -44,9 +44,7 @@ def get_all_repos(org_name: str, github_token: str, excluded_repos: list) -> lis
     # the API response
     # https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
     while "link" in resp.headers:
-        resp = get_request(
-            resp.links["next"]["url"], headers=headers, params=params
-        )
+        resp = get_request(resp.links["next"]["url"], headers=headers, params=params)
         for repo in resp.json():
             if repo["name"] not in excluded_repos:
                 org_repos.append(repo["name"])
@@ -109,11 +107,7 @@ def find_existing_pull_request(
     # Expression to match the head ref
     matches = jmespath.search("[*].head.label", resp)
     indx, match = next(
-        (
-            (indx, match)
-            for (indx, match) in enumerate(matches)
-            if head_branch in match
-        ),
+        ((indx, match) for (indx, match) in enumerate(matches) if head_branch in match),
         (None, None),
     )
 

@@ -50,7 +50,11 @@ class TestGetGithubToken:
 
 class TestLoadExcludedRepos:
     @patch("all_all_contributors.cli.path.exists", return_value=True)
-    @patch("builtins.open", new_callable=mock_open, read_data="repo1\nrepo2\n# comment\nrepo3\n")
+    @patch(
+        "builtins.open",
+        new_callable=mock_open,
+        read_data="repo1\nrepo2\n# comment\nrepo3\n",
+    )
     @patch.dict(os.environ, {"INPUT_IGNORE_FILE": "test.repoignore"})
     def test_loads_repos_from_file(self, mock_file, mock_exists):
         """Test that repos are loaded from file and comments are filtered"""
@@ -134,7 +138,9 @@ class TestMain:
         mock_find_pr.assert_called_once_with(
             "test-org", "test-repo", "merged-all-contributors", "test-token"
         )
-        mock_branch_exists.assert_called_once_with("merged-all-contributors/ABCD", "/test/repo")
+        mock_branch_exists.assert_called_once_with(
+            "merged-all-contributors/ABCD", "/test/repo"
+        )
         mock_checkout.assert_called_once_with(
             "merged-all-contributors/ABCD", create=True, working_dir="/test/repo"
         )
@@ -208,7 +214,9 @@ class TestMain:
         )
 
         # Verify branch handling
-        mock_branch_exists.assert_called_once_with("merged-all-contributors/WXYZ", "/test/repo")
+        mock_branch_exists.assert_called_once_with(
+            "merged-all-contributors/WXYZ", "/test/repo"
+        )
         mock_checkout.assert_called_once_with(
             "merged-all-contributors/WXYZ", create=False, working_dir="/test/repo"
         )
@@ -325,10 +333,16 @@ class TestMain:
 
         with patch("all_all_contributors.cli.load_excluded_repos") as mock_load:
             mock_load.return_value = set()
-            with patch("all_all_contributors.cli.github_api.get_all_repos") as mock_repos:
+            with patch(
+                "all_all_contributors.cli.github_api.get_all_repos"
+            ) as mock_repos:
                 mock_repos.return_value = []
-                with patch("all_all_contributors.cli.github_api.get_contributors_from_repo"):
-                    with patch("all_all_contributors.cli.merge_contributors") as mock_merge:
+                with patch(
+                    "all_all_contributors.cli.github_api.get_contributors_from_repo"
+                ):
+                    with patch(
+                        "all_all_contributors.cli.merge_contributors"
+                    ) as mock_merge:
                         mock_merge.return_value = []
 
                         cli.main(

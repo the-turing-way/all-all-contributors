@@ -37,7 +37,9 @@ class TestCheckoutBranch:
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_creates_new_branch(self, mock_run):
         """Test that new branch is created when create=True"""
-        git_operations.checkout_branch("new-branch", create=True, working_dir="/test/repo")
+        git_operations.checkout_branch(
+            "new-branch", create=True, working_dir="/test/repo"
+        )
 
         mock_run.assert_called_once_with(
             ["git", "checkout", "-b", "new-branch"],

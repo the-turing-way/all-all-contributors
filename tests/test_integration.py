@@ -1,4 +1,5 @@
 """Integration tests for error handling and workflow scenarios"""
+
 import subprocess
 from unittest.mock import MagicMock, mock_open, patch
 
@@ -17,7 +18,9 @@ class TestGitErrorHandling:
         mock_run.side_effect = subprocess.CalledProcessError(1, ["git", "checkout"])
 
         with pytest.raises(subprocess.CalledProcessError):
-            git_operations.checkout_branch("nonexistent-branch", create=False, working_dir="/test/repo")
+            git_operations.checkout_branch(
+                "nonexistent-branch", create=False, working_dir="/test/repo"
+            )
 
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_pull_fails_on_merge_conflict(self, mock_run):
@@ -79,8 +82,13 @@ class TestGitHubAPIErrorHandling:
 
         with pytest.raises(requests.HTTPError):
             github_api.create_update_pull_request(
-                "test-org", "test-repo", "main", "test-branch",
-                pr_exists=False, pr_number=None, github_token="token"
+                "test-org",
+                "test-repo",
+                "main",
+                "test-branch",
+                pr_exists=False,
+                pr_number=None,
+                github_token="token",
             )
 
 
