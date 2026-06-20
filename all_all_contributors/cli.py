@@ -90,7 +90,7 @@ def main(
     all_contributors = []
     for repo in repos:
         contributors = github_api.get_contributors_from_repo(repo)
-        all_contributors.append(contributors)
+        all_contributors.extend(contributors)
 
     merged_contributors = merge_contributors(all_contributors)
     if merged_contributors:
