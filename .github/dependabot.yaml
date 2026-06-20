@@ -11,7 +11,7 @@ updates:
       workflows:
         patterns:
           - "*"
-  # Maintain dependencies for pip
+  # Maintain dependencies for pyproject.toml - uses pip ecosystem
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
