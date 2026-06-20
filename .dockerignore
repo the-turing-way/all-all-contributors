@@ -1,10 +1,48 @@
-# Folders to be ignored
+# Version control
 .git
 .github
-docs
-old-code
-tests
 
-# Files to be ignored
-.all-contributorsrc
+# Documentation
+docs
 mkdocs.yml
+
+# Tests
+tests
+.pytest_cache
+.coverage
+
+# Python virtual environments and caches
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+.eggs
+
+# Python tools caches
+.ruff_cache
+.hatch
+.mypy_cache
+.tox
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Config files
+.all-contributorsrc
+.pre-commit-config.yaml
+
+# Logs
+*.log
