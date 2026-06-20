@@ -47,7 +47,7 @@ inputs:
       in actions/checkout if a custom path was specified. Defaults to: . (current directory)
 runs:
   using: "docker"
-  image: "docker://ghcr.io/the-turing-way/all-all-contributors:main"
+  image: "docker://ghcr.io/the-turing-way/all-all-contributors:test"
 branding:
   icon: "award"
   color: "blue"
