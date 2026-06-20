@@ -284,6 +284,8 @@ class GitHubAPI:
         resp = get_request(
             url, headers=self.headers, params={"ref": ref}, output="json"
         )
+        # Store the SHA for later use in create_commit
+        self.sha = resp["sha"]
         resp = get_request(resp["download_url"], headers=self.headers, output="json")
         return resp
 
