@@ -147,16 +147,19 @@ def main(
     with open(config_path, "w") as f:
         json.dump(file_contents, f, indent=2)
         f.write("\n")  # Add trailing newline
-
     print(f"Updated {target_filepath} with merged contributors")
-
-    # Stage modified files (ignores untracked files)
-    git_operations.stage_modified_files(working_dir)
 
     # Check if there are any changes to commit
     if not git_operations.has_changes(working_dir):
         print("No changes to commit - contributors list is already up to date")
         return
+
+    # Stage modified files (ignores untracked files)
+    git_operations.stage_modified_files(working_dir)
+
+    # Create commit
+    commit_message = "Merging all contributors info from across the org"
+    git_operations.create_commit(commit_message, working_dir)
 
     # Push branch to remote
     git_operations.push_branch(head_branch, working_dir)
