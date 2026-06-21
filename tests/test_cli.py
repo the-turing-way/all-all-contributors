@@ -67,6 +67,7 @@ class TestMain:
     @patch("all_all_contributors.cli.git_operations.create_commit")
     @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
+    @patch("all_all_contributors.cli.contributor_table.generate_contributor_tables")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
@@ -85,6 +86,7 @@ class TestMain:
         mock_checkout,
         mock_inject,
         mock_file,
+        mock_generate_tables,
         mock_stage,
         mock_has_changes,
         mock_commit,
@@ -99,6 +101,7 @@ class TestMain:
         mock_merge.return_value = [{"login": "user1", "contributions": ["code"]}]
         mock_find_pr.return_value = (False, "merge-all-contributors/ABCD", None)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_generate_tables.return_value = None
         mock_has_changes.return_value = True
 
         # Call main
@@ -123,10 +126,9 @@ class TestMain:
         mock_checkout.assert_called_once_with(
             "merge-all-contributors/ABCD", create=True, working_dir="/test/repo"
         )
-        mock_stage.assert_called_once_with("/test/repo", ".all-contributorsrc")
-        mock_commit.assert_called_once_with(
-            "Merging all contributors info from across the org", "/test/repo"
-        )
+        mock_generate_tables.assert_called_once_with("/test/repo")
+        mock_stage.assert_called_once_with("/test/repo")
+        mock_commit.assert_called_once()
         mock_push.assert_called_once_with("merge-all-contributors/ABCD", "/test/repo")
         mock_create_pr.assert_called_once_with(
             "test-org",
@@ -334,6 +336,7 @@ class TestMain:
     @patch("all_all_contributors.cli.git_operations.create_commit")
     @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
+    @patch("all_all_contributors.cli.contributor_table.generate_contributor_tables")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
@@ -352,6 +355,7 @@ class TestMain:
         mock_checkout,
         mock_inject,
         mock_file,
+        mock_generate_tables,
         mock_stage,
         mock_has_changes,
         mock_commit,
@@ -366,6 +370,7 @@ class TestMain:
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_generate_tables.return_value = None
         # No staged changes
         mock_has_changes.return_value = False
 
@@ -381,7 +386,7 @@ class TestMain:
         )
 
         # Verify early return - no commit, push, or PR creation
-        mock_has_changes.assert_called_once_with("/test/repo", ".all-contributorsrc")
+        mock_has_changes.assert_called_once_with("/test/repo")
         mock_commit.assert_not_called()
         mock_push.assert_not_called()
         mock_create_pr.assert_not_called()
