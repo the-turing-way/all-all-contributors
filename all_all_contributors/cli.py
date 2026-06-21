@@ -126,6 +126,15 @@ def main(
     # Stage all modified files (config + any README files that were updated)
     git_operations.stage_modified_files(working_dir)
 
+    # Create commit with descriptive message
+    if updated_files:
+        commit_message = (
+            f"Merge all-contributors from across the org\n\n"
+            f"Updated files:\n- {target_filepath}\n"
+            + "\n".join(f"- {f}" for f in updated_files)
+        )
+    else:
+        commit_message = f"Merge all-contributors from across the org\n\nUpdated: {target_filepath}"
     git_operations.create_commit(commit_message, working_dir)
 
     # Push branch to remote
