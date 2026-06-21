@@ -145,12 +145,12 @@ class TestFindExistingPullRequest:
         with patch.object(random, "sample", return_value=list("ABCD")):
             pr_exists, actual_head_branch, pr_number = (
                 github_api.find_existing_pull_request(
-                    "test-org", "test-repo", "merged-all-contributors", "test-token"
+                    "test-org", "test-repo", "merge-all-contributors", "test-token"
                 )
             )
 
         assert pr_exists is False
-        assert actual_head_branch == "merged-all-contributors/ABCD"
+        assert actual_head_branch == "merge-all-contributors/ABCD"
         assert pr_number is None
         mock_get.assert_called_once_with(
             "https://api.github.com/repos/test-org/test-repo/pulls",
@@ -166,17 +166,17 @@ class TestFindExistingPullRequest:
     def test_returns_true_when_pr_exists(self, mock_get):
         """Test that function returns True and existing branch details when PR exists"""
         mock_get.return_value = [
-            {"head": {"label": "test-org:merged-all-contributors/WXYZ"}, "number": 42}
+            {"head": {"label": "test-org:merge-all-contributors/WXYZ"}, "number": 42}
         ]
 
         pr_exists, actual_head_branch, pr_number = (
             github_api.find_existing_pull_request(
-                "test-org", "test-repo", "merged-all-contributors", "test-token"
+                "test-org", "test-repo", "merge-all-contributors", "test-token"
             )
         )
 
         assert pr_exists is True
-        assert actual_head_branch == "merged-all-contributors/WXYZ"
+        assert actual_head_branch == "merge-all-contributors/WXYZ"
         assert pr_number == 42
 
     @patch("all_all_contributors.github_api.get_request")
@@ -184,17 +184,17 @@ class TestFindExistingPullRequest:
         """Test that branch name matching works with partial match"""
         mock_get.return_value = [
             {"head": {"label": "other-org:different-branch"}, "number": 1},
-            {"head": {"label": "test-org:merged-all-contributors/TEST"}, "number": 10},
+            {"head": {"label": "test-org:merge-all-contributors/TEST"}, "number": 10},
         ]
 
         pr_exists, actual_head_branch, pr_number = (
             github_api.find_existing_pull_request(
-                "test-org", "test-repo", "merged-all-contributors", "test-token"
+                "test-org", "test-repo", "merge-all-contributors", "test-token"
             )
         )
 
         assert pr_exists is True
-        assert actual_head_branch == "merged-all-contributors/TEST"
+        assert actual_head_branch == "merge-all-contributors/TEST"
         assert pr_number == 10
 
 
@@ -208,7 +208,7 @@ class TestCreateUpdatePullRequest:
             "test-org",
             "test-repo",
             "main",
-            "merged-all-contributors/ABCD",
+            "merge-all-contributors/ABCD",
             pr_exists=False,
             pr_number=None,
             github_token="test-token",
@@ -224,7 +224,7 @@ class TestCreateUpdatePullRequest:
                 "title": "Merging all-contributors across the org",
                 "body": "",
                 "base": "main",
-                "head": "merged-all-contributors/ABCD",
+                "head": "merge-all-contributors/ABCD",
             },
             return_json=True,
         )
@@ -238,7 +238,7 @@ class TestCreateUpdatePullRequest:
             "test-org",
             "test-repo",
             "main",
-            "merged-all-contributors/WXYZ",
+            "merge-all-contributors/WXYZ",
             pr_exists=True,
             pr_number=42,
             github_token="test-token",

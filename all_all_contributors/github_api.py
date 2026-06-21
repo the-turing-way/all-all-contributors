@@ -94,7 +94,7 @@ def find_existing_pull_request(
     Returns:
         tuple: (pr_exists, actual_head_branch, pr_number)
             pr_exists: True if PR exists, False otherwise
-            actual_head_branch: The actual head branch name (may have random suffix)
+            head_branch: The head branch name (may have random suffix)
             pr_number: The PR number if exists, None otherwise
     """
     headers = _get_headers(github_token)

@@ -80,7 +80,7 @@ def main(
             envvar="INPUT_HEAD_BRANCH",
             help="The name of the head branch to create in the target repository to open a Pull Request",
         ),
-    ] = "merged-all-contributors",
+    ] = "merge-all-contributors",
 ) -> None:
     excluded_repos = load_excluded_repos()
 

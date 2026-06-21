@@ -97,7 +97,7 @@ class TestMain:
         mock_get_repos.return_value = ["repo1", "repo2"]
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1", "contributions": ["code"]}]
-        mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
+        mock_find_pr.return_value = (False, "merge-all-contributors/ABCD", None)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -108,7 +108,7 @@ class TestMain:
             github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
-            head_branch="merged-all-contributors",
+            head_branch="merge-all-contributors",
             working_dir="/test/repo",
         )
 
@@ -118,21 +118,21 @@ class TestMain:
         assert mock_get_contributors.call_count == 2
         mock_merge.assert_called_once()
         mock_find_pr.assert_called_once_with(
-            "test-org", "test-repo", "merged-all-contributors", "test-token"
+            "test-org", "test-repo", "merge-all-contributors", "test-token"
         )
         mock_checkout.assert_called_once_with(
-            "merged-all-contributors/ABCD", create=True, working_dir="/test/repo"
+            "merge-all-contributors/ABCD", create=True, working_dir="/test/repo"
         )
         mock_stage.assert_called_once_with("/test/repo")
         mock_commit.assert_called_once_with(
             "Merging all contributors info from across the org", "/test/repo"
         )
-        mock_push.assert_called_once_with("merged-all-contributors/ABCD", "/test/repo")
+        mock_push.assert_called_once_with("merge-all-contributors/ABCD", "/test/repo")
         mock_create_pr.assert_called_once_with(
             "test-org",
             "test-repo",
             "main",
-            "merged-all-contributors/ABCD",
+            "merge-all-contributors/ABCD",
             False,
             None,
             "test-token",
@@ -174,7 +174,7 @@ class TestMain:
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
-        mock_find_pr.return_value = (True, "merged-all-contributors/WXYZ", 42)
+        mock_find_pr.return_value = (True, "merge-all-contributors/WXYZ", 42)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -185,19 +185,19 @@ class TestMain:
             github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
-            head_branch="merged-all-contributors",
+            head_branch="merge-all-contributors",
             working_dir="/test/repo",
         )
 
         # Verify branch handling
         mock_checkout.assert_called_once_with(
-            "merged-all-contributors/WXYZ", create=False, working_dir="/test/repo"
+            "merge-all-contributors/WXYZ", create=False, working_dir="/test/repo"
         )
         mock_create_pr.assert_called_once_with(
             "test-org",
             "test-repo",
             "main",
-            "merged-all-contributors/WXYZ",
+            "merge-all-contributors/WXYZ",
             True,
             42,
             "test-token",
@@ -229,7 +229,7 @@ class TestMain:
             github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
-            head_branch="merged-all-contributors",
+            head_branch="merge-all-contributors",
             working_dir="/test/repo",
         )
 
@@ -271,7 +271,7 @@ class TestMain:
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
-        mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
+        mock_find_pr.return_value = (False, "merge-all-contributors/ABCD", None)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -286,7 +286,7 @@ class TestMain:
                 github_token="test-token",
                 target_filepath=".all-contributorsrc",
                 base_branch="main",
-                head_branch="merged-all-contributors",
+                head_branch="merge-all-contributors",
                 working_dir="/test/repo",
             )
 
@@ -320,7 +320,7 @@ class TestMain:
                             github_token="test-token",
                             target_filepath=".all-contributorsrc",
                             base_branch="main",
-                            head_branch="merged-all-contributors",
+                            head_branch="merge-all-contributors",
                             working_dir="/custom/working/dir",
                         )
 
