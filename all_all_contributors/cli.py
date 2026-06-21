@@ -60,6 +60,13 @@ def main(
             help="Target filepath where the merged .all-contributorsrc will be written",
         ),
     ] = ".all-contributorsrc",
+    working_dir: Annotated[
+        str,
+        typer.Argument(
+            envvar="INPUT_WORKING_DIR",
+            help="Path to the checked-out git repository",
+        ),
+    ] = ".",
     base_branch: Annotated[
         str,
         typer.Argument(
