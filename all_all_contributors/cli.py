@@ -13,15 +13,6 @@ from .merge import merge_contributors
 app = typer.Typer(pretty_exceptions_show_locals=False)
 
 
-def get_github_token() -> str | None:
-    """Read a GitHub token from the environment"""
-    token = getenv("INPUT_GITHUB_TOKEN")
-    if token is None:
-        print("Environment variable INPUT_GITHUB_TOKEN is not defined")
-        raise typer.Exit(code=1)
-    return token
-
-
 def load_excluded_repos() -> set:
     """Load excluded repositories from a file
 
@@ -55,6 +46,13 @@ def main(
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
+    github_token: Annotated[
+        str,
+        typer.Argument(
+            envvar="INPUT_GITHUB_TOKEN",
+            help="GitHub personal access token with `public_repo` and `repo` permissions",
+        ),
+    ],
     target_filepath: Annotated[
         str,
         typer.Argument(
@@ -76,15 +74,7 @@ def main(
             help="The name of the head branch to create in the target repository to open a Pull Request",
         ),
     ] = "merged-all-contributors",
-    working_dir: Annotated[
-        str,
-        typer.Argument(
-            envvar="INPUT_WORKING_DIR",
-            help="Path to the checked-out git repository",
-        ),
-    ] = ".",
 ) -> None:
-    github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
     # Fetch all repos from the organization

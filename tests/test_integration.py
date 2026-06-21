@@ -1,4 +1,5 @@
 """Integration tests for error handling and workflow scenarios"""
+import os
 import subprocess
 from unittest.mock import MagicMock, mock_open, patch
 
@@ -79,6 +80,7 @@ class TestGitHubAPIErrorHandling:
 class TestWorkflowIntegration:
     """Test workflow scenarios with multiple components"""
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -92,10 +94,8 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_workflow_handles_git_push_failure(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -112,7 +112,6 @@ class TestWorkflowIntegration:
     ):
         """Test that push failures propagate and don't create PR"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -129,6 +128,7 @@ class TestWorkflowIntegration:
             cli.main(
                 organisation="test-org",
                 target_repo="test-repo",
+                github_token="test-token",
                 target_filepath=".all-contributorsrc",
                 base_branch="main",
                 head_branch="test-branch",
@@ -138,6 +138,7 @@ class TestWorkflowIntegration:
         # PR should not be created after push failure
         mock_create_pr.assert_not_called()
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -151,10 +152,8 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_workflow_handles_commit_failure(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -171,7 +170,6 @@ class TestWorkflowIntegration:
     ):
         """Test that commit failures propagate correctly"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -188,6 +186,7 @@ class TestWorkflowIntegration:
             cli.main(
                 organisation="test-org",
                 target_repo="test-repo",
+                github_token="test-token",
                 target_filepath=".all-contributorsrc",
                 base_branch="main",
                 head_branch="test-branch",
@@ -198,14 +197,13 @@ class TestWorkflowIntegration:
         mock_push.assert_not_called()
         mock_create_pr.assert_not_called()
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "bad-token"})
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_workflow_handles_github_auth_failure(
-        self, mock_get_token, mock_load_excluded, mock_get_repos
+        self, mock_load_excluded, mock_get_repos
     ):
         """Test that GitHub authentication failures are propagated"""
-        mock_get_token.return_value = "bad-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.side_effect = requests.HTTPError("401 Unauthorized")
 
@@ -213,12 +211,14 @@ class TestWorkflowIntegration:
             cli.main(
                 organisation="test-org",
                 target_repo="test-repo",
+                github_token="bad-token",
                 target_filepath=".all-contributorsrc",
                 base_branch="main",
                 head_branch="test-branch",
                 working_dir="/test/repo",
             )
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -232,10 +232,8 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_workflow_completes_after_successful_push(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -252,7 +250,6 @@ class TestWorkflowIntegration:
     ):
         """Test that PR is created after successful push"""
         # Setup all mocks to succeed
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -266,6 +263,7 @@ class TestWorkflowIntegration:
         cli.main(
             organisation="test-org",
             target_repo="test-repo",
+            github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
             head_branch="test-branch",

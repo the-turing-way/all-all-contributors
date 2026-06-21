@@ -29,23 +29,7 @@ def unset_github_token(monkeypatch):
 class TestCli:
     def test_cli_missing_env(self, runner, unset_github_token):
         result = runner.invoke(app, ["organisation", "./target.txt"])
-        assert result.exit_code == 1
-        assert "Environment variable INPUT_GITHUB_TOKEN is not defined" in result.stdout
-
-
-class TestGetGithubToken:
-    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
-    def test_returns_token_when_set(self):
-        """Test that token is returned when environment variable is set"""
-        token = cli.get_github_token()
-        assert token == "test-token"
-
-    @patch.dict(os.environ, {}, clear=True)
-    def test_raises_exit_when_token_not_set(self):
-        """Test that Exit is raised when environment variable is not set"""
-        with pytest.raises(typer.Exit) as exc_info:
-            cli.get_github_token()
-        assert exc_info.value.exit_code == 1
+        assert result.exit_code == 2
 
 
 class TestLoadExcludedRepos:
@@ -73,6 +57,7 @@ class TestLoadExcludedRepos:
 
 
 class TestMain:
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -86,10 +71,8 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_main_workflow_with_new_branch(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -106,7 +89,6 @@ class TestMain:
     ):
         """Test main workflow when creating a new branch"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1", "repo2"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -119,6 +101,7 @@ class TestMain:
         cli.main(
             organisation="test-org",
             target_repo="test-repo",
+            github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
             head_branch="merged-all-contributors",
@@ -126,7 +109,6 @@ class TestMain:
         )
 
         # Verify workflow
-        mock_get_token.assert_called_once()
         mock_load_excluded.assert_called_once()
         mock_get_repos.assert_called_once_with("test-org", "test-token", set())
         assert mock_get_contributors.call_count == 2
@@ -152,6 +134,7 @@ class TestMain:
             "test-token",
         )
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -165,10 +148,8 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_main_workflow_with_existing_branch(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -185,7 +166,6 @@ class TestMain:
     ):
         """Test main workflow when branch already exists"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -198,6 +178,7 @@ class TestMain:
         cli.main(
             organisation="test-org",
             target_repo="test-repo",
+            github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
             head_branch="merged-all-contributors",
@@ -218,14 +199,13 @@ class TestMain:
             "test-token",
         )
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_main_exits_when_no_contributors(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -233,7 +213,6 @@ class TestMain:
     ):
         """Test that main returns early when no contributors found"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = []
@@ -243,6 +222,7 @@ class TestMain:
         result = cli.main(
             organisation="test-org",
             target_repo="test-repo",
+            github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
             head_branch="merged-all-contributors",
@@ -253,6 +233,7 @@ class TestMain:
         assert result is None
         mock_merge.assert_called_once_with([])
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -265,10 +246,8 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_main_creates_default_config_when_file_not_found(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -284,7 +263,6 @@ class TestMain:
     ):
         """Test that default config is created when file doesn't exist"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -301,6 +279,7 @@ class TestMain:
             cli.main(
                 organisation="test-org",
                 target_repo="test-repo",
+                github_token="test-token",
                 target_filepath=".all-contributorsrc",
                 base_branch="main",
                 head_branch="merged-all-contributors",
@@ -313,10 +292,9 @@ class TestMain:
         assert call_args[0]["projectOwner"] == "test-org"
         assert call_args[0]["contributors"] == []
 
-    @patch("all_all_contributors.cli.get_github_token")
-    def test_main_uses_custom_working_dir(self, mock_get_token):
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
+    def test_main_uses_custom_working_dir(self):
         """Test that custom working_dir parameter is used throughout"""
-        mock_get_token.return_value = "test-token"
 
         with patch("all_all_contributors.cli.load_excluded_repos") as mock_load:
             mock_load.return_value = set()
@@ -329,6 +307,7 @@ class TestMain:
                         cli.main(
                             organisation="test-org",
                             target_repo="test-repo",
+                            github_token="test-token",
                             target_filepath=".all-contributorsrc",
                             base_branch="main",
                             head_branch="merged-all-contributors",
@@ -339,6 +318,7 @@ class TestMain:
                         # (returns early due to no contributors, so just verify it accepts the parameter)
                         assert True
 
+    @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
@@ -352,10 +332,8 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
-    @patch("all_all_contributors.cli.get_github_token")
     def test_main_returns_early_when_no_changes(
         self,
-        mock_get_token,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -372,7 +350,6 @@ class TestMain:
     ):
         """Test that main returns early when there are no changes"""
         # Setup mocks
-        mock_get_token.return_value = "test-token"
         mock_load_excluded.return_value = set()
         mock_get_repos.return_value = ["repo1"]
         mock_get_contributors.return_value = [{"login": "user1"}]
@@ -386,6 +363,7 @@ class TestMain:
         result = cli.main(
             organisation="test-org",
             target_repo="test-repo",
+            github_token="test-token",
             target_filepath=".all-contributorsrc",
             base_branch="main",
             head_branch="test-branch",
