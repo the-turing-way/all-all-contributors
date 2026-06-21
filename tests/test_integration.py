@@ -1,4 +1,5 @@
 """Integration tests for error handling and workflow scenarios"""
+
 import os
 import subprocess
 from unittest.mock import MagicMock, mock_open, patch
