@@ -39,7 +39,9 @@ def load_config_file(
         }
 
 
-def write_config_file(config_path: str, file_contents: dict, target_filepath: str) -> None:
+def write_config_file(
+    config_path: str, file_contents: dict, target_filepath: str
+) -> None:
     """Write configuration file to disk
 
     Args:
