@@ -20,14 +20,6 @@ class TestGitErrorHandling:
             git_operations.checkout_branch("nonexistent-branch", create=False, working_dir="/test/repo")
 
     @patch("all_all_contributors.git_operations.subprocess.run")
-    def test_pull_fails_on_merge_conflict(self, mock_run):
-        """Test that merge conflicts during pull raise CalledProcessError"""
-        mock_run.side_effect = subprocess.CalledProcessError(1, ["git", "pull"])
-
-        with pytest.raises(subprocess.CalledProcessError):
-            git_operations.pull_latest("/test/repo")
-
-    @patch("all_all_contributors.git_operations.subprocess.run")
     def test_commit_fails_when_nothing_to_commit(self, mock_run):
         """Test that commit with no changes raises CalledProcessError"""
         mock_run.side_effect = subprocess.CalledProcessError(1, ["git", "commit"])
@@ -95,7 +87,6 @@ class TestWorkflowIntegration:
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -110,7 +101,6 @@ class TestWorkflowIntegration:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_file,
@@ -128,7 +118,6 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -157,7 +146,6 @@ class TestWorkflowIntegration:
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -172,7 +160,6 @@ class TestWorkflowIntegration:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_file,
@@ -190,7 +177,6 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -241,7 +227,6 @@ class TestWorkflowIntegration:
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -256,7 +241,6 @@ class TestWorkflowIntegration:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_file,
@@ -274,7 +258,6 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
         mock_create_pr.return_value = None

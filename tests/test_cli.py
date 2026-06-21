@@ -81,7 +81,6 @@ class TestMain:
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -96,7 +95,6 @@ class TestMain:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_file,
@@ -114,7 +112,6 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1", "contributions": ["code"]}]
         mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
-        mock_branch_exists.return_value = (False, "merged-all-contributors/ABCD")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -137,7 +134,6 @@ class TestMain:
         mock_find_pr.assert_called_once_with(
             "test-org", "test-repo", "merged-all-contributors", "test-token"
         )
-        mock_branch_exists.assert_called_once_with("merged-all-contributors/ABCD", "/test/repo")
         mock_checkout.assert_called_once_with(
             "merged-all-contributors/ABCD", create=True, working_dir="/test/repo"
         )
@@ -163,9 +159,7 @@ class TestMain:
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
-    @patch("all_all_contributors.cli.git_operations.pull_latest")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -180,9 +174,7 @@ class TestMain:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
-        mock_pull,
         mock_inject,
         mock_file,
         mock_stage,
@@ -199,7 +191,6 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (True, "merged-all-contributors/WXYZ", 42)
-        mock_branch_exists.return_value = (True, "merged-all-contributors/WXYZ")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -214,11 +205,9 @@ class TestMain:
         )
 
         # Verify branch handling
-        mock_branch_exists.assert_called_once_with("merged-all-contributors/WXYZ", "/test/repo")
         mock_checkout.assert_called_once_with(
             "merged-all-contributors/WXYZ", create=False, working_dir="/test/repo"
         )
-        mock_pull.assert_called_once_with("/test/repo")
         mock_create_pr.assert_called_once_with(
             "test-org",
             "test-repo",
@@ -271,7 +260,6 @@ class TestMain:
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -286,7 +274,6 @@ class TestMain:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_stage,
@@ -303,7 +290,6 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
-        mock_branch_exists.return_value = (False, "merged-all-contributors/ABCD")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_has_changes.return_value = True
 
@@ -361,7 +347,6 @@ class TestMain:
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
-    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
     @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
     @patch("all_all_contributors.cli.merge_contributors")
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
@@ -376,7 +361,6 @@ class TestMain:
         mock_get_contributors,
         mock_merge,
         mock_find_pr,
-        mock_branch_exists,
         mock_checkout,
         mock_inject,
         mock_file,
@@ -394,7 +378,6 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         # No staged changes
         mock_has_changes.return_value = False

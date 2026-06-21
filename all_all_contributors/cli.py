@@ -105,27 +105,21 @@ def main(
         return
 
     # Check if PR already exists
-    pr_exists, actual_head_branch, pr_number = github_api.find_existing_pull_request(
+    pr_exists, head_branch, pr_number = github_api.find_existing_pull_request(
         organisation, target_repo, head_branch, github_token
     )
 
-    # Check if branch exists on remote
-    branch_exists, actual_head_branch = git_operations.branch_exists_remote(
-        actual_head_branch, working_dir
-    )
-
-    if branch_exists:
-        # Checkout existing branch and pull latest changes
-        print(f"Branch {actual_head_branch} exists, checking out and pulling latest")
+    if pr_exists:
+        # Checkout existing branch
+        print(f"Branch {head_branch} exists, checking out")
         git_operations.checkout_branch(
-            actual_head_branch, create=False, working_dir=working_dir
+            head_branch, create=False, working_dir=working_dir
         )
-        git_operations.pull_latest(working_dir)
     else:
         # Create new branch from current position
-        print(f"Creating new branch: {actual_head_branch}")
+        print(f"Creating new branch: {head_branch}")
         git_operations.checkout_branch(
-            actual_head_branch, create=True, working_dir=working_dir
+            head_branch, create=True, working_dir=working_dir
         )
 
     # Read local .all-contributorsrc file
@@ -168,14 +162,14 @@ def main(
         return
 
     # Push branch to remote
-    git_operations.push_branch(actual_head_branch, working_dir)
+    git_operations.push_branch(head_branch, working_dir)
 
     # Create or update pull request
     github_api.create_update_pull_request(
         organisation,
         target_repo,
         base_branch,
-        actual_head_branch,
+        head_branch,
         pr_exists,
         pr_number,
         github_token,
