@@ -123,7 +123,7 @@ class TestMain:
         mock_checkout.assert_called_once_with(
             "merge-all-contributors/ABCD", create=True, working_dir="/test/repo"
         )
-        mock_stage.assert_called_once_with("/test/repo")
+        mock_stage.assert_called_once_with("/test/repo", ".all-contributorsrc")
         mock_commit.assert_called_once_with(
             "Merging all contributors info from across the org", "/test/repo"
         )
@@ -381,7 +381,7 @@ class TestMain:
         )
 
         # Verify early return - no commit, push, or PR creation
-        mock_has_changes.assert_called_once_with("/test/repo")
+        mock_has_changes.assert_called_once_with("/test/repo", ".all-contributorsrc")
         mock_commit.assert_not_called()
         mock_push.assert_not_called()
         mock_create_pr.assert_not_called()

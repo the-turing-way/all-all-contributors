@@ -150,12 +150,12 @@ def main(
     print(f"Updated {target_filepath} with merged contributors")
 
     # Check if there are any changes to commit
-    if not git_operations.has_changes(working_dir):
+    if not git_operations.has_changes(working_dir, target_filepath):
         print("No changes to commit - contributors list is already up to date")
         return
 
-    # Stage modified files (ignores untracked files)
-    git_operations.stage_modified_files(working_dir)
+    # Stage the specific file we modified
+    git_operations.stage_modified_files(working_dir, target_filepath)
 
     # Create commit
     commit_message = "Merging all contributors info from across the org"

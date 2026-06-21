@@ -31,38 +31,53 @@ def checkout_branch(branch_name: str, create: bool, working_dir: str) -> None:
         )
 
 
-def stage_modified_files(working_dir: str) -> None:
+def stage_modified_files(working_dir: str, filepath: str = None) -> None:
     """
-    Stage all modified files (ignores untracked files).
-
-    Uses: git add --update
+    Stage modified files.
 
     Args:
         working_dir: Repository working directory
+        filepath: Optional specific file to stage. If provided, stages that file.
+                  If None, stages all tracked modified files.
     """
-    print("Staging modified files")
+    if filepath:
+        print(f"Staging file: {filepath}")
+        subprocess.run(
+            ["git", "add", filepath],
+            cwd=working_dir,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    else:
+        print("Staging modified files")
+        subprocess.run(
+            ["git", "add", "--update"],
+            cwd=working_dir,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
 
-    subprocess.run(
-        ["git", "add", "--update"],
-        cwd=working_dir,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
 
-
-def has_changes(working_dir: str) -> bool:
+def has_changes(working_dir: str, filepath: str = None) -> bool:
     """
     Check if there are any changes ready to be staged and committed.
 
     Args:
         working_dir: Repository working directory
+        filepath: Optional specific file to check. If provided, only checks that file.
+                  If None, checks all files.
 
     Returns:
         bool: True if there are local changes, False otherwise
     """
+    cmd = ["git", "diff", "--quiet"]
+    if filepath:
+        cmd.append(filepath)
+
     result = subprocess.run(
-        ["git", "diff", "--quiet"],
+        cmd,
         cwd=working_dir,
         capture_output=True,
         text=True,
