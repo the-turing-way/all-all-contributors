@@ -149,6 +149,8 @@ def main(
         pr_exists,
         pr_number,
         github_token,
+        config_filepath=target_filepath,
+        updated_files=updated_files,
     )
 
 

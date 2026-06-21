@@ -237,6 +237,7 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.git_operations.create_commit")
     @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
+    @patch("all_all_contributors.cli.contributor_table.generate_contributor_tables")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
@@ -257,6 +258,7 @@ class TestWorkflowIntegration:
         mock_checkout,
         mock_inject,
         mock_file,
+        mock_generate_tables,
         mock_stage,
         mock_has_changes,
         mock_commit,
@@ -271,6 +273,7 @@ class TestWorkflowIntegration:
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_generate_tables.return_value = None
         mock_has_changes.return_value = True
         mock_create_pr.return_value = None
 
@@ -288,5 +291,13 @@ class TestWorkflowIntegration:
         # Verify push happened before PR creation
         mock_push.assert_called_once_with("test-branch", "/test/repo")
         mock_create_pr.assert_called_once_with(
-            "test-org", "test-repo", "main", "test-branch", False, None, "test-token"
+            "test-org",
+            "test-repo",
+            "main",
+            "test-branch",
+            False,
+            None,
+            "test-token",
+            config_filepath=".all-contributorsrc",
+            updated_files=None,
         )

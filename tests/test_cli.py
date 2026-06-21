@@ -138,6 +138,8 @@ class TestMain:
             False,
             None,
             "test-token",
+            config_filepath=".all-contributorsrc",
+            updated_files=None,
         )
 
     @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
@@ -203,6 +205,8 @@ class TestMain:
             True,
             42,
             "test-token",
+            config_filepath=".all-contributorsrc",
+            updated_files=None,
         )
 
     @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "test-token"})
