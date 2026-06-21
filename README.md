@@ -90,6 +90,45 @@ If you cannot enable GitHub Actions to create pull requests (due to organization
 
 **Security Note:** Personal Access Tokens have broader permissions than `GITHUB_TOKEN`. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.
 
+## Versioning and Releases
+
+This action follows [Semantic Versioning](https://semver.org/). When referencing the action in your workflows, you can pin to different version levels:
+
+### Recommended: Major Version
+
+```yaml
+uses: the-turing-way/all-all-contributors@v1
+```
+
+**Best for most users.** Automatically receives:
+- ✅ Bug fixes (patch updates)
+- ✅ New features (minor updates)
+- ❌ Breaking changes (major updates require manual upgrade)
+
+### Specific Version
+
+```yaml
+uses: the-turing-way/all-all-contributors@v1.2.3
+```
+
+**Best for maximum stability.** Pins to an exact version. You control when to update.
+
+### Latest Development
+
+```yaml
+uses: the-turing-way/all-all-contributors@main
+```
+
+**Not recommended for production.** Gets the latest code from the main branch. May include unreleased features or bugs.
+
+### Version Format
+
+- **v1.2.3** - Exact version (patch release)
+- **v1.2** - Latest patch within minor version
+- **v1** - Latest minor and patch within major version (recommended)
+
+For maintainers releasing new versions, see [Release Instructions](docs/RELEASE.md).
+
 ## Contributors ✨
 
 This project started at the [2025 SSI Collaboration Workshop Hack Day](https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25).
