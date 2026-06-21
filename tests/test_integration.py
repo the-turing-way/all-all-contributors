@@ -126,7 +126,7 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = False
+        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
 
         # Make push fail
@@ -185,7 +185,7 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = False
+        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
 
         # Make commit fail (e.g., nothing to commit)
@@ -266,7 +266,7 @@ class TestWorkflowIntegration:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "test-branch", None)
-        mock_branch_exists.return_value = False
+        mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
         mock_create_pr.return_value = None
 

@@ -109,7 +109,9 @@ def main(
     )
 
     # Check if branch exists on remote
-    branch_exists = git_operations.branch_exists_remote(actual_head_branch, working_dir)
+    branch_exists, actual_head_branch = git_operations.branch_exists_remote(
+        actual_head_branch, working_dir
+    )
 
     if branch_exists:
         # Checkout existing branch and pull latest changes

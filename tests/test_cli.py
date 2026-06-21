@@ -112,7 +112,7 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1", "contributions": ["code"]}]
         mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
-        mock_branch_exists.return_value = False
+        mock_branch_exists.return_value = (False, "merged-all-contributors/ABCD")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
 
         # Call main
@@ -194,7 +194,7 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (True, "merged-all-contributors/WXYZ", 42)
-        mock_branch_exists.return_value = True
+        mock_branch_exists.return_value = (True, "merged-all-contributors/WXYZ")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
 
         # Call main

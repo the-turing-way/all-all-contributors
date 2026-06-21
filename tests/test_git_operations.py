@@ -12,9 +12,10 @@ class TestBranchExistsRemote:
         """Test that function returns True when branch exists on remote"""
         mock_run.return_value = MagicMock(stdout="abc123 refs/heads/test-branch\n")
 
-        result = git_operations.branch_exists_remote("test-branch", "/test/repo")
+        exists, branch_name = git_operations.branch_exists_remote("test-branch", "/test/repo")
 
-        assert result is True
+        assert exists is True
+        assert branch_name == "test-branch"
         mock_run.assert_called_once_with(
             ["git", "ls-remote", "--heads", "origin", "test-branch"],
             cwd="/test/repo",
@@ -28,9 +29,48 @@ class TestBranchExistsRemote:
         """Test that function returns False when branch doesn't exist on remote"""
         mock_run.return_value = MagicMock(stdout="")
 
-        result = git_operations.branch_exists_remote("test-branch", "/test/repo")
+        exists, branch_name = git_operations.branch_exists_remote("test-branch", "/test/repo")
 
-        assert result is False
+        assert exists is False
+        assert branch_name == "test-branch"
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_finds_existing_branch_with_prefix_pattern(self, mock_run):
+        """Test that function finds existing branch when checking with prefix pattern"""
+        # First call checks for prefix pattern, second is the fallback
+        mock_run.side_effect = [
+            MagicMock(stdout="def456\trefs/heads/merged-all-contributors/XyZw\n"),
+        ]
+
+        exists, branch_name = git_operations.branch_exists_remote(
+            "merged-all-contributors/aBcD", "/test/repo"
+        )
+
+        assert exists is True
+        assert branch_name == "merged-all-contributors/XyZw"
+        mock_run.assert_called_once_with(
+            ["git", "ls-remote", "--heads", "origin", "merged-all-contributors/*"],
+            cwd="/test/repo",
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_returns_false_when_no_prefix_match_exists(self, mock_run):
+        """Test that function returns False when no branch with prefix exists"""
+        # Both prefix pattern check and exact match return empty
+        mock_run.side_effect = [
+            MagicMock(stdout=""),  # prefix pattern check
+            MagicMock(stdout=""),  # exact match fallback
+        ]
+
+        exists, branch_name = git_operations.branch_exists_remote(
+            "merged-all-contributors/aBcD", "/test/repo"
+        )
+
+        assert exists is False
+        assert branch_name == "merged-all-contributors/aBcD"
 
 
 class TestCheckoutBranch:
