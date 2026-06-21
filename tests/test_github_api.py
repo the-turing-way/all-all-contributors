@@ -134,6 +134,50 @@ class TestGetContributorsFromRepo:
         assert first_call_url.endswith("/custom.json")
 
 
+class TestFetchAllContributors:
+    @patch("all_all_contributors.github_api.get_contributors_from_repo")
+    def test_fetches_contributors_from_multiple_repos(self, mock_get_contributors):
+        """Test that contributors are fetched from all repos and combined"""
+        mock_get_contributors.side_effect = [
+            [{"login": "user1", "contributions": ["code"]}],
+            [{"login": "user2", "contributions": ["doc"]}],
+            [{"login": "user3", "contributions": ["test"]}],
+        ]
+        repos = ["repo1", "repo2", "repo3"]
+
+        result = github_api.fetch_all_contributors("test-org", "test-token", repos)
+
+        assert len(result) == 3
+        assert result[0]["login"] == "user1"
+        assert result[1]["login"] == "user2"
+        assert result[2]["login"] == "user3"
+        assert mock_get_contributors.call_count == 3
+
+    @patch("all_all_contributors.github_api.get_contributors_from_repo")
+    def test_returns_empty_list_when_no_repos(self, mock_get_contributors):
+        """Test that empty list is returned when no repos provided"""
+        result = github_api.fetch_all_contributors("test-org", "test-token", [])
+
+        assert result == []
+        mock_get_contributors.assert_not_called()
+
+    @patch("all_all_contributors.github_api.get_contributors_from_repo")
+    def test_handles_repos_with_no_contributors(self, mock_get_contributors):
+        """Test that repos with no contributors don't break the flow"""
+        mock_get_contributors.side_effect = [
+            [{"login": "user1"}],
+            [],  # No contributors
+            [{"login": "user2"}],
+        ]
+        repos = ["repo1", "repo2", "repo3"]
+
+        result = github_api.fetch_all_contributors("test-org", "test-token", repos)
+
+        assert len(result) == 2
+        assert result[0]["login"] == "user1"
+        assert result[1]["login"] == "user2"
+
+
 class TestFindExistingPullRequest:
     @patch("all_all_contributors.github_api.get_request")
     def test_returns_false_when_no_pr_exists(self, mock_get):

@@ -80,6 +80,24 @@ def get_contributors_from_repo(
             raise
 
 
+def fetch_all_contributors(org_name: str, github_token: str, repos: list) -> list:
+    """Fetch contributors from all repositories
+
+    Args:
+        org_name: GitHub organisation name
+        github_token: GitHub API token
+        repos: List of repository names to fetch from
+
+    Returns:
+        list: All contributors from all repositories
+    """
+    all_contributors = []
+    for repo in repos:
+        contributors = get_contributors_from_repo(org_name, repo, github_token)
+        all_contributors.extend(contributors)
+    return all_contributors
+
+
 def find_existing_pull_request(
     org_name: str, repo_name: str, head_branch: str, github_token: str
 ) -> tuple[bool, str, int | None]:

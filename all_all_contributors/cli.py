@@ -6,7 +6,7 @@ from typing import Annotated
 import typer
 
 from . import git_operations, github_api
-from .inject import inject_config
+from .inject import inject_config, load_config_file, write_config_file
 from .merge import merge_contributors
 
 # Disable pretty exceptions exposing sensitive data in error messages
@@ -90,67 +90,30 @@ def main(
     # Fetch all repos from the organization
     repos = github_api.get_all_repos(organisation, github_token, excluded_repos)
 
-    # Fetch contributors from all repos
-    all_contributors = []
-    for repo in repos:
-        contributors = github_api.get_contributors_from_repo(
-            organisation, repo, github_token
-        )
-        all_contributors.extend(contributors)
-
-    # Merge contributors
+    # Fetch and merge contributors from all repos
+    all_contributors = github_api.fetch_all_contributors(
+        organisation, github_token, repos
+    )
     merged_contributors = merge_contributors(all_contributors)
     if not merged_contributors:
         print("No contributors to merge")
         return
 
-    # Check if PR already exists
+    # Check if PR already exists and checkout appropriate branch
     pr_exists, head_branch, pr_number = github_api.find_existing_pull_request(
         organisation, target_repo, head_branch, github_token
     )
+    git_operations.checkout_branch(
+        head_branch, create=not pr_exists, working_dir=working_dir
+    )
 
-    if pr_exists:
-        # Checkout existing branch
-        print(f"Branch {head_branch} exists, checking out")
-        git_operations.checkout_branch(
-            head_branch, create=False, working_dir=working_dir
-        )
-    else:
-        # Create new branch from current position
-        print(f"Creating new branch: {head_branch}")
-        git_operations.checkout_branch(
-            head_branch, create=True, working_dir=working_dir
-        )
-
-    # Read local .all-contributorsrc file
+    # Load, update, and write config file
     config_path = os.path.join(working_dir, target_filepath)
-    try:
-        with open(config_path, "r") as f:
-            file_contents = json.load(f)
-    except FileNotFoundError:
-        print(f"File {target_filepath} not found, creating with default structure")
-        file_contents = {
-            "files": ["README.md"],
-            "imageSize": 100,
-            "commit": False,
-            "commitConvention": "angular",
-            "contributors": [],
-            "contributorsPerLine": 7,
-            "skipCi": True,
-            "repoType": "github",
-            "repoHost": "https://github.com",
-            "projectName": target_repo,
-            "projectOwner": organisation,
-        }
-
-    # Inject merged contributors
+    file_contents = load_config_file(
+        config_path, target_filepath, organisation, target_repo
+    )
     file_contents = inject_config(file_contents, merged_contributors)
-
-    # Write updated .all-contributorsrc to local filesystem
-    with open(config_path, "w") as f:
-        json.dump(file_contents, f, indent=2)
-        f.write("\n")  # Add trailing newline
-    print(f"Updated {target_filepath} with merged contributors")
+    write_config_file(config_path, file_contents, target_filepath)
 
     # Check if there are any changes to commit
     if not git_operations.has_changes(working_dir, target_filepath):
