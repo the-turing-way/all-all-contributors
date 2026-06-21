@@ -151,6 +151,8 @@ def create_update_pull_request(
     pr_exists: bool,
     pr_number: int | None,
     github_token: str,
+    config_filepath: str = ".all-contributorsrc",
+    updated_files: list[str] | None = None,
 ) -> None:
     """Create or update a Pull Request via the GitHub API
 
@@ -162,12 +164,39 @@ def create_update_pull_request(
         pr_exists: Whether the PR already exists
         pr_number: The PR number if it exists
         github_token: GitHub token for authentication
+        config_filepath: Path to the config file that was updated
+        updated_files: List of files updated by all-contributors generate, or None if skipped
     """
     headers = _get_headers(github_token)
     url = "/".join([API_URL, "repos", org_name, repo_name, "pulls"])
+
+    # Build PR body
+    body_parts = [
+        "## Summary",
+        "",
+        "This PR merges all-contributors data from across the organization.",
+        "",
+        "## Files Updated",
+        "",
+        f"- `{config_filepath}` (contributor data)",
+    ]
+
+    if updated_files:
+        body_parts.append("")
+        body_parts.append("**Contributor tables generated:**")
+        for file in updated_files:
+            body_parts.append(f"- `{file}`")
+    else:
+        body_parts.append("")
+        body_parts.append(
+            "**Note:** Contributor table generation was skipped or failed. The `.all-contributorsrc` file has been updated, but you may need to run `all-contributors generate` manually to update README files."
+        )
+
+    pr_body = "\n".join(body_parts)
+
     pr = {
         "title": "Merging all-contributors across the org",
-        "body": "",  # FIXME: Add a descriptive PR body here
+        "body": pr_body,
         "base": base_branch,
     }
 

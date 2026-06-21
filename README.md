@@ -79,6 +79,19 @@ jobs:
 | `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
 | `working_dir` | Path to the checked-out git repository. Defaults to: `.` (current directory). | no |
 
+### What This Action Does
+
+When the action runs, it will:
+
+1. **Fetch Contributors**: Collect all `.all-contributorsrc` files from every repository in your organisation that using All Contributors
+2. **Merge Data**: Combine all contributors and their contributions into a single unified list
+3. **Regenerate Tables**: Automatically run `all-contributors generate` to update contributor tables in README files (based on the `files` array in `.all-contributorsrc`)
+4. **Create PR**: Open or update a pull request with:
+   - The merged `.all-contributorsrc` file
+   - Updated files with contributor tables (if generation succeeded)
+
+**Note:** The files that get updated with contributor tables are determined by the `files` array in your `.all-contributorsrc` configuration. Make sure this array includes all files where you want contributor tables to appear.
+
 ### Permissions
 
 This Action will need permission to read the contents of a files stored in repositories in an organisation, create a new branch, commit to that branch, and open a Pull Request.
@@ -134,6 +147,41 @@ If you cannot enable GitHub Actions to create pull requests (due to organization
    ```
 
 **Security Note:** Personal Access Tokens have broader permissions than `GITHUB_TOKEN`. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.
+
+## Troubleshooting
+
+### Contributor Tables Not Generated
+
+If your PR only updates `.all-contributorsrc` but doesn't update files with tables:
+
+1. **Check the `files` array** in your `.all-contributorsrc`:
+   ```json
+   {
+     "files": ["README.md"],
+     "contributors": [...]
+   }
+   ```
+   The `files` array must list all files where you want contributor tables to appear.
+
+2. **Check PR description**: The PR body will indicate if table generation failed and provide the reason.
+
+3. **Manual generation**: If needed, you can run `all-contributors generate` manually and push to the PR.
+
+### Table Generation Failed
+
+If the PR indicates table generation failed, check:
+
+- The `files` in your config actually exist in the repository
+- The table files have the proper comment markers for all-contributors
+- Check the action logs for specific error messages from the `all-contributors` CLI
+
+### Empty Contributor List
+
+If the merged `.all-contributorsrc` has no contributors:
+
+- Ensure your organization's repositories have `.all-contributorsrc` files
+- Check that the GitHub token has permission to read from all repositories in the organization
+- Review the action logs for any "404" or "permission denied" messages
 
 ## Contributors ✨
 

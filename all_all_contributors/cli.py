@@ -5,7 +5,7 @@ from typing import Annotated
 
 import typer
 
-from . import git_operations, github_api
+from . import contributor_table, git_operations, github_api
 from .inject import inject_config, load_config_file, write_config_file
 from .merge import merge_contributors
 
@@ -115,16 +115,28 @@ def main(
     file_contents = inject_config(file_contents, merged_contributors)
     write_config_file(config_path, file_contents, target_filepath)
 
+    # Generate contributor tables
+    updated_files = contributor_table.generate_contributor_tables(working_dir)
+
     # Check if there are any changes to commit
-    if not git_operations.has_changes(working_dir, target_filepath):
+    if not git_operations.has_changes(working_dir):
         print("No changes to commit - contributors list is already up to date")
         return
 
-    # Stage the specific file we modified
-    git_operations.stage_modified_files(working_dir, target_filepath)
+    # Stage all modified files (config + any README files that were updated)
+    git_operations.stage_modified_files(working_dir)
 
-    # Create commit
-    commit_message = "Merging all contributors info from across the org"
+    # Create commit with descriptive message
+    if updated_files:
+        commit_message = (
+            f"Merge all-contributors from across the org\n\n"
+            f"Updated files:\n- {target_filepath}\n"
+            + "\n".join(f"- {f}" for f in updated_files)
+        )
+    else:
+        commit_message = (
+            f"Merge all-contributors from across the org\n\nUpdated: {target_filepath}"
+        )
     git_operations.create_commit(commit_message, working_dir)
 
     # Push branch to remote
@@ -139,6 +151,8 @@ def main(
         pr_exists,
         pr_number,
         github_token,
+        config_filepath=target_filepath,
+        updated_files=updated_files,
     )
 
 

@@ -258,20 +258,26 @@ class TestCreateUpdatePullRequest:
             github_token="test-token",
         )
 
-        mock_post.assert_called_once_with(
-            "https://api.github.com/repos/test-org/test-repo/pulls",
-            headers={
-                "Accept": "application/vnd.github.v3+json",
-                "Authorization": "token test-token",
-            },
-            json={
-                "title": "Merging all-contributors across the org",
-                "body": "",
-                "base": "main",
-                "head": "merge-all-contributors/ABCD",
-            },
-            return_json=True,
+        # Verify the call
+        assert mock_post.call_count == 1
+        call_args = mock_post.call_args
+
+        # Check URL and headers
+        assert (
+            call_args[0][0] == "https://api.github.com/repos/test-org/test-repo/pulls"
         )
+        assert call_args[1]["headers"]["Authorization"] == "token test-token"
+
+        # Check PR data
+        pr_data = call_args[1]["json"]
+        assert pr_data["title"] == "Merging all-contributors across the org"
+        assert pr_data["base"] == "main"
+        assert pr_data["head"] == "merge-all-contributors/ABCD"
+
+        # Check body contains expected sections
+        assert "## Summary" in pr_data["body"]
+        assert "## Files Updated" in pr_data["body"]
+        assert "`.all-contributorsrc`" in pr_data["body"]
 
     @patch("all_all_contributors.github_api.patch_request")
     def test_updates_existing_pull_request(self, mock_patch):
@@ -288,17 +294,73 @@ class TestCreateUpdatePullRequest:
             github_token="test-token",
         )
 
-        mock_patch.assert_called_once_with(
-            "https://api.github.com/repos/test-org/test-repo/pulls/42",
-            headers={
-                "Accept": "application/vnd.github.v3+json",
-                "Authorization": "token test-token",
-            },
-            json={
-                "title": "Merging all-contributors across the org",
-                "body": "",
-                "base": "main",
-                "state": "open",
-            },
-            return_json=True,
+        # Verify the call
+        assert mock_patch.call_count == 1
+        call_args = mock_patch.call_args
+
+        # Check URL and headers
+        assert (
+            call_args[0][0]
+            == "https://api.github.com/repos/test-org/test-repo/pulls/42"
         )
+        assert call_args[1]["headers"]["Authorization"] == "token test-token"
+
+        # Check PR data
+        pr_data = call_args[1]["json"]
+        assert pr_data["title"] == "Merging all-contributors across the org"
+        assert pr_data["base"] == "main"
+        assert pr_data["state"] == "open"
+
+        # Check body contains expected sections
+        assert "## Summary" in pr_data["body"]
+        assert "## Files Updated" in pr_data["body"]
+
+    @patch("all_all_contributors.github_api.post_request")
+    def test_creates_pr_with_updated_files(self, mock_post):
+        """Test that PR body includes list of updated files when tables were generated"""
+        mock_post.return_value = {"number": 123}
+
+        github_api.create_update_pull_request(
+            "test-org",
+            "test-repo",
+            "main",
+            "merge-all-contributors/ABCD",
+            pr_exists=False,
+            pr_number=None,
+            github_token="test-token",
+            config_filepath=".all-contributorsrc",
+            updated_files=["README.md", "docs/CONTRIBUTORS.md"],
+        )
+
+        # Verify the PR body includes the updated files
+        pr_data = mock_post.call_args[1]["json"]
+        assert "**Contributor tables generated:**" in pr_data["body"]
+        assert "`README.md`" in pr_data["body"]
+        assert "`docs/CONTRIBUTORS.md`" in pr_data["body"]
+        assert (
+            "manually" not in pr_data["body"]
+        )  # Should not show manual generation note
+
+    @patch("all_all_contributors.github_api.post_request")
+    def test_creates_pr_without_updated_files(self, mock_post):
+        """Test that PR body shows note when table generation was skipped"""
+        mock_post.return_value = {"number": 123}
+
+        github_api.create_update_pull_request(
+            "test-org",
+            "test-repo",
+            "main",
+            "merge-all-contributors/ABCD",
+            pr_exists=False,
+            pr_number=None,
+            github_token="test-token",
+            config_filepath=".all-contributorsrc",
+            updated_files=None,
+        )
+
+        # Verify the PR body includes note about manual generation
+        pr_data = mock_post.call_args[1]["json"]
+        assert "**Note:**" in pr_data["body"]
+        assert "manually" in pr_data["body"]
+        assert "all-contributors generate" in pr_data["body"]
+        assert "**Contributor tables generated:**" not in pr_data["body"]
