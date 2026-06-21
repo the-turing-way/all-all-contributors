@@ -74,6 +74,7 @@ class TestCheckoutBranch:
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_checks_out_remote_branch_when_local_fails(self, mock_run):
         """Test that remote branch is checked out when local checkout fails"""
+
         # First call is fetch (succeeds), second is checkout (fails), third is checkout --track (succeeds)
         def side_effect(*args, **kwargs):
             cmd = args[0]
@@ -81,7 +82,9 @@ class TestCheckoutBranch:
                 return MagicMock()
             elif cmd[0:2] == ["git", "checkout"] and len(cmd) == 3:
                 # Regular checkout fails
-                raise subprocess.CalledProcessError(1, cmd, stderr="pathspec did not match")
+                raise subprocess.CalledProcessError(
+                    1, cmd, stderr="pathspec did not match"
+                )
             elif cmd[0:3] == ["git", "checkout", "--track"]:
                 # Checkout with --track succeeds
                 return MagicMock()
@@ -126,6 +129,7 @@ class TestCheckoutBranch:
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_continues_after_fetch_failure(self, mock_run):
         """Test that checkout continues even if fetch fails"""
+
         # First call is fetch (fails), second is checkout (succeeds)
         def side_effect(*args, **kwargs):
             cmd = args[0]
