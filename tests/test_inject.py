@@ -4,7 +4,11 @@ import tempfile
 
 from pytest import fixture, raises
 
-from all_all_contributors.inject import inject_config, load_config_file, write_config_file
+from all_all_contributors.inject import (
+    inject_config,
+    load_config_file,
+    write_config_file,
+)
 from all_all_contributors import inject as inject_mod
 
 
