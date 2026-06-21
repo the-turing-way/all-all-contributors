@@ -9,7 +9,8 @@ from . import git_operations, github_api
 from .inject import inject_config
 from .merge import merge_contributors
 
-app = typer.Typer()
+# Disable pretty exceptions exposing sensitive data in error messages
+app = typer.Typer(pretty_exceptions_show_locals=False)
 
 
 def get_github_token() -> str | None:
