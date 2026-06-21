@@ -1,8 +1,9 @@
 name: "all-all-contributors"
 description: >-
   A GitHub Action that merges all-contributors files (https://allcontributors.org)
-  from repos within an organisation and opens a Pull Request to a chosen repo to
-  host the full list of contributors in.
+  from repos within an organisation, automatically regenerates contributor tables in
+  files, and opens a Pull Request to a chosen repo with the complete merged
+  contributor data and updated tables.
 
   IMPORTANT: This action requires the repository to be checked out first using
   actions/checkout@v4. Git authentication is handled automatically by actions/checkout
