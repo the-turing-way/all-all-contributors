@@ -102,8 +102,10 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
+    @patch("all_all_contributors.cli.git_operations.configure_safe_directory")
     def test_workflow_handles_git_push_failure(
         self,
+        mock_configure_safe,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -160,8 +162,10 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
+    @patch("all_all_contributors.cli.git_operations.configure_safe_directory")
     def test_workflow_handles_commit_failure(
         self,
+        mock_configure_safe,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,
@@ -208,8 +212,9 @@ class TestWorkflowIntegration:
     @patch.dict(os.environ, {"INPUT_GITHUB_TOKEN": "bad-token"})
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
+    @patch("all_all_contributors.cli.git_operations.configure_safe_directory")
     def test_workflow_handles_github_auth_failure(
-        self, mock_load_excluded, mock_get_repos
+        self, mock_configure_safe, mock_load_excluded, mock_get_repos
     ):
         """Test that GitHub authentication failures are propagated"""
         mock_load_excluded.return_value = set()
@@ -240,8 +245,10 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
     @patch("all_all_contributors.cli.github_api.get_all_repos")
     @patch("all_all_contributors.cli.load_excluded_repos")
+    @patch("all_all_contributors.cli.git_operations.configure_safe_directory")
     def test_workflow_completes_after_successful_push(
         self,
+        mock_configure_safe,
         mock_load_excluded,
         mock_get_repos,
         mock_get_contributors,

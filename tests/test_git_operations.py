@@ -6,6 +6,31 @@ import pytest
 from all_all_contributors import git_operations
 
 
+class TestConfigureSafeDirectory:
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_configures_safe_directory(self, mock_run):
+        """Test that git config safe.directory is called with absolute path"""
+        git_operations.configure_safe_directory("/test/repo")
+
+        # Should be called with absolute path
+        mock_run.assert_called_once_with(
+            ["git", "config", "--global", "--add", "safe.directory", "/test/repo"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_subprocess_error_is_raised(self, mock_run):
+        """Test that subprocess errors are propagated"""
+        mock_run.side_effect = subprocess.CalledProcessError(
+            1, ["git", "config"], stderr="error message"
+        )
+
+        with pytest.raises(subprocess.CalledProcessError):
+            git_operations.configure_safe_directory("/test/repo")
+
+
 class TestCheckoutBranch:
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_creates_new_branch(self, mock_run):

@@ -82,6 +82,9 @@ def main(
         ),
     ] = "merge-all-contributors",
 ) -> None:
+    # Configure git safe.directory to handle ownership issues in CI
+    git_operations.configure_safe_directory(working_dir)
+
     excluded_repos = load_excluded_repos()
 
     # Fetch all repos from the organization

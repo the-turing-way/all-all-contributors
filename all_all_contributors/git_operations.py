@@ -2,6 +2,31 @@ import os
 import subprocess
 
 
+def configure_safe_directory(working_dir: str) -> None:
+    """
+    Configure git safe.directory to allow operations in this repository.
+
+    This is needed in CI environments where the repository may have different
+    ownership than the user running git commands.
+
+    Args:
+        working_dir: Repository working directory
+    """
+    # Convert to absolute path since git config expects absolute paths
+    abs_working_dir = os.path.abspath(working_dir)
+
+    try:
+        subprocess.run(
+            ["git", "config", "--global", "--add", "safe.directory", abs_working_dir],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Git config safe.directory failed with error:\n{e.stderr}")
+        raise
+
+
 def checkout_branch(branch_name: str, create: bool, working_dir: str) -> None:
     """
     Checkout branch, optionally creating it if it doesn't exist.
