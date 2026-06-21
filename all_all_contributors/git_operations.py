@@ -13,22 +13,30 @@ def checkout_branch(branch_name: str, create: bool, working_dir: str) -> None:
     """
     if create:
         print(f"Creating and checking out new branch: {branch_name}")
-        subprocess.run(
-            ["git", "checkout", "-b", branch_name],
-            cwd=working_dir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        try:
+            subprocess.run(
+                ["git", "checkout", "-b", branch_name],
+                cwd=working_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print(f"Git checkout failed with error:\n{e.stderr}")
+            raise
     else:
         print(f"Checking out existing branch: {branch_name}")
-        subprocess.run(
-            ["git", "checkout", branch_name],
-            cwd=working_dir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        try:
+            subprocess.run(
+                ["git", "checkout", branch_name],
+                cwd=working_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print(f"Git checkout failed with error:\n{e.stderr}")
+            raise
 
 
 def stage_modified_files(working_dir: str, filepath: str = None) -> None:
@@ -42,22 +50,30 @@ def stage_modified_files(working_dir: str, filepath: str = None) -> None:
     """
     if filepath:
         print(f"Staging file: {filepath}")
-        subprocess.run(
-            ["git", "add", filepath],
-            cwd=working_dir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        try:
+            subprocess.run(
+                ["git", "add", filepath],
+                cwd=working_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print(f"Git add failed with error:\n{e.stderr}")
+            raise
     else:
         print("Staging modified files")
-        subprocess.run(
-            ["git", "add", "--update"],
-            cwd=working_dir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        try:
+            subprocess.run(
+                ["git", "add", "--update"],
+                cwd=working_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print(f"Git add failed with error:\n{e.stderr}")
+            raise
 
 
 def has_changes(working_dir: str, filepath: str = None) -> bool:
@@ -97,13 +113,17 @@ def create_commit(message: str, working_dir: str) -> None:
     """
     print(f"Creating commit with message: {message}")
 
-    subprocess.run(
-        ["git", "commit", "-m", message],
-        cwd=working_dir,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+    try:
+        subprocess.run(
+            ["git", "commit", "-m", message],
+            cwd=working_dir,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Git commit failed with error:\n{e.stderr}")
+        raise
 
 
 def push_branch(branch_name: str, working_dir: str) -> None:
@@ -116,10 +136,14 @@ def push_branch(branch_name: str, working_dir: str) -> None:
     """
     print(f"Pushing branch {branch_name} to remote")
 
-    subprocess.run(
-        ["git", "push", "origin", branch_name],
-        cwd=working_dir,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+    try:
+        subprocess.run(
+            ["git", "push", "origin", branch_name],
+            cwd=working_dir,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Git push failed with error:\n{e.stderr}")
+        raise
