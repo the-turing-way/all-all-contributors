@@ -4,9 +4,8 @@
 # Use a Python slim image
 FROM python:3.14.6-slim
 
-# Install gcc
-# NOTE: Sarah can't remember why she needed this line... Let's see what breaks without it!
-# RUN apt-get update && apt-get install --yes gcc
+# Install git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Create and set the 'app' working directory
 RUN mkdir /app

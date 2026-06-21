@@ -1,23 +1,16 @@
-import base64
-
+import json
+import os
 from os import getenv, path
-from typing import Annotated, Any
+from typing import Annotated
 
 import typer
 
-from .github_api import GitHubAPI
+from . import git_operations, github_api
+from .inject import inject_config, load_config_file, write_config_file
 from .merge import merge_contributors
 
-app = typer.Typer()
-
-
-def get_github_token() -> str | None:
-    """Read a GitHub token from the environment"""
-    token = getenv("INPUT_GITHUB_TOKEN")
-    if token is None:
-        print("Environment variable INPUT_GITHUB_TOKEN is not defined")
-        raise typer.Exit(code=1)
-    return token
+# Disable pretty exceptions exposing sensitive data in error messages
+app = typer.Typer(pretty_exceptions_show_locals=False)
 
 
 def load_excluded_repos() -> set:
@@ -53,48 +46,100 @@ def main(
             help="Target repository where the merged .all-contributorsrc file exists",
         ),
     ],
+    github_token: Annotated[
+        str,
+        typer.Argument(
+            envvar="INPUT_GITHUB_TOKEN",
+            help="GitHub personal access token with `public_repo` and `repo` permissions",
+        ),
+    ],
     target_filepath: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_TARGET_FILEPATH",
+            envvar="INPUT_TARGET_FILEPATH",
             help="Target filepath where the merged .all-contributorsrc will be written",
         ),
     ] = ".all-contributorsrc",
+    working_dir: Annotated[
+        str,
+        typer.Argument(
+            envvar="INPUT_WORKING_DIR",
+            help="Path to the checked-out git repository",
+        ),
+    ] = ".",
     base_branch: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_BASE_BRANCH",
+            envvar="INPUT_BASE_BRANCH",
             help="The name of the default branch of the target repository",
         ),
     ] = "main",
     head_branch: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_HEAD_BRANCH",
+            envvar="INPUT_HEAD_BRANCH",
             help="The name of the head branch to create in the target repository to open a Pull Request",
         ),
-    ] = "merged-all-contributors",
+    ] = "merge-all-contributors",
 ) -> None:
-    github_token = get_github_token()
+    # Configure git safe.directory to handle ownership issues in CI
+    git_operations.configure_safe_directory(working_dir)
+
     excluded_repos = load_excluded_repos()
 
-    github_api = GitHubAPI(
+    # Fetch all repos from the organization
+    repos = github_api.get_all_repos(organisation, github_token, excluded_repos)
+
+    # Fetch and merge contributors from all repos
+    all_contributors = github_api.fetch_all_contributors(
+        organisation, github_token, repos
+    )
+    merged_contributors = merge_contributors(all_contributors)
+    if not merged_contributors:
+        print("No contributors to merge")
+        return
+
+    # Check if PR already exists and checkout appropriate branch
+    pr_exists, head_branch, pr_number = github_api.find_existing_pull_request(
+        organisation, target_repo, head_branch, github_token
+    )
+    git_operations.checkout_branch(
+        head_branch, create=not pr_exists, working_dir=working_dir
+    )
+
+    # Load, update, and write config file
+    config_path = os.path.join(working_dir, target_filepath)
+    file_contents = load_config_file(
+        config_path, target_filepath, organisation, target_repo
+    )
+    file_contents = inject_config(file_contents, merged_contributors)
+    write_config_file(config_path, file_contents, target_filepath)
+
+    # Check if there are any changes to commit
+    if not git_operations.has_changes(working_dir, target_filepath):
+        print("No changes to commit - contributors list is already up to date")
+        return
+
+    # Stage the specific file we modified
+    git_operations.stage_modified_files(working_dir, target_filepath)
+
+    # Create commit
+    commit_message = "Merging all contributors info from across the org"
+    git_operations.create_commit(commit_message, working_dir)
+
+    # Push branch to remote
+    git_operations.push_branch(head_branch, working_dir)
+
+    # Create or update pull request
+    github_api.create_update_pull_request(
         organisation,
         target_repo,
+        base_branch,
+        head_branch,
+        pr_exists,
+        pr_number,
         github_token,
-        target_filepath=target_filepath,
-        base_branch=base_branch,
     )
-    repos = github_api.get_all_repos(excluded_repos)
-
-    all_contributors = []
-    for repo in repos:
-        contributors = github_api.get_contributors_from_repo(repo)
-        all_contributors.extend(contributors)
-
-    merged_contributors = merge_contributors(all_contributors)
-    if merged_contributors:
-        github_api.run(merged_contributors)
 
 
 def cli():

@@ -23,6 +23,50 @@ This project will provide a way to fetch all of the `.all-contributorsrc` files 
 
 ## Usage
 
+### Prerequisites
+
+This action requires:
+1. **Repository Checkout**: The target repository must be checked out before running this action using `actions/checkout@v4`
+2. **Git Configuration**: Git user name and email must be configured for commits
+3. **Git Authentication**: Authentication is handled automatically by `actions/checkout` when you pass the `token` parameter
+
+### Example Workflow
+
+```yaml
+name: Merge All Contributors
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight
+  workflow_dispatch:     # Allow manual triggering
+  workflow_call:         # Allow other workflows to call this one
+
+jobs:
+  merge-contributors:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge all contributors
+        uses: the-turing-way/all-all-contributors@main
+        with:
+          organisation: your-org-name
+          target_repo: your-repo-name
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ### Inputs
 
 | Input Name | Input Description | Required? |
@@ -30,9 +74,10 @@ This project will provide a way to fetch all of the `.all-contributorsrc` files 
 | `organisation` | The name of the GitHub organisation to collect all-contributors from | **YES** |
 | `target_repo` | The name of the repository within the GitHub organisation where the merged all-contributors file will live | **YES** |
 | `github_token` | A GitHub token with permissions to write to the contents of the target repo and open pull requests. | **YES** |
-| `target_filepath` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
+| `target_filepath` | Path to the merged all-contributors file relative to the repository root. Defaults to: `.all-contributorsrc`. | no |
 | `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
 | `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
+| `working_dir` | Path to the checked-out git repository. Defaults to: `.` (current directory). | no |
 
 ### Permissions
 
