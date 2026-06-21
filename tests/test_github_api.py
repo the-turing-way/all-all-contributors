@@ -263,7 +263,9 @@ class TestCreateUpdatePullRequest:
         call_args = mock_post.call_args
 
         # Check URL and headers
-        assert call_args[0][0] == "https://api.github.com/repos/test-org/test-repo/pulls"
+        assert (
+            call_args[0][0] == "https://api.github.com/repos/test-org/test-repo/pulls"
+        )
         assert call_args[1]["headers"]["Authorization"] == "token test-token"
 
         # Check PR data
@@ -297,7 +299,10 @@ class TestCreateUpdatePullRequest:
         call_args = mock_patch.call_args
 
         # Check URL and headers
-        assert call_args[0][0] == "https://api.github.com/repos/test-org/test-repo/pulls/42"
+        assert (
+            call_args[0][0]
+            == "https://api.github.com/repos/test-org/test-repo/pulls/42"
+        )
         assert call_args[1]["headers"]["Authorization"] == "token test-token"
 
         # Check PR data
@@ -332,7 +337,9 @@ class TestCreateUpdatePullRequest:
         assert "**Contributor tables generated:**" in pr_data["body"]
         assert "`README.md`" in pr_data["body"]
         assert "`docs/CONTRIBUTORS.md`" in pr_data["body"]
-        assert "manually" not in pr_data["body"]  # Should not show manual generation note
+        assert (
+            "manually" not in pr_data["body"]
+        )  # Should not show manual generation note
 
     @patch("all_all_contributors.github_api.post_request")
     def test_creates_pr_without_updated_files(self, mock_post):

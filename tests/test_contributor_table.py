@@ -39,7 +39,9 @@ class TestGetFilesToUpdate:
 
     def test_returns_empty_list_when_file_not_found(self):
         """Test that empty list is returned when config file doesn't exist"""
-        result = contributor_table.get_files_to_update("/nonexistent/path/.all-contributorsrc")
+        result = contributor_table.get_files_to_update(
+            "/nonexistent/path/.all-contributorsrc"
+        )
 
         assert result == []
 
@@ -61,7 +63,9 @@ class TestGenerateContributorTables:
     def test_generates_tables_successfully(self, mock_get_files, mock_run):
         """Test successful table generation"""
         mock_get_files.return_value = ["README.md"]
-        mock_run.return_value = MagicMock(stdout="Generated contributor table", stderr="")
+        mock_run.return_value = MagicMock(
+            stdout="Generated contributor table", stderr=""
+        )
 
         result = contributor_table.generate_contributor_tables("/test/repo")
 
@@ -113,7 +117,11 @@ class TestGenerateContributorTables:
     @patch("all_all_contributors.contributor_table.get_files_to_update")
     def test_handles_multiple_files(self, mock_get_files, mock_run):
         """Test handling multiple files to update"""
-        mock_get_files.return_value = ["README.md", "docs/CONTRIBUTORS.md", "CHANGELOG.md"]
+        mock_get_files.return_value = [
+            "README.md",
+            "docs/CONTRIBUTORS.md",
+            "CHANGELOG.md",
+        ]
         mock_run.return_value = MagicMock(stdout="", stderr="")
 
         result = contributor_table.generate_contributor_tables("/test/repo")

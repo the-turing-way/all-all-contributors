@@ -134,7 +134,9 @@ def main(
             + "\n".join(f"- {f}" for f in updated_files)
         )
     else:
-        commit_message = f"Merge all-contributors from across the org\n\nUpdated: {target_filepath}"
+        commit_message = (
+            f"Merge all-contributors from across the org\n\nUpdated: {target_filepath}"
+        )
     git_operations.create_commit(commit_message, working_dir)
 
     # Push branch to remote

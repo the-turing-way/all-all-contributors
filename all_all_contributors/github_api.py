@@ -188,7 +188,9 @@ def create_update_pull_request(
             body_parts.append(f"- `{file}`")
     else:
         body_parts.append("")
-        body_parts.append("**Note:** Contributor table generation was skipped or failed. The `.all-contributorsrc` file has been updated, but you may need to run `all-contributors generate` manually to update README files.")
+        body_parts.append(
+            "**Note:** Contributor table generation was skipped or failed. The `.all-contributorsrc` file has been updated, but you may need to run `all-contributors generate` manually to update README files."
+        )
 
     pr_body = "\n".join(body_parts)
 
