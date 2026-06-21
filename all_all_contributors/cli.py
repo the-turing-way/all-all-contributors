@@ -127,7 +127,7 @@ def main(
     except FileNotFoundError:
         print(f"File {target_filepath} not found, creating with default structure")
         file_contents = {
-            "files": ["profile/README.md"],
+            "files": ["README.md"],
             "imageSize": 100,
             "commit": False,
             "commitConvention": "angular",
