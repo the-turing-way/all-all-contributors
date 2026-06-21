@@ -122,6 +122,27 @@ def stage_modified_files(working_dir: str) -> None:
     )
 
 
+def has_changes(working_dir: str) -> bool:
+    """
+    Check if there are any changes ready to be staged and committed.
+
+    Args:
+        working_dir: Repository working directory
+
+    Returns:
+        bool: True if there are local changes, False otherwise
+    """
+    result = subprocess.run(
+        ["git", "diff", "--quiet"],
+        cwd=working_dir,
+        capture_output=True,
+        text=True,
+    )
+
+    # git diff --quiet returns 0 if no changes, 1 if there are changes
+    return result.returncode == 1
+
+
 def create_commit(message: str, working_dir: str) -> None:
     """
     Create a git commit.

@@ -76,6 +76,7 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
@@ -100,6 +101,7 @@ class TestMain:
         mock_inject,
         mock_file,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -114,6 +116,7 @@ class TestMain:
         mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
         mock_branch_exists.return_value = (False, "merged-all-contributors/ABCD")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
 
         # Call main
         cli.main(
@@ -156,6 +159,7 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
@@ -182,6 +186,7 @@ class TestMain:
         mock_inject,
         mock_file,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -196,6 +201,7 @@ class TestMain:
         mock_find_pr.return_value = (True, "merged-all-contributors/WXYZ", 42)
         mock_branch_exists.return_value = (True, "merged-all-contributors/WXYZ")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
 
         # Call main
         cli.main(
@@ -261,6 +267,7 @@ class TestMain:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("all_all_contributors.cli.inject_config")
     @patch("all_all_contributors.cli.git_operations.checkout_branch")
@@ -283,6 +290,7 @@ class TestMain:
         mock_checkout,
         mock_inject,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -295,8 +303,9 @@ class TestMain:
         mock_get_contributors.return_value = [{"login": "user1"}]
         mock_merge.return_value = [{"login": "user1"}]
         mock_find_pr.return_value = (False, "merged-all-contributors/ABCD", None)
-        mock_branch_exists.return_value = False
+        mock_branch_exists.return_value = (False, "merged-all-contributors/ABCD")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
 
         # Mock file operations - read raises FileNotFoundError, write succeeds
         m = mock_open()
@@ -343,3 +352,66 @@ class TestMain:
                         # Verify custom working dir would be used
                         # (returns early due to no contributors, so just verify it accepts the parameter)
                         assert True
+
+    @patch("all_all_contributors.cli.github_api.create_update_pull_request")
+    @patch("all_all_contributors.cli.git_operations.push_branch")
+    @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
+    @patch("all_all_contributors.cli.git_operations.stage_modified_files")
+    @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
+    @patch("all_all_contributors.cli.inject_config")
+    @patch("all_all_contributors.cli.git_operations.checkout_branch")
+    @patch("all_all_contributors.cli.git_operations.branch_exists_remote")
+    @patch("all_all_contributors.cli.github_api.find_existing_pull_request")
+    @patch("all_all_contributors.cli.merge_contributors")
+    @patch("all_all_contributors.cli.github_api.get_contributors_from_repo")
+    @patch("all_all_contributors.cli.github_api.get_all_repos")
+    @patch("all_all_contributors.cli.load_excluded_repos")
+    @patch("all_all_contributors.cli.get_github_token")
+    def test_main_returns_early_when_no_changes(
+        self,
+        mock_get_token,
+        mock_load_excluded,
+        mock_get_repos,
+        mock_get_contributors,
+        mock_merge,
+        mock_find_pr,
+        mock_branch_exists,
+        mock_checkout,
+        mock_inject,
+        mock_file,
+        mock_stage,
+        mock_has_changes,
+        mock_commit,
+        mock_push,
+        mock_create_pr,
+    ):
+        """Test that main returns early when there are no changes"""
+        # Setup mocks
+        mock_get_token.return_value = "test-token"
+        mock_load_excluded.return_value = set()
+        mock_get_repos.return_value = ["repo1"]
+        mock_get_contributors.return_value = [{"login": "user1"}]
+        mock_merge.return_value = [{"login": "user1"}]
+        mock_find_pr.return_value = (False, "test-branch", None)
+        mock_branch_exists.return_value = (False, "test-branch")
+        mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        # No staged changes
+        mock_has_changes.return_value = False
+
+        # Call main
+        result = cli.main(
+            organisation="test-org",
+            target_repo="test-repo",
+            target_filepath=".all-contributorsrc",
+            base_branch="main",
+            head_branch="test-branch",
+            working_dir="/test/repo",
+        )
+
+        # Verify early return - no commit, push, or PR creation
+        mock_has_changes.assert_called_once_with("/test/repo")
+        mock_commit.assert_not_called()
+        mock_push.assert_not_called()
+        mock_create_pr.assert_not_called()
+        assert result is None

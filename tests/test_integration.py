@@ -90,6 +90,7 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
@@ -114,6 +115,7 @@ class TestWorkflowIntegration:
         mock_inject,
         mock_file,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -128,6 +130,7 @@ class TestWorkflowIntegration:
         mock_find_pr.return_value = (False, "test-branch", None)
         mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
 
         # Make push fail
         mock_push.side_effect = subprocess.CalledProcessError(1, ["git", "push"])
@@ -149,6 +152,7 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
@@ -173,6 +177,7 @@ class TestWorkflowIntegration:
         mock_inject,
         mock_file,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -187,6 +192,7 @@ class TestWorkflowIntegration:
         mock_find_pr.return_value = (False, "test-branch", None)
         mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
 
         # Make commit fail (e.g., nothing to commit)
         mock_commit.side_effect = subprocess.CalledProcessError(1, ["git", "commit"])
@@ -230,6 +236,7 @@ class TestWorkflowIntegration:
     @patch("all_all_contributors.cli.github_api.create_update_pull_request")
     @patch("all_all_contributors.cli.git_operations.push_branch")
     @patch("all_all_contributors.cli.git_operations.create_commit")
+    @patch("all_all_contributors.cli.git_operations.has_changes")
     @patch("all_all_contributors.cli.git_operations.stage_modified_files")
     @patch("builtins.open", new_callable=mock_open, read_data='{"contributors": []}')
     @patch("all_all_contributors.cli.inject_config")
@@ -254,6 +261,7 @@ class TestWorkflowIntegration:
         mock_inject,
         mock_file,
         mock_stage,
+        mock_has_changes,
         mock_commit,
         mock_push,
         mock_create_pr,
@@ -268,6 +276,7 @@ class TestWorkflowIntegration:
         mock_find_pr.return_value = (False, "test-branch", None)
         mock_branch_exists.return_value = (False, "test-branch")
         mock_inject.return_value = {"contributors": [{"login": "user1"}]}
+        mock_has_changes.return_value = True
         mock_create_pr.return_value = None
 
         # Execute workflow

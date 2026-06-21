@@ -133,6 +133,34 @@ class TestStageModifiedFiles:
         )
 
 
+class TestHasChanges:
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_returns_true_when_changes_exist(self, mock_run):
+        """Test that function returns True when there are changes"""
+        # git diff --quiet returns 1 when there are changes
+        mock_run.return_value = MagicMock(returncode=1)
+
+        result = git_operations.has_changes("/test/repo")
+
+        assert result is True
+        mock_run.assert_called_once_with(
+            ["git", "diff", "--quiet"],
+            cwd="/test/repo",
+            capture_output=True,
+            text=True,
+        )
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_returns_false_when_no_changes_exist(self, mock_run):
+        """Test that function returns False when there are no changes"""
+        # git diff --quiet returns 0 when there are no changes
+        mock_run.return_value = MagicMock(returncode=0)
+
+        result = git_operations.has_changes("/test/repo")
+
+        assert result is False
+
+
 class TestCreateCommit:
     @patch("all_all_contributors.git_operations.subprocess.run")
     def test_creates_commit_with_message(self, mock_run):

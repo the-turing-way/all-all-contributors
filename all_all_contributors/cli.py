@@ -161,9 +161,10 @@ def main(
     # Stage modified files (ignores untracked files)
     git_operations.stage_modified_files(working_dir)
 
-    # Create commit
-    commit_message = "Merging all contributors info from across the org"
-    git_operations.create_commit(commit_message, working_dir)
+    # Check if there are any changes to commit
+    if not git_operations.has_changes(working_dir):
+        print("No changes to commit - contributors list is already up to date")
+        return
 
     # Push branch to remote
     git_operations.push_branch(actual_head_branch, working_dir)
