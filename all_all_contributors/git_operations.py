@@ -51,6 +51,20 @@ def checkout_branch(branch_name: str, create: bool, working_dir: str) -> None:
             raise
     else:
         print(f"Checking out existing branch: {branch_name}")
+        # First, fetch the remote branch in case it exists remotely but not locally
+        try:
+            subprocess.run(
+                ["git", "fetch", "origin", branch_name],
+                cwd=working_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as e:
+            print(f"Git fetch failed with error:\n{e.stderr}")
+            # Continue anyway - the branch might exist locally
+
+        # Try to checkout the branch
         try:
             subprocess.run(
                 ["git", "checkout", branch_name],
@@ -60,8 +74,19 @@ def checkout_branch(branch_name: str, create: bool, working_dir: str) -> None:
                 text=True,
             )
         except subprocess.CalledProcessError as e:
-            print(f"Git checkout failed with error:\n{e.stderr}")
-            raise
+            # If checkout failed, try to checkout with remote tracking
+            print(f"Local checkout failed, trying remote tracking")
+            try:
+                subprocess.run(
+                    ["git", "checkout", "--track", f"origin/{branch_name}"],
+                    cwd=working_dir,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+            except subprocess.CalledProcessError as e2:
+                print(f"Git checkout failed with error:\n{e2.stderr}")
+                raise
 
 
 def stage_modified_files(working_dir: str, filepath: str = None) -> None:

@@ -48,19 +48,100 @@ class TestCheckoutBranch:
         )
 
     @patch("all_all_contributors.git_operations.subprocess.run")
-    def test_checks_out_existing_branch(self, mock_run):
-        """Test that existing branch is checked out when create=False"""
+    def test_checks_out_existing_local_branch(self, mock_run):
+        """Test that existing local branch is checked out when create=False"""
         git_operations.checkout_branch(
             "existing-branch", create=False, working_dir="/test/repo"
         )
 
-        mock_run.assert_called_once_with(
+        # Should first fetch, then checkout
+        assert mock_run.call_count == 2
+        mock_run.assert_any_call(
+            ["git", "fetch", "origin", "existing-branch"],
+            cwd="/test/repo",
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        mock_run.assert_any_call(
             ["git", "checkout", "existing-branch"],
             cwd="/test/repo",
             check=True,
             capture_output=True,
             text=True,
         )
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_checks_out_remote_branch_when_local_fails(self, mock_run):
+        """Test that remote branch is checked out when local checkout fails"""
+        # First call is fetch (succeeds), second is checkout (fails), third is checkout --track (succeeds)
+        def side_effect(*args, **kwargs):
+            cmd = args[0]
+            if cmd[0:2] == ["git", "fetch"]:
+                return MagicMock()
+            elif cmd[0:2] == ["git", "checkout"] and len(cmd) == 3:
+                # Regular checkout fails
+                raise subprocess.CalledProcessError(1, cmd, stderr="pathspec did not match")
+            elif cmd[0:3] == ["git", "checkout", "--track"]:
+                # Checkout with --track succeeds
+                return MagicMock()
+
+        mock_run.side_effect = side_effect
+
+        git_operations.checkout_branch(
+            "remote-branch", create=False, working_dir="/test/repo"
+        )
+
+        # Should fetch, try checkout, then checkout --track
+        assert mock_run.call_count == 3
+        calls = mock_run.call_args_list
+
+        # First call: fetch
+        assert calls[0] == call(
+            ["git", "fetch", "origin", "remote-branch"],
+            cwd="/test/repo",
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        # Second call: checkout
+        assert calls[1] == call(
+            ["git", "checkout", "remote-branch"],
+            cwd="/test/repo",
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        # Third call: checkout --track
+        assert calls[2] == call(
+            ["git", "checkout", "--track", "origin/remote-branch"],
+            cwd="/test/repo",
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    @patch("all_all_contributors.git_operations.subprocess.run")
+    def test_continues_after_fetch_failure(self, mock_run):
+        """Test that checkout continues even if fetch fails"""
+        # First call is fetch (fails), second is checkout (succeeds)
+        def side_effect(*args, **kwargs):
+            cmd = args[0]
+            if cmd[0:2] == ["git", "fetch"]:
+                raise subprocess.CalledProcessError(1, cmd, stderr="fetch failed")
+            elif cmd[0:2] == ["git", "checkout"]:
+                return MagicMock()
+
+        mock_run.side_effect = side_effect
+
+        git_operations.checkout_branch(
+            "local-branch", create=False, working_dir="/test/repo"
+        )
+
+        # Should attempt fetch and checkout
+        assert mock_run.call_count == 2
 
 
 class TestStageModifiedFiles:
