@@ -1673,7 +1673,7 @@
               <div class="doc-md-description">
                 <p>(pr_exists, actual_head_branch, pr_number)
 pr_exists: True if PR exists, False otherwise
-actual_head_branch: The actual head branch name (may have random suffix)
+head_branch: The head branch name (may have random suffix)
 pr_number: The PR number if exists, None otherwise</p>
               </div>
             </td>
@@ -1740,7 +1740,7 @@ pr_number: The PR number if exists, None otherwise</p>
 </span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">    Returns:</span>
 </span><span id="__span-0-95"><a id="__codelineno-0-95" name="__codelineno-0-95"></a><span class="sd">        tuple: (pr_exists, actual_head_branch, pr_number)</span>
 </span><span id="__span-0-96"><a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="sd">            pr_exists: True if PR exists, False otherwise</span>
-</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">            actual_head_branch: The actual head branch name (may have random suffix)</span>
+</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">            head_branch: The head branch name (may have random suffix)</span>
 </span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98"></a><span class="sd">            pr_number: The PR number if exists, None otherwise</span>
 </span><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="n">_get_headers</span><span class="p">(</span><span class="n">github_token</span><span class="p">)</span>
