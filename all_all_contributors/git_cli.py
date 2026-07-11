@@ -49,3 +49,13 @@ class GitCLI:
             self._run("switch", "-c", head_branch, base_branch)
         except GitCLIError:
             self._run("switch", head_branch)
+
+    def check_for_changes(self) -> bool:
+        """Return True if there are unstaged changes."""
+        result = subprocess.run(
+            ["git", "diff", "--quiet"],
+            capture_output=True,
+            text=True,
+            cwd=self.repo_dir
+        )
+        return result.returncode != 0
