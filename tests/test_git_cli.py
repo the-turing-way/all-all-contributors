@@ -58,13 +58,35 @@ class TestVerifyEnvironment:
 
 class TestCreateBranch:
     @patch("subprocess.run")
-    def test_creates_new_branch(self, mock_run):
+    def test_creates_new_branch_from_base(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        cli.create_branch("feature")
+        cli.create_branch("feature", "main")
         mock_run.assert_called_once_with(
+            ["git", "switch", "-c", "feature", "main"],
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
+        )
+
+    @patch("subprocess.run")
+    def test_fallback_to_head_when_base_invalid(self, mock_run):
+        """base_branch ref fails (shallow clone), falls back to creating from HEAD."""
+        fail = subprocess.CompletedProcess(
+            args=[], returncode=1, stdout="", stderr="invalid reference: main"
+        )
+        success = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout="", stderr=""
+        )
+        mock_run.side_effect = [fail, success]
+
+        cli = GitCLI("/tmp/repo")
+        cli.create_branch("feature", "main")
+
+        assert mock_run.call_count == 2
+        mock_run.assert_called_with(
             ["git", "switch", "-c", "feature"],
             capture_output=True,
             text=True,
@@ -73,19 +95,19 @@ class TestCreateBranch:
 
     @patch("subprocess.run")
     def test_fallback_to_existing_branch(self, mock_run):
-        """First call fails (branch exists), second call switches to it."""
+        """Both -c calls fail (branch exists), switches to it."""
         fail = subprocess.CompletedProcess(
             args=[], returncode=1, stdout="", stderr="already exists"
         )
         success = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="", stderr=""
         )
-        mock_run.side_effect = [fail, success]
+        mock_run.side_effect = [fail, fail, success]
 
         cli = GitCLI("/tmp/repo")
-        cli.create_branch("feature")
+        cli.create_branch("feature", "main")
 
-        assert mock_run.call_count == 2
+        assert mock_run.call_count == 3
         mock_run.assert_called_with(
             ["git", "switch", "feature"],
             capture_output=True,
@@ -94,7 +116,7 @@ class TestCreateBranch:
         )
 
     @patch("subprocess.run")
-    def test_both_fail_raises(self, mock_run):
+    def test_all_fail_raises(self, mock_run):
         fail = subprocess.CompletedProcess(
             args=[], returncode=1, stdout="", stderr="fatal"
         )
@@ -102,7 +124,7 @@ class TestCreateBranch:
 
         cli = GitCLI("/tmp/repo")
         with pytest.raises(GitCLIError):
-            cli.create_branch("feature")
+            cli.create_branch("feature", "main")
 
 
 class TestCommitFile:

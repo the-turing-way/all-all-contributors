@@ -72,12 +72,17 @@ class GitCLI:
         if result.returncode != 0 or not result.stdout.strip():
             self._run("config", "--global", key, default)
 
-    def create_branch(self, head_branch: str) -> None:
-        """Create a new branch, or switch to it if it already exists."""
+    def create_branch(self, head_branch: str, base_branch: str) -> None:
+        """Create a new branch from base_branch, or switch to it if it already exists."""
         try:
-            self._run("switch", "-c", head_branch)
+            self._run("switch", "-c", head_branch, base_branch)
         except GitCLIError:
-            self._run("switch", head_branch)
+            # base_branch ref may not exist in shallow clones; try from HEAD
+            try:
+                self._run("switch", "-c", head_branch)
+            except GitCLIError:
+                # Branch already exists locally
+                self._run("switch", head_branch)
 
     def check_for_changes(self) -> bool:
         """Return True if there are unstaged changes."""
