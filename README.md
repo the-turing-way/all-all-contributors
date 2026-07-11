@@ -127,7 +127,7 @@ uses: the-turing-way/all-all-contributors@main
 - **v1.2** - Latest patch within minor version
 - **v1** - Latest minor and patch within major version (recommended)
 
-For maintainers releasing new versions, see [Release Instructions](docs/RELEASE.md).
+For maintainers releasing new versions, see [Release Instructions](docs/developer/RELEASE.md).
 
 ## Contributors ✨
 

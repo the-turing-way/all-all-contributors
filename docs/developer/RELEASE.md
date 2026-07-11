@@ -54,9 +54,9 @@ Create a PR to update `action.yaml` with the new Docker image version.
 
 ```bash
 # 1. Create a new branch
-git checkout main
+git switch main
 git pull origin main
-git checkout -b release/TAG_FROM_STEP_1
+git switch -c release/TAG_FROM_STEP_1
 
 # 2. Edit action.yaml
 # Change line 47 from:
