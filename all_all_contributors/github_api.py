@@ -83,7 +83,7 @@ class GitHubAPI:
 
             print(f"Pull Request #{resp['number']} created!")
 
-    def find_existing_pull_request(self):
+    def find_existing_pull_request(self) -> tuple[bool, str]:
         """Check if the bot already has an open Pull Request"""
         print("Finding Pull Requests previously opened to merge all contributors files")
 
@@ -117,6 +117,8 @@ class GitHubAPI:
             self.head_branch = match.split(":")[-1]
             self.pr_number = resp[indx]["number"]
             self.pr_exists = True
+        
+        return self.pr_exists, self.head_branch
 
     def get_all_repos(self, excluded_repos: list) -> list:
         """
