@@ -39,7 +39,7 @@ inputs:
       Defaults to: merge-all-contributors
 runs:
   using: "docker"
-  image: "docker://ghcr.io/the-turing-way/all-all-contributors:main"
+  image: "docker://ghcr.io/the-turing-way/all-all-contributors:v1.0.0"
 branding:
   icon: "award"
   color: "blue"
