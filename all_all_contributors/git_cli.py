@@ -59,3 +59,9 @@ class GitCLI:
             cwd=self.repo_dir
         )
         return result.returncode != 0
+
+    def commit_file(
+        self, filepath: str, message: str = "Merging all contributors info from across the org"
+    ) -> None:
+        self._run("add", filepath)
+        self._run("commit", "-m", message)
