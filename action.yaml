@@ -36,7 +36,7 @@ inputs:
   head_branch:
     description: >-
       A prefix to prepend to head branches when opening pull requests.
-      Defaults to: merge-all-contributors
+      Defaults to: merged-all-contributors
 runs:
   using: "docker"
   image: "docker://ghcr.io/the-turing-way/all-all-contributors:main"

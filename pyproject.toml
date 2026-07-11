@@ -21,9 +21,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/RayStick/all-all-contributors#readme"
-Issues = "https://github.com/RayStick/all-all-contributors/issues"
-Source = "https://github.com/RayStick/all-all-contributors"
+Documentation = "https://github.com/the-turing-way/all-all-contributors#readme"
+Issues = "https://github.com/the-turing-way/all-all-contributors/issues"
+Source = "https://github.com/the-turing-way/all-all-contributors"
 
 [project.scripts]
 all-all-contributors = "all_all_contributors.cli:cli"

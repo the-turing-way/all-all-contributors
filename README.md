@@ -30,9 +30,20 @@ This project will provide a way to fetch all of the `.all-contributorsrc` files 
 | `organisation` | The name of the GitHub organisation to collect all-contributors from | **YES** |
 | `target_repo` | The name of the repository within the GitHub organisation where the merged all-contributors file will live | **YES** |
 | `github_token` | A GitHub token with permissions to write to the contents of the target repo and open pull requests. | **YES** |
-| `target_filepath` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
+| `target_filepath` | The filepath to the `.all-contributorsrc` file in the target repo. Defaults to: `.all-contributorsrc`. | no |
+| `ignore_file` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
 | `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
-| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
+| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merged-all-contributors`. | no |
+
+### CLI Usage
+
+The tool can also be run standalone outside of GitHub Actions:
+
+```console
+all-all-contributors MY_ORG MY_REPO --repo-dir /path/to/local/clone
+```
+
+All action inputs are also available as CLI arguments. Use `--help` for details. The `--repo-dir` option (env: `INPUT_REPO_DIR`) specifies the path to the local clone of the target repository (defaults to `.`).
 
 ### Permissions
 
