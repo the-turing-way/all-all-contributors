@@ -33,7 +33,7 @@ class GitCLI:
         return result
 
     def verify_environment(self) -> None:
-        """Check git is available and we're inside a repo."""
+        """Check git is available, we're inside a repo, and committer identity is set."""
         try:
             subprocess.run(["git", "--version"], capture_output=True, check=True)
         except (FileNotFoundError, subprocess.CalledProcessError) as ex:
@@ -46,6 +46,21 @@ class GitCLI:
                 file=sys.stderr,
             )
             raise SystemExit(1)
+
+        # Ensure committer identity is configured (required for commits in CI)
+        self._ensure_git_config("user.name", "all-all-contributors[bot]")
+        self._ensure_git_config("user.email", "all-all-contributors[bot]@users.noreply.github.com")
+
+    def _ensure_git_config(self, key: str, default: str) -> None:
+        """Set a git config value if not already configured."""
+        result = subprocess.run(
+            ["git", "config", key],
+            capture_output=True,
+            text=True,
+            cwd=self.repo_dir,
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            self._run("config", key, default)
 
     def create_branch(self, head_branch: str, base_branch: str) -> None:
         """Create a new branch, or switch to it if it already exists."""
