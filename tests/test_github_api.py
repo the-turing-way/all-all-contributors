@@ -1,12 +1,7 @@
-import base64
-import json
 import unittest
-from unittest.mock import call, patch
+from unittest.mock import patch
 
 from all_all_contributors.github_api import GitHubAPI
-from all_all_contributors.yaml_parser import YamlParser
-
-yaml = YamlParser()
 
 
 class TestGitHubAPI(unittest.TestCase):
