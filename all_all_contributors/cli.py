@@ -103,21 +103,21 @@ def main(
     target_filepath: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_TARGET_FILEPATH",
+            envvar="INPUT_TARGET_FILEPATH",
             help="Target filepath where the merged .all-contributorsrc will be written",
         ),
     ] = ".all-contributorsrc",
     base_branch: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_BASE_BRANCH",
+            envvar="INPUT_BASE_BRANCH",
             help="The name of the default branch of the target repository",
         ),
     ] = "main",
     head_branch: Annotated[
         str,
         typer.Argument(
-            envvar="AAC_HEAD_BRANCH",
+            envvar="INPUT_HEAD_BRANCH",
             help="The name of the head branch to create in the target repository to open a Pull Request",
         ),
     ] = "merged-all-contributors",
