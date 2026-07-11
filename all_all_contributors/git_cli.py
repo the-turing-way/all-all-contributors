@@ -40,6 +40,14 @@ class GitCLI:
             print("Error: git must be installed and available on PATH", file=sys.stderr)
             raise SystemExit(1)
 
+        # Mark repo_dir as safe to handle ownership mismatches in containers
+        abs_repo = str(self.repo_dir.resolve())
+        subprocess.run(
+            ["git", "config", "--global", "--add", "safe.directory", abs_repo],
+            capture_output=True,
+            text=True,
+        )
+
         if not (self.repo_dir / ".git").is_dir():
             print(
                 "Error: target repository must be cloned locally before running this tool",
