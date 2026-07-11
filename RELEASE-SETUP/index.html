@@ -1,0 +1,1799 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Repository Setup Guide - all-all contributors</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#repository-setup-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="all-all contributors" class="md-header__button md-logo" aria-label="all-all contributors" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            all-all contributors
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Repository Setup Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/RayStick/all-all-contributors" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    all-all-contributors
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="all-all contributors" class="md-nav__button md-logo" aria-label="all-all contributors" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    all-all contributors
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/RayStick/all-all-contributors" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    all-all-contributors
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    all_all_contributors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    all_all_contributors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/__about__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __about__
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/github_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    github_api
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/http_requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    http_requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/inject/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    inject
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    validate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/all_all_contributors/yaml_parser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    yaml_parser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tests
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    tests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/conftest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    conftest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_github_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_github_api
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_http_requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_http_requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_inject/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_inject
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoapi/tests/test_validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_validate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-enable-github-container-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Enable GitHub Container Registry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Enable GitHub Container Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-ghcr-is-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify GHCR is Working
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-package-visibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Package Visibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link-package-to-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Link Package to Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-release-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create Release Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Create Release Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-navigate-to-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Navigate to Environments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Create Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-configure-environment-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Configure Environment Protection Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Configure Environment Protection Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-deployment-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Deployment Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-deployment-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional: Deployment Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-verify-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Verify Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-configure-branch-protection-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configure Branch Protection (Recommended)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Configure Branch Protection (Recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-navigate-to-branch-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Navigate to Branch Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-configure-protection-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Configure Protection Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-save-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Save Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verify-repository-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Verify Repository Permissions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Verify Repository Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-navigate-to-actions-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Navigate to Actions Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-configure-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Configure Permissions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-additional-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Additional Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verify-everything-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Verify Everything Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Verify Everything Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-1-draft-release-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test 1: Draft Release Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-2-container-build-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test 2: Container Build Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-3-release-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test 3: Release Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-first-release-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. First Release Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. First Release Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-actionyaml-for-initial-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update action.yaml for Initial Release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cant-create-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can't Create Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-fails-with-resource-not-accessible-by-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Fails with "Resource not accessible by integration"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cant-add-reviewers-to-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can't Add Reviewers to Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draft-release-not-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Draft Release Not Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/RayStick/all-all-contributors/edit/main/docs/RELEASE-SETUP.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="repository-setup-guide">Repository Setup Guide</h1>
+<p>This guide walks through the one-time configuration needed to enable the automated release workflow for all-all-contributors.</p>
+<h2 id="overview">Overview</h2>
+<p>Before you can use the release workflows, the GitHub repository must be configured with:
+1. GitHub Container Registry (GHCR) enabled
+2. Release environment with approvers
+3. Branch protection rules (recommended)
+4. Proper repository permissions</p>
+<p><strong>Time required:</strong> ~15 minutes
+<strong>Who can do this:</strong> Repository administrators</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Admin access to the <code>the-turing-way/all-all-contributors</code> repository</li>
+<li>At least one other maintainer to act as release approver</li>
+</ul>
+<h2 id="1-enable-github-container-registry">1. Enable GitHub Container Registry</h2>
+<p>GHCR should already be enabled, but verify:</p>
+<h3 id="verify-ghcr-is-working">Verify GHCR is Working</h3>
+<ol>
+<li>Go to the repository home page</li>
+<li>Look for <strong>Packages</strong> in the right sidebar</li>
+<li>You should see the <code>all-all-contributors</code> package listed</li>
+</ol>
+<p>If you don't see it:
+1. Push a commit to trigger the <code>container-build.yaml</code> workflow
+2. The workflow will create the package automatically
+3. Check <strong>Actions</strong> tab to verify the workflow succeeded</p>
+<h3 id="configure-package-visibility">Configure Package Visibility</h3>
+<ol>
+<li>Click on the <code>all-all-contributors</code> package</li>
+<li>Click <strong>Package settings</strong> (gear icon)</li>
+<li>Scroll to <strong>Danger Zone</strong></li>
+<li>Verify <strong>Visibility</strong> is set to <strong>Public</strong></li>
+<li>If not, click <strong>Change visibility</strong> → <strong>Public</strong> → Confirm</li>
+</ol>
+<h3 id="link-package-to-repository">Link Package to Repository</h3>
+<ol>
+<li>Still in <strong>Package settings</strong></li>
+<li>Scroll to <strong>Connect repository</strong></li>
+<li>If not already connected, click <strong>Connect repository</strong></li>
+<li>Select <code>the-turing-way/all-all-contributors</code></li>
+<li>Click <strong>Connect</strong></li>
+</ol>
+<h2 id="2-create-release-environment">2. Create Release Environment</h2>
+<p>The release environment provides a manual approval gate for updating major version tags.</p>
+<h3 id="step-1-navigate-to-environments">Step 1: Navigate to Environments</h3>
+<ol>
+<li>Go to repository <strong>Settings</strong></li>
+<li>In the left sidebar, click <strong>Environments</strong></li>
+<li>Click <strong>New environment</strong></li>
+</ol>
+<h3 id="step-2-create-environment">Step 2: Create Environment</h3>
+<ol>
+<li><strong>Name:</strong> <code>release</code> (must be exactly this name)</li>
+<li>Click <strong>Configure environment</strong></li>
+</ol>
+<h3 id="step-3-configure-environment-protection-rules">Step 3: Configure Environment Protection Rules</h3>
+<p>On the environment configuration page:</p>
+<h4 id="enable-deployment-protection-rules">Enable Deployment Protection Rules</h4>
+<p>Check the box: <strong>☑️ Required reviewers</strong></p>
+<h4 id="add-reviewers">Add Reviewers</h4>
+<ol>
+<li>Click <strong>Add reviewers</strong></li>
+<li>Add at least 1-2 maintainers who can approve releases</li>
+<li>Recommended: Add 2+ people for redundancy</li>
+<li>Click <strong>Save protection rules</strong></li>
+</ol>
+<p><strong>Suggested reviewers:</strong>
+- Repository owners
+- Senior maintainers
+- People who understand the release process</p>
+<h4 id="optional-deployment-branches">Optional: Deployment Branches</h4>
+<p>You can restrict which branches can trigger deployments:</p>
+<ol>
+<li>Under <strong>Deployment branches</strong>, select <strong>Selected branches</strong></li>
+<li>Click <strong>Add deployment branch rule</strong></li>
+<li>Enter <code>main</code> as the branch name pattern</li>
+<li>Click <strong>Add rule</strong></li>
+</ol>
+<p>This ensures only releases from <code>main</code> can update version tags.</p>
+<h3 id="step-4-verify-configuration">Step 4: Verify Configuration</h3>
+<p>Your environment should show:
+- ✅ <strong>Required reviewers:</strong> [list of reviewers]
+- ✅ <strong>Deployment branches:</strong> Only <code>main</code> (optional)</p>
+<h2 id="3-configure-branch-protection-recommended">3. Configure Branch Protection (Recommended)</h2>
+<p>Protect the <code>main</code> branch to prevent accidental changes and ensure code quality.</p>
+<h3 id="step-1-navigate-to-branch-settings">Step 1: Navigate to Branch Settings</h3>
+<ol>
+<li>Go to repository <strong>Settings</strong></li>
+<li>Click <strong>Branches</strong> in left sidebar</li>
+<li>Under <strong>Branch protection rules</strong>, click <strong>Add rule</strong></li>
+</ol>
+<h3 id="step-2-configure-protection-rule">Step 2: Configure Protection Rule</h3>
+<p><strong>Branch name pattern:</strong> <code>main</code></p>
+<p><strong>Recommended settings:</strong></p>
+<p>☑️ <strong>Require a pull request before merging</strong>
+- ☑️ Require approvals: <strong>1</strong>
+- ☑️ Dismiss stale pull request approvals when new commits are pushed
+- ☑️ Require review from Code Owners (if you have CODEOWNERS file)</p>
+<p>☑️ <strong>Require status checks to pass before merging</strong>
+- ☑️ Require branches to be up to date before merging
+- <strong>Select required checks:</strong>
+  - <code>test</code> (from test.yaml workflow)
+  - <code>build</code> (from container-build.yaml workflow)
+  - <code>build_docs</code> (from build-docs.yml workflow)</p>
+<p>☑️ <strong>Require conversation resolution before merging</strong></p>
+<p>☑️ <strong>Include administrators</strong> (recommended for consistency)</p>
+<p><strong>Optional:</strong>
+- ☑️ Require signed commits
+- ☑️ Require linear history</p>
+<h3 id="step-3-save-changes">Step 3: Save Changes</h3>
+<p>Click <strong>Create</strong> at the bottom of the page.</p>
+<h2 id="4-verify-repository-permissions">4. Verify Repository Permissions</h2>
+<p>Ensure GitHub Actions has the necessary permissions.</p>
+<h3 id="step-1-navigate-to-actions-settings">Step 1: Navigate to Actions Settings</h3>
+<ol>
+<li>Go to repository <strong>Settings</strong></li>
+<li>Click <strong>Actions</strong> → <strong>General</strong> in left sidebar</li>
+<li>Scroll to <strong>Workflow permissions</strong></li>
+</ol>
+<h3 id="step-2-configure-permissions">Step 2: Configure Permissions</h3>
+<p>Select: <strong>Read and write permissions</strong></p>
+<p>This allows workflows to:
+- Push Docker images to GHCR
+- Create and update Git tags
+- Update releases</p>
+<p><strong>Alternative (more restrictive):</strong>
+If you prefer <strong>Read repository contents and packages permissions</strong>, you must add explicit permissions to each workflow file. The current workflows already include necessary <code>permissions:</code> blocks.</p>
+<h3 id="step-3-additional-settings">Step 3: Additional Settings</h3>
+<p>In the same page:</p>
+<p>☑️ <strong>Allow GitHub Actions to create and approve pull requests</strong></p>
+<p>This is needed if the draft-release workflow creates PRs (currently it doesn't, but good to enable for future use).</p>
+<h2 id="5-verify-everything-works">5. Verify Everything Works</h2>
+<p>Test the complete setup before your first release.</p>
+<h3 id="test-1-draft-release-workflow">Test 1: Draft Release Workflow</h3>
+<ol>
+<li>Create a test PR with a <code>feature</code> label</li>
+<li>Merge the PR to <code>main</code></li>
+<li>Go to <strong>Actions</strong> tab</li>
+<li>Verify <strong>Draft Release</strong> workflow runs successfully</li>
+<li>Go to <strong>Releases</strong> tab</li>
+<li>Verify a draft release was created or updated</li>
+</ol>
+<h3 id="test-2-container-build-workflow">Test 2: Container Build Workflow</h3>
+<ol>
+<li>Go to <strong>Actions</strong> tab</li>
+<li>Find a recent <strong>Build Container</strong> workflow run</li>
+<li>Verify it succeeded</li>
+<li>Go to <strong>Packages</strong></li>
+<li>Verify Docker image was pushed with appropriate tags</li>
+</ol>
+<h3 id="test-3-release-environment">Test 3: Release Environment</h3>
+<ol>
+<li>Go to <strong>Settings</strong> → <strong>Environments</strong> → <strong>release</strong></li>
+<li>Verify reviewers are listed</li>
+<li>Make a note of who can approve releases</li>
+</ol>
+<h2 id="6-first-release-setup">6. First Release Setup</h2>
+<p>Before making your first release with the new workflow:</p>
+<h3 id="update-actionyaml-for-initial-release">Update action.yaml for Initial Release</h3>
+<p>The current <code>action.yaml</code> references a hardcoded image. You need to establish a baseline version.</p>
+<p><strong>Option A: Start with v1.0.0</strong></p>
+<ol>
+<li>Create PR to update action.yaml to reference <code>v1.0.0</code></li>
+<li>Merge the PR</li>
+<li>Follow the <a href="../RELEASE/">Release Instructions</a> to create v1.0.0</li>
+<li>This becomes your baseline version</li>
+</ol>
+<p><strong>Option B: Use current state as v0.1.0</strong></p>
+<p>If you're not ready for v1.0.0:</p>
+<ol>
+<li>Create PR to update action.yaml to reference <code>v0.1.0</code></li>
+<li>Merge the PR</li>
+<li>Follow the <a href="../RELEASE/">Release Instructions</a> to create v0.1.0</li>
+<li>Future releases can be v0.2.0, v0.3.0, etc. until ready for v1.0.0</li>
+</ol>
+<h3 id="recommended-approach">Recommended Approach</h3>
+<p>Start with <strong>v1.0.0</strong> since:
+- The action is already functional and used in production
+- Contributor table generation is a new feature, not a breaking change
+- Users expect stability from v1.x releases</p>
+<h2 id="configuration-checklist">Configuration Checklist</h2>
+<p>Use this checklist to verify setup is complete:</p>
+<ul>
+<li>[ ] GHCR package exists and is public</li>
+<li>[ ] GHCR package is linked to repository</li>
+<li>[ ] <code>release</code> environment created</li>
+<li>[ ] At least 1 reviewer added to <code>release</code> environment</li>
+<li>[ ] Branch protection enabled on <code>main</code> (optional but recommended)</li>
+<li>[ ] Required status checks configured (optional but recommended)</li>
+<li>[ ] GitHub Actions has read/write permissions</li>
+<li>[ ] Draft release workflow tested</li>
+<li>[ ] Container build workflow verified working</li>
+<li>[ ] Release environment access verified</li>
+<li>[ ] Initial version tag decided (v1.0.0 or v0.1.0)</li>
+<li>[ ] Team briefed on release process</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="cant-create-environment">Can't Create Environment</h3>
+<p><strong>Issue:</strong> "Environments" option not visible in Settings.</p>
+<p><strong>Solution:</strong> Environments are available in:
+- Public repositories (any plan)
+- Private repositories (GitHub Pro, Team, or Enterprise)</p>
+<p>If using a private repo on Free plan, you'll need to upgrade or make the repo public.</p>
+<h3 id="workflow-fails-with-resource-not-accessible-by-integration">Workflow Fails with "Resource not accessible by integration"</h3>
+<p><strong>Issue:</strong> Workflow fails when trying to push images or update tags.</p>
+<p><strong>Solution:</strong>
+1. Check <strong>Settings</strong> → <strong>Actions</strong> → <strong>General</strong> → <strong>Workflow permissions</strong>
+2. Ensure <strong>Read and write permissions</strong> is selected
+3. Or verify individual workflow files have appropriate <code>permissions:</code> blocks</p>
+<h3 id="cant-add-reviewers-to-environment">Can't Add Reviewers to Environment</h3>
+<p><strong>Issue:</strong> People you want to add aren't available in the dropdown.</p>
+<p><strong>Solution:</strong>
+- Users must have <strong>Write access</strong> or higher to the repository
+- Go to <strong>Settings</strong> → <strong>Collaborators</strong> to add them first
+- Then retry adding them as environment reviewers</p>
+<h3 id="draft-release-not-created">Draft Release Not Created</h3>
+<p><strong>Issue:</strong> Draft release workflow runs but no draft appears.</p>
+<p><strong>Solution:</strong>
+1. Check workflow logs for errors
+2. Verify PRs have appropriate labels (<code>feature</code>, <code>fix</code>, etc.)
+3. Check that <code>release-drafter.yml</code> config file exists
+4. Try manually triggering the workflow:
+   - Go to <strong>Actions</strong> tab
+   - Click <strong>Draft Release</strong> workflow
+   - Click <strong>Run workflow</strong> → <strong>Run workflow</strong></p>
+<h2 id="next-steps">Next Steps</h2>
+<p>After completing this setup:</p>
+<ol>
+<li>Review the <a href="../RELEASE/">Release Instructions</a></li>
+<li>Brief the team on the release process</li>
+<li>Create your first release following the documented process</li>
+<li>Update this guide if you encounter any issues or have improvements</li>
+</ol>
+<h2 id="questions">Questions?</h2>
+<p>If you encounter issues not covered here:
+1. Check the workflow logs in the <strong>Actions</strong> tab
+2. Review the <a href="../RELEASE/">Release Instructions</a> for runtime issues
+3. Consult the <a href="../.claude/spec/automated-release-workflow.md">spec document</a> for design decisions
+4. Open an issue for discussion</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
