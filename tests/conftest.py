@@ -1,6 +1,22 @@
 import json
 
 from pytest import fixture
+from typer.testing import CliRunner
+
+
+@fixture()
+def runner():
+    return CliRunner()
+
+
+@fixture()
+def github_token(monkeypatch):
+    monkeypatch.setenv("INPUT_GITHUB_TOKEN", "dummy_token")
+
+
+@fixture()
+def unset_github_token(monkeypatch):
+    monkeypatch.delenv("INPUT_GITHUB_TOKEN", raising=False)
 
 
 @fixture()
