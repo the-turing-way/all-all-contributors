@@ -182,7 +182,7 @@ class TestEnsureGitConfig:
 
         assert mock_run.call_count == 2
         mock_run.assert_called_with(
-            ["git", "config", "user.name", "bot[bot]"],
+            ["git", "config", "--global", "user.name", "bot[bot]"],
             capture_output=True,
             text=True,
             cwd=cli.repo_dir,
