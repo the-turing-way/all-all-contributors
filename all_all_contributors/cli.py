@@ -1,5 +1,8 @@
 import base64
+import json
+import sys
 
+from pathlib import Path
 from os import getenv, path
 from typing import Annotated, Any
 
@@ -35,6 +38,28 @@ def load_excluded_repos() -> set:
         excluded = []
 
     return set(excluded)
+
+
+def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributorsrc") -> list[dict]:
+    filepath = Path(dirpath) / filename
+
+    if not filepath.is_file():
+        print(f"Warning: {filepath} does not exist, returning empty list", file=sys.stderr)
+        return []
+    
+    try:
+        with open(filepath) as f:
+            contents = json.load(f)
+    except json.JSONDecodeError as ex:
+        raise json.JSONDecodeError(
+            f"{filepath}: {ex.msg}", ex.doc, ex.pos
+        ) from ex
+
+    if "contributors" not in contents.keys():
+        print(f"Warning: {filepath} does not contain a 'contributors' key, returning empty list", file=sys.stderr)
+        return []
+
+    return contents["contributors"]
 
 
 @app.command()
