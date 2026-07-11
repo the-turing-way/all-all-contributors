@@ -5,6 +5,7 @@ from pathlib import Path
 
 class GitCLIError(Exception):
     """Raised when a git subprocess exits non-zero."""
+
     def __init__(self, command: str, stderr: str):
         self.command = command
         self.stderr = stderr
@@ -25,10 +26,10 @@ class GitCLI:
             text=True,
             cwd=self.repo_dir,
         )
-        
+
         if result.returncode != 0:
             raise GitCLIError(" ".join(args), result.stderr.strip())
-        
+
         return result
 
     def verify_environment(self) -> None:
@@ -40,7 +41,10 @@ class GitCLI:
             raise SystemExit(1)
 
         if not (self.repo_dir / ".git").is_dir():
-            print("Error: target repository must be cloned locally before running this tool", file=sys.stderr)
+            print(
+                "Error: target repository must be cloned locally before running this tool",
+                file=sys.stderr,
+            )
             raise SystemExit(1)
 
     def create_branch(self, head_branch: str, base_branch: str) -> None:
@@ -56,19 +60,21 @@ class GitCLI:
             ["git", "diff", "--quiet"],
             capture_output=True,
             text=True,
-            cwd=self.repo_dir
+            cwd=self.repo_dir,
         )
         return result.returncode != 0
 
     def commit_file(
-        self, filepath: str, message: str = "Merging all contributors info from across the org"
+        self,
+        filepath: str,
+        message: str = "Merging all contributors info from across the org",
     ) -> None:
         self._run("add", filepath)
         self._run("commit", "-m", message)
 
     def push_branch(self, branch_name: str) -> None:
         """Push branch to origin, force-push if remote branch exists.
-        
+
         Using both `--force` and `--set-upstream` handles both new and
         existing remote branches in one call.
         """
