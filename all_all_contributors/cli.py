@@ -1,14 +1,16 @@
-import base64
 import json
 import sys
 
 from pathlib import Path
 from os import getenv, path
-from typing import Annotated, Any
+from typing import Annotated
 
 import typer
+import requests
 
+from .git_cli import GitCLI, GitCLIError
 from .github_api import GitHubAPI
+from .inject import inject_config
 from .merge import merge_contributors
 
 app = typer.Typer()
@@ -118,6 +120,9 @@ def main(
     github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
+    git_cli = GitCLI()
+    git_cli.verify_environment()
+
     github_api = GitHubAPI(
         organisation,
         target_repo,
@@ -125,16 +130,47 @@ def main(
         target_filepath=target_filepath,
         base_branch=base_branch,
     )
-    repos = github_api.get_all_repos(excluded_repos)
 
-    all_contributors = []
-    for repo in repos:
-        contributors = github_api.get_contributors_from_repo(repo)
-        all_contributors.extend(contributors)
+    try:
+        github_api.find_existing_pull_request()
+        git_cli.create_branch(github_api.head_branch, base_branch)
+        repos = github_api.get_all_repos(excluded_repos)
 
-    merged_contributors = merge_contributors(all_contributors)
-    if merged_contributors:
-        github_api.run(merged_contributors)
+        all_contributors = []
+        for repo in repos:
+            contributors = github_api.get_contributors_from_repo(repo)
+            all_contributors.extend(contributors)
+
+        # Read local contributors file
+        local_contributors = read_contributors_file()
+        all_contributors.extend(local_contributors)
+
+        merged_contributors = merge_contributors(all_contributors)
+        if not merged_contributors:
+            print("No contributors to be merged.")
+            raise typer.Exit(code=0)
+
+        aac_file_contents = read_contributors_file(full_file=True)
+        updated_contents = inject_config(aac_file_contents, merged_contributors)
+        
+        # Write updated file
+        with open(target_filepath, "w") as f:
+            json.dump(updated_contents, f, indent=2)
+
+        if not git_cli.check_for_changes():
+            print("No changes to commit.")
+            raise typer.Exit(code=0)
+    
+        git_cli.commit_file(target_filepath)
+        git_cli.push_branch(github_api.head_branch)
+        github_api.create_update_pull_request()
+
+    except GitCLIError as e:
+        print(f"Git error: {e}", file=sys.stderr)
+        raise typer.Exit(code=1)
+    except requests.HTTPError as e:
+        print(f"GitHub API error: {e}", file=sys.stderr)
+        raise typer.Exit(code=1)
 
 
 def cli():
