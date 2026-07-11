@@ -72,10 +72,10 @@ class GitCLI:
         if result.returncode != 0 or not result.stdout.strip():
             self._run("config", "--global", key, default)
 
-    def create_branch(self, head_branch: str, base_branch: str) -> None:
+    def create_branch(self, head_branch: str) -> None:
         """Create a new branch, or switch to it if it already exists."""
         try:
-            self._run("switch", "-c", head_branch, base_branch)
+            self._run("switch", "-c", head_branch)
         except GitCLIError:
             self._run("switch", head_branch)
 

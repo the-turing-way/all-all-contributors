@@ -63,9 +63,9 @@ class TestCreateBranch:
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        cli.create_branch("feature", "main")
+        cli.create_branch("feature")
         mock_run.assert_called_once_with(
-            ["git", "switch", "-c", "feature", "main"],
+            ["git", "switch", "-c", "feature"],
             capture_output=True,
             text=True,
             cwd=cli.repo_dir,
@@ -83,7 +83,7 @@ class TestCreateBranch:
         mock_run.side_effect = [fail, success]
 
         cli = GitCLI("/tmp/repo")
-        cli.create_branch("feature", "main")
+        cli.create_branch("feature")
 
         assert mock_run.call_count == 2
         mock_run.assert_called_with(
@@ -102,7 +102,7 @@ class TestCreateBranch:
 
         cli = GitCLI("/tmp/repo")
         with pytest.raises(GitCLIError):
-            cli.create_branch("feature", "main")
+            cli.create_branch("feature")
 
 
 class TestCommitFile:
