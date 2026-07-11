@@ -121,11 +121,19 @@ def main(
             help="The name of the head branch to create in the target repository to open a Pull Request",
         ),
     ] = "merged-all-contributors",
+    repo_dir: Annotated[
+        str,
+        typer.Option(
+            "--repo-dir",
+            envvar="INPUT_REPO_DIR",
+            help="Path to the local clone of the target repository",
+        ),
+    ] = ".",
 ) -> None:
     github_token = get_github_token()
     excluded_repos = load_excluded_repos()
 
-    git_cli = GitCLI()
+    git_cli = GitCLI(repo_dir=repo_dir)
     git_cli.verify_environment()
 
     github_api = GitHubAPI(
@@ -147,7 +155,7 @@ def main(
             all_contributors.extend(contributors)
 
         # Read local contributors file
-        local_contributors = read_contributors_file()
+        local_contributors = read_contributors_file(dirpath=repo_dir)
         all_contributors.extend(local_contributors)
 
         merged_contributors = merge_contributors(all_contributors)
@@ -155,11 +163,12 @@ def main(
             print("No contributors to be merged.")
             raise typer.Exit(code=0)
 
-        aac_file_contents = read_contributors_file(full_file=True)
+        aac_file_contents = read_contributors_file(dirpath=repo_dir, full_file=True)
         updated_contents = inject_config(aac_file_contents, merged_contributors)
 
         # Write updated file
-        with open(target_filepath, "w") as f:
+        output_path = Path(repo_dir) / target_filepath
+        with open(output_path, "w") as f:
             json.dump(updated_contents, f, indent=2)
 
         if not git_cli.check_for_changes():
