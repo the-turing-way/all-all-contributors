@@ -35,6 +35,16 @@ This project will provide a way to fetch all of the `.all-contributorsrc` files 
 | `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
 | `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merged-all-contributors`. | no |
 
+### CLI Usage
+
+The tool can also be run standalone outside of GitHub Actions:
+
+```console
+all-all-contributors MY_ORG MY_REPO --repo-dir /path/to/local/clone
+```
+
+All action inputs are also available as CLI arguments. Use `--help` for details. The `--repo-dir` option (env: `INPUT_REPO_DIR`) specifies the path to the local clone of the target repository (defaults to `.`).
+
 ### Permissions
 
 This Action will need permission to read the contents of a files stored in repositories in an organisation, create a new branch, commit to that branch, and open a Pull Request.
