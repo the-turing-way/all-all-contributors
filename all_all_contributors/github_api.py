@@ -1,17 +1,9 @@
-import os
-import base64
-import json
 import random
 import string
 import jmespath
 import requests
-from requests import put
 
 from .http_requests import get_request, patch_request, post_request
-from .inject import inject_config
-from .yaml_parser import YamlParser
-
-yaml = YamlParser()
 
 
 class GitHubAPI:
@@ -53,55 +45,6 @@ class GitHubAPI:
         }
 
         self.api_url = "https://api.github.com"
-
-    def create_commit(
-        self,
-        contents: str,
-        commit_msg: str = "Merging all contributors info from across the org",
-    ):
-        """Create a commit over the GitHub API by creating or updating a file
-
-        Args:
-            contents (str): The content of the file to be updated, encoded in base64
-            commit_msg (str): A message describing the changes the commit applies.
-                (default: "Merging all contributors info from across the org")
-        """
-        print(f"Committing changes to file: {self.target_filepath}")
-        url = "/".join(
-            [
-                self.api_url,
-                "repos",
-                self.org_name,
-                self.target_repo_name,
-                "contents",
-                self.target_filepath,
-            ]
-        )
-        body = {
-            "message": commit_msg,
-            "content": contents,
-            "sha": self.sha,
-            "branch": self.head_branch,
-        }
-        put(url, json=body, headers=self.headers)
-
-    def create_ref(self, ref: str, sha: str):
-        """Create a new git reference (specifically, a branch) with GitHub's git
-        database API endpoint
-
-        Args:
-            ref (str): The reference or branch name to create
-            sha (str): The SHA of the parent commit to point the new reference to
-        """
-        print(f"Creating new branch: {ref}")
-        url = "/".join(
-            [self.api_url, "repos", self.org_name, self.target_repo_name, "git", "refs"]
-        )
-        body = {
-            "ref": f"refs/heads/{ref}",
-            "sha": sha,
-        }
-        post_request(url, headers=self.headers, json=body)
 
     def create_update_pull_request(self):
         """Create or update a Pull Request via the GitHub API"""
@@ -175,31 +118,6 @@ class GitHubAPI:
             self.pr_number = resp[indx]["number"]
             self.pr_exists = True
 
-    def get_ref(self, ref: str) -> dict:
-        """Get a git reference (specifically, a HEAD ref) using GitHub's git
-        database API endpoint
-
-        Args:
-            ref (str): The reference for which to return information for
-
-        Returns:
-            dict: The JSON payload response of the request
-        """
-        print(f"Pulling info for ref: {ref}")
-        url = "/".join(
-            [
-                self.api_url,
-                "repos",
-                self.org_name,
-                self.target_repo_name,
-                "git",
-                "ref",
-                "heads",
-                ref,
-            ]
-        )
-        return get_request(url, headers=self.headers, output="json")
-
     def get_all_repos(self, excluded_repos: list) -> list:
         """
         Get all repositories from a GitHub organization using the GitHub API
@@ -260,60 +178,3 @@ class GitHubAPI:
                 return []
             else:
                 raise
-
-    def get_target_file_contents(self, ref):
-        """Download the JSON-formatted contents of a target filepath in a target
-        repository inside a target GitHub org.
-
-        Args:
-            ref (str): The reference (branch) the file is stored on
-
-        Returns:
-            dict: The JSON formatted contents of the target filepath
-        """
-        url = "/".join(
-            [
-                self.api_url,
-                "repos",
-                self.org_name,
-                self.target_repo_name,
-                "contents",
-                self.target_filepath,
-            ]
-        )
-        resp = get_request(
-            url, headers=self.headers, params={"ref": ref}, output="json"
-        )
-        # Store the SHA for later use in create_commit
-        self.sha = resp["sha"]
-        resp = get_request(resp["download_url"], headers=self.headers, output="json")
-        return resp
-
-    def run(self, merged_contributors: list) -> None:
-        """Run git flow to make a branch, commit a file, and open a PR"""
-        # Check if a PR exists
-        self.find_existing_pull_request()
-
-        # We want to work against the most up-to-date version of the target file
-        if self.pr_exists:
-            # If a PR exists, pull the file from there
-            file_contents = self.get_target_file_contents(self.head_branch)
-        else:
-            # Otherwise, pull from the base of the repo
-            file_contents = self.get_target_file_contents(self.base_branch)
-
-        file_contents = inject_config(file_contents, merged_contributors)
-
-        if not self.pr_exists:
-            # Create a branch to open a PR from
-            resp = self.get_ref(self.base_branch)
-            self.create_ref(self.head_branch, resp["object"]["sha"])
-
-        # base64 encode the updated config file
-        encoded_file_contents = json.dumps(file_contents, indent=2).encode("utf-8")
-        base64_bytes = base64.b64encode(encoded_file_contents)
-        file_contents = base64_bytes.decode("utf-8")
-
-        # Create a commit and open a pull request
-        self.create_commit(file_contents)
-        self.create_update_pull_request()
