@@ -65,3 +65,11 @@ class GitCLI:
     ) -> None:
         self._run("add", filepath)
         self._run("commit", "-m", message)
+
+    def push_branch(self, branch_name: str) -> None:
+        """Push branch to origin, force-push if remote branch exists.
+        
+        Using both `--force` and `--set-upstream` handles both new and
+        existing remote branches in one call.
+        """
+        self._run("push", "--set-upstream", "--force", "origin", branch_name)
