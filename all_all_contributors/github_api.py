@@ -16,7 +16,7 @@ class GitHubAPI:
         github_token: str,
         target_filepath: str = ".all-contributorsrc",
         base_branch: str = "main",
-        head_branch: str = "merge-all-contributors",
+        head_branch: str = "merged-all-contributors",
     ):
         """
         Args:
@@ -31,7 +31,7 @@ class GitHubAPI:
                 `target_repo_name`. (default: "main")
             head_branch (str, optional): A prefix for branches created in
                 `target_repo_name` for pull requests.
-                (default: "all-all-contributors")
+                (default: "merged-all-contributors")
         """
         self.org_name = org_name
         self.target_repo_name = target_repo_name

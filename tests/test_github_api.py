@@ -78,7 +78,7 @@ class TestGitHubAPI(unittest.TestCase):
                 output="json",
             )
             self.assertFalse(github.pr_exists)
-            self.assertTrue(github.head_branch.startswith("merge-all-contributors"))
+            self.assertTrue(github.head_branch.startswith("merged-all-contributors"))
 
     def test_find_existing_pull_request_match(self):
         github = GitHubAPI(
@@ -93,7 +93,7 @@ class TestGitHubAPI(unittest.TestCase):
             return_value=[
                 {
                     "head": {
-                        "label": "merge-all-contributors",
+                        "label": "merged-all-contributors",
                     },
                     "number": 1,
                 }
@@ -121,7 +121,7 @@ class TestGitHubAPI(unittest.TestCase):
                 output="json",
             )
             self.assertTrue(github.pr_exists)
-            self.assertEqual(github.head_branch, "merge-all-contributors")
+            self.assertEqual(github.head_branch, "merged-all-contributors")
             self.assertEqual(github.pr_number, 1)
 
     def test_update_existing_pr(self):
