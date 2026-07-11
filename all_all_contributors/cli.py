@@ -40,7 +40,19 @@ def load_excluded_repos() -> set:
     return set(excluded)
 
 
-def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributorsrc") -> list[dict]:
+def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributorsrc", full_file: bool = False) -> list[dict]:
+    """ Read in the target contributors file in the target repo.
+
+    Args:
+        dirpath (str): The directory path to the contributors file
+        filename (str): The name of the contributors file
+        full_file (bool): If True, return the full file contents. If False, return only the contributors list.
+    
+    Returns:
+        list[dict]: A list of contributor dictionaries
+    Raises:
+        json.JSONDecodeError: If the file is not valid JSON
+    """
     filepath = Path(dirpath) / filename
 
     if not filepath.is_file():
@@ -54,6 +66,9 @@ def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributor
         raise json.JSONDecodeError(
             f"{filepath}: {ex.msg}", ex.doc, ex.pos
         ) from ex
+
+    if full_file:
+        return contents
 
     if "contributors" not in contents.keys():
         print(f"Warning: {filepath} does not contain a 'contributors' key, returning empty list", file=sys.stderr)
