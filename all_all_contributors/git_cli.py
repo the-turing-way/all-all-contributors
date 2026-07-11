@@ -49,7 +49,9 @@ class GitCLI:
 
         # Ensure committer identity is configured (required for commits in CI)
         self._ensure_git_config("user.name", "all-all-contributors[bot]")
-        self._ensure_git_config("user.email", "all-all-contributors[bot]@users.noreply.github.com")
+        self._ensure_git_config(
+            "user.email", "all-all-contributors[bot]@users.noreply.github.com"
+        )
 
     def _ensure_git_config(self, key: str, default: str) -> None:
         """Set a git config value if not already configured."""
