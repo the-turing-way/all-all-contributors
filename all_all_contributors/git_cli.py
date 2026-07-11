@@ -60,7 +60,7 @@ class GitCLI:
             cwd=self.repo_dir,
         )
         if result.returncode != 0 or not result.stdout.strip():
-            self._run("config", key, default)
+            self._run("config", "--global", key, default)
 
     def create_branch(self, head_branch: str, base_branch: str) -> None:
         """Create a new branch, or switch to it if it already exists."""
