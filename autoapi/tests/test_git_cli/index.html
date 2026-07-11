@@ -948,6 +948,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TestEnsureGitConfig
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TestEnsureGitConfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig.test_sets_config_when_missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test_sets_config_when_missing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig.test_skips_when_already_set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test_skips_when_already_set
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1164,6 +1203,45 @@
     <span class="md-ellipsis">
       
         test_fallback_to_existing_branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TestEnsureGitConfig
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TestEnsureGitConfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig.test_sets_config_when_missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test_sets_config_when_missing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests.test_git_cli.TestEnsureGitConfig.test_skips_when_already_set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test_skips_when_already_set
       
     </span>
   </a>
@@ -1418,6 +1496,251 @@
 </span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93"></a>        <span class="n">cwd</span><span class="o">=</span><span class="n">cli</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
 </span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="tests.test_git_cli.TestEnsureGitConfig" class="doc doc-heading">
+            <code>TestEnsureGitConfig</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>tests/test_git_cli.py</code></summary>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-168">168</a></span>
+<span class="normal"><a href="#__codelineno-0-169">169</a></span>
+<span class="normal"><a href="#__codelineno-0-170">170</a></span>
+<span class="normal"><a href="#__codelineno-0-171">171</a></span>
+<span class="normal"><a href="#__codelineno-0-172">172</a></span>
+<span class="normal"><a href="#__codelineno-0-173">173</a></span>
+<span class="normal"><a href="#__codelineno-0-174">174</a></span>
+<span class="normal"><a href="#__codelineno-0-175">175</a></span>
+<span class="normal"><a href="#__codelineno-0-176">176</a></span>
+<span class="normal"><a href="#__codelineno-0-177">177</a></span>
+<span class="normal"><a href="#__codelineno-0-178">178</a></span>
+<span class="normal"><a href="#__codelineno-0-179">179</a></span>
+<span class="normal"><a href="#__codelineno-0-180">180</a></span>
+<span class="normal"><a href="#__codelineno-0-181">181</a></span>
+<span class="normal"><a href="#__codelineno-0-182">182</a></span>
+<span class="normal"><a href="#__codelineno-0-183">183</a></span>
+<span class="normal"><a href="#__codelineno-0-184">184</a></span>
+<span class="normal"><a href="#__codelineno-0-185">185</a></span>
+<span class="normal"><a href="#__codelineno-0-186">186</a></span>
+<span class="normal"><a href="#__codelineno-0-187">187</a></span>
+<span class="normal"><a href="#__codelineno-0-188">188</a></span>
+<span class="normal"><a href="#__codelineno-0-189">189</a></span>
+<span class="normal"><a href="#__codelineno-0-190">190</a></span>
+<span class="normal"><a href="#__codelineno-0-191">191</a></span>
+<span class="normal"><a href="#__codelineno-0-192">192</a></span>
+<span class="normal"><a href="#__codelineno-0-193">193</a></span>
+<span class="normal"><a href="#__codelineno-0-194">194</a></span>
+<span class="normal"><a href="#__codelineno-0-195">195</a></span>
+<span class="normal"><a href="#__codelineno-0-196">196</a></span>
+<span class="normal"><a href="#__codelineno-0-197">197</a></span>
+<span class="normal"><a href="#__codelineno-0-198">198</a></span>
+<span class="normal"><a href="#__codelineno-0-199">199</a></span>
+<span class="normal"><a href="#__codelineno-0-200">200</a></span>
+<span class="normal"><a href="#__codelineno-0-201">201</a></span>
+<span class="normal"><a href="#__codelineno-0-202">202</a></span>
+<span class="normal"><a href="#__codelineno-0-203">203</a></span>
+<span class="normal"><a href="#__codelineno-0-204">204</a></span>
+<span class="normal"><a href="#__codelineno-0-205">205</a></span>
+<span class="normal"><a href="#__codelineno-0-206">206</a></span>
+<span class="normal"><a href="#__codelineno-0-207">207</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-168"><a id="__codelineno-0-168" name="__codelineno-0-168"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestEnsureGitConfig</span><span class="p">:</span>
+</span><span id="__span-0-169"><a id="__codelineno-0-169" name="__codelineno-0-169"></a>    <span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;subprocess.run&quot;</span><span class="p">)</span>
+</span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_sets_config_when_missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_run</span><span class="p">):</span>
+</span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;If git config returns non-zero (unset), _ensure_git_config should set it.&quot;&quot;&quot;</span>
+</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>        <span class="n">not_set</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>            <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>        <span class="p">)</span>
+</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>        <span class="n">set_ok</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>            <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>        <span class="p">)</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>        <span class="n">mock_run</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span><span class="n">not_set</span><span class="p">,</span> <span class="n">set_ok</span><span class="p">]</span>
+</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>
+</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>        <span class="n">cli</span> <span class="o">=</span> <span class="n">GitCLI</span><span class="p">(</span><span class="s2">&quot;/tmp/repo&quot;</span><span class="p">)</span>
+</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>        <span class="n">cli</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">)</span>
+</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>
+</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>        <span class="k">assert</span> <span class="n">mock_run</span><span class="o">.</span><span class="n">call_count</span> <span class="o">==</span> <span class="mi">2</span>
+</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>        <span class="n">mock_run</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span>
+</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>            <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">],</span>
+</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>            <span class="n">cwd</span><span class="o">=</span><span class="n">cli</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="p">)</span>
+</span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>
+</span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;subprocess.run&quot;</span><span class="p">)</span>
+</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_skips_when_already_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_run</span><span class="p">):</span>
+</span><span id="__span-0-193"><a id="__codelineno-0-193" name="__codelineno-0-193"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;If git config returns a value, _ensure_git_config should not overwrite it.&quot;&quot;&quot;</span>
+</span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a>        <span class="n">already_set</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>            <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;Existing User</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>        <span class="p">)</span>
+</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>        <span class="n">mock_run</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">already_set</span>
+</span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>
+</span><span id="__span-0-199"><a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="n">cli</span> <span class="o">=</span> <span class="n">GitCLI</span><span class="p">(</span><span class="s2">&quot;/tmp/repo&quot;</span><span class="p">)</span>
+</span><span id="__span-0-200"><a id="__codelineno-0-200" name="__codelineno-0-200"></a>        <span class="n">cli</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">)</span>
+</span><span id="__span-0-201"><a id="__codelineno-0-201" name="__codelineno-0-201"></a>
+</span><span id="__span-0-202"><a id="__codelineno-0-202" name="__codelineno-0-202"></a>        <span class="n">mock_run</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+</span><span id="__span-0-203"><a id="__codelineno-0-203" name="__codelineno-0-203"></a>            <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;user.name&quot;</span><span class="p">],</span>
+</span><span id="__span-0-204"><a id="__codelineno-0-204" name="__codelineno-0-204"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-205"><a id="__codelineno-0-205" name="__codelineno-0-205"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-206"><a id="__codelineno-0-206" name="__codelineno-0-206"></a>            <span class="n">cwd</span><span class="o">=</span><span class="n">cli</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="__span-0-207"><a id="__codelineno-0-207" name="__codelineno-0-207"></a>        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="tests.test_git_cli.TestEnsureGitConfig.test_sets_config_when_missing" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">test_sets_config_when_missing</span><span class="p">(</span><span class="n">mock_run</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>If git config returns non-zero (unset), _ensure_git_config should set it.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>tests/test_git_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-169">169</a></span>
+<span class="normal"><a href="#__codelineno-0-170">170</a></span>
+<span class="normal"><a href="#__codelineno-0-171">171</a></span>
+<span class="normal"><a href="#__codelineno-0-172">172</a></span>
+<span class="normal"><a href="#__codelineno-0-173">173</a></span>
+<span class="normal"><a href="#__codelineno-0-174">174</a></span>
+<span class="normal"><a href="#__codelineno-0-175">175</a></span>
+<span class="normal"><a href="#__codelineno-0-176">176</a></span>
+<span class="normal"><a href="#__codelineno-0-177">177</a></span>
+<span class="normal"><a href="#__codelineno-0-178">178</a></span>
+<span class="normal"><a href="#__codelineno-0-179">179</a></span>
+<span class="normal"><a href="#__codelineno-0-180">180</a></span>
+<span class="normal"><a href="#__codelineno-0-181">181</a></span>
+<span class="normal"><a href="#__codelineno-0-182">182</a></span>
+<span class="normal"><a href="#__codelineno-0-183">183</a></span>
+<span class="normal"><a href="#__codelineno-0-184">184</a></span>
+<span class="normal"><a href="#__codelineno-0-185">185</a></span>
+<span class="normal"><a href="#__codelineno-0-186">186</a></span>
+<span class="normal"><a href="#__codelineno-0-187">187</a></span>
+<span class="normal"><a href="#__codelineno-0-188">188</a></span>
+<span class="normal"><a href="#__codelineno-0-189">189</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-169"><a id="__codelineno-0-169" name="__codelineno-0-169"></a><span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;subprocess.run&quot;</span><span class="p">)</span>
+</span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_sets_config_when_missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_run</span><span class="p">):</span>
+</span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;If git config returns non-zero (unset), _ensure_git_config should set it.&quot;&quot;&quot;</span>
+</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>    <span class="n">not_set</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>        <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>    <span class="p">)</span>
+</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>    <span class="n">set_ok</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>        <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>    <span class="p">)</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>    <span class="n">mock_run</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span><span class="n">not_set</span><span class="p">,</span> <span class="n">set_ok</span><span class="p">]</span>
+</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>
+</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>    <span class="n">cli</span> <span class="o">=</span> <span class="n">GitCLI</span><span class="p">(</span><span class="s2">&quot;/tmp/repo&quot;</span><span class="p">)</span>
+</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>    <span class="n">cli</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">)</span>
+</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>
+</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>    <span class="k">assert</span> <span class="n">mock_run</span><span class="o">.</span><span class="n">call_count</span> <span class="o">==</span> <span class="mi">2</span>
+</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>    <span class="n">mock_run</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span>
+</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>        <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">],</span>
+</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>        <span class="n">cwd</span><span class="o">=</span><span class="n">cli</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="tests.test_git_cli.TestEnsureGitConfig.test_skips_when_already_set" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">test_skips_when_already_set</span><span class="p">(</span><span class="n">mock_run</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>If git config returns a value, _ensure_git_config should not overwrite it.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>tests/test_git_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-191">191</a></span>
+<span class="normal"><a href="#__codelineno-0-192">192</a></span>
+<span class="normal"><a href="#__codelineno-0-193">193</a></span>
+<span class="normal"><a href="#__codelineno-0-194">194</a></span>
+<span class="normal"><a href="#__codelineno-0-195">195</a></span>
+<span class="normal"><a href="#__codelineno-0-196">196</a></span>
+<span class="normal"><a href="#__codelineno-0-197">197</a></span>
+<span class="normal"><a href="#__codelineno-0-198">198</a></span>
+<span class="normal"><a href="#__codelineno-0-199">199</a></span>
+<span class="normal"><a href="#__codelineno-0-200">200</a></span>
+<span class="normal"><a href="#__codelineno-0-201">201</a></span>
+<span class="normal"><a href="#__codelineno-0-202">202</a></span>
+<span class="normal"><a href="#__codelineno-0-203">203</a></span>
+<span class="normal"><a href="#__codelineno-0-204">204</a></span>
+<span class="normal"><a href="#__codelineno-0-205">205</a></span>
+<span class="normal"><a href="#__codelineno-0-206">206</a></span>
+<span class="normal"><a href="#__codelineno-0-207">207</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a><span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;subprocess.run&quot;</span><span class="p">)</span>
+</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_skips_when_already_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_run</span><span class="p">):</span>
+</span><span id="__span-0-193"><a id="__codelineno-0-193" name="__codelineno-0-193"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;If git config returns a value, _ensure_git_config should not overwrite it.&quot;&quot;&quot;</span>
+</span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="n">already_set</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">(</span>
+</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>        <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;Existing User</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>    <span class="p">)</span>
+</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>    <span class="n">mock_run</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">already_set</span>
+</span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>
+</span><span id="__span-0-199"><a id="__codelineno-0-199" name="__codelineno-0-199"></a>    <span class="n">cli</span> <span class="o">=</span> <span class="n">GitCLI</span><span class="p">(</span><span class="s2">&quot;/tmp/repo&quot;</span><span class="p">)</span>
+</span><span id="__span-0-200"><a id="__codelineno-0-200" name="__codelineno-0-200"></a>    <span class="n">cli</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">&quot;user.name&quot;</span><span class="p">,</span> <span class="s2">&quot;bot[bot]&quot;</span><span class="p">)</span>
+</span><span id="__span-0-201"><a id="__codelineno-0-201" name="__codelineno-0-201"></a>
+</span><span id="__span-0-202"><a id="__codelineno-0-202" name="__codelineno-0-202"></a>    <span class="n">mock_run</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+</span><span id="__span-0-203"><a id="__codelineno-0-203" name="__codelineno-0-203"></a>        <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;user.name&quot;</span><span class="p">],</span>
+</span><span id="__span-0-204"><a id="__codelineno-0-204" name="__codelineno-0-204"></a>        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-205"><a id="__codelineno-0-205" name="__codelineno-0-205"></a>        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-206"><a id="__codelineno-0-206" name="__codelineno-0-206"></a>        <span class="n">cwd</span><span class="o">=</span><span class="n">cli</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="__span-0-207"><a id="__codelineno-0-207" name="__codelineno-0-207"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
