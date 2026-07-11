@@ -165,6 +165,48 @@ class TestPushBranch:
         assert "permission denied" in exc_info.value.stderr
 
 
+class TestEnsureGitConfig:
+    @patch("subprocess.run")
+    def test_sets_config_when_missing(self, mock_run):
+        """If git config returns non-zero (unset), _ensure_git_config should set it."""
+        not_set = subprocess.CompletedProcess(
+            args=[], returncode=1, stdout="", stderr=""
+        )
+        set_ok = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout="", stderr=""
+        )
+        mock_run.side_effect = [not_set, set_ok]
+
+        cli = GitCLI("/tmp/repo")
+        cli._ensure_git_config("user.name", "bot[bot]")
+
+        assert mock_run.call_count == 2
+        mock_run.assert_called_with(
+            ["git", "config", "user.name", "bot[bot]"],
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
+        )
+
+    @patch("subprocess.run")
+    def test_skips_when_already_set(self, mock_run):
+        """If git config returns a value, _ensure_git_config should not overwrite it."""
+        already_set = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout="Existing User\n", stderr=""
+        )
+        mock_run.return_value = already_set
+
+        cli = GitCLI("/tmp/repo")
+        cli._ensure_git_config("user.name", "bot[bot]")
+
+        mock_run.assert_called_once_with(
+            ["git", "config", "user.name"],
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
+        )
+
+
 class TestCheckForChanges:
     @patch("subprocess.run")
     def test_no_changes(self, mock_run):
