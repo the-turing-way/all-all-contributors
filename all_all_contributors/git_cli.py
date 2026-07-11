@@ -42,3 +42,10 @@ class GitCLI:
         if not (self.repo_dir / ".git").is_dir():
             print("Error: target repository must be cloned locally before running this tool", file=sys.stderr)
             raise SystemExit(1)
+
+    def create_branch(self, head_branch: str, base_branch: str) -> None:
+        """Create a new branch, or switch to it if it already exists."""
+        try:
+            self._run("switch", "-c", head_branch, base_branch)
+        except GitCLIError:
+            self._run("switch", head_branch)
