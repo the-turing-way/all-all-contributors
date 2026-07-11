@@ -19,6 +19,7 @@ class TestCli:
         mock_git_cli_cls,
         runner,
         github_token,
+        tmp_path,
     ):
         """Happy path: list repos → collect contributors → merge → commit → push → PR"""
         # Set up GitCLI mock
@@ -93,6 +94,8 @@ class TestCli:
                 ".all-contributorsrc",
                 "main",
                 "merged-all-contributors",
+                "--repo-dir",
+                str(tmp_path),
             ],
         )
 
