@@ -117,7 +117,7 @@ class GitHubAPI:
             self.head_branch = match.split(":")[-1]
             self.pr_number = resp[indx]["number"]
             self.pr_exists = True
-        
+
         return self.pr_exists, self.head_branch
 
     def get_all_repos(self, excluded_repos: list) -> list:

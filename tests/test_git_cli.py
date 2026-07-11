@@ -23,7 +23,10 @@ class TestVerifyEnvironment:
     @patch("subprocess.run")
     def test_success(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
-            args=["git", "--version"], returncode=0, stdout="git version 2.40.0", stderr=""
+            args=["git", "--version"],
+            returncode=0,
+            stdout="git version 2.40.0",
+            stderr="",
         )
         cli = GitCLI(".")
         with patch.object(cli.repo_dir.__class__, "is_dir", return_value=True):
@@ -42,7 +45,10 @@ class TestVerifyEnvironment:
     @patch("subprocess.run")
     def test_missing_git_dir_raises_system_exit(self, mock_run, mock_is_dir):
         mock_run.return_value = subprocess.CompletedProcess(
-            args=["git", "--version"], returncode=0, stdout="git version 2.40.0", stderr=""
+            args=["git", "--version"],
+            returncode=0,
+            stdout="git version 2.40.0",
+            stderr="",
         )
         cli = GitCLI("/tmp/not-a-repo")
         with pytest.raises(SystemExit) as exc_info:
@@ -60,14 +66,20 @@ class TestCreateBranch:
         cli.create_branch("feature", "main")
         mock_run.assert_called_once_with(
             ["git", "switch", "-c", "feature", "main"],
-            capture_output=True, text=True, cwd=cli.repo_dir,
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
         )
 
     @patch("subprocess.run")
     def test_fallback_to_existing_branch(self, mock_run):
         """First call fails (branch exists), second call switches to it."""
-        fail = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="already exists")
-        success = subprocess.CompletedProcess(args=[], returncode=0, stdout="", stderr="")
+        fail = subprocess.CompletedProcess(
+            args=[], returncode=1, stdout="", stderr="already exists"
+        )
+        success = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout="", stderr=""
+        )
         mock_run.side_effect = [fail, success]
 
         cli = GitCLI("/tmp/repo")
@@ -76,12 +88,16 @@ class TestCreateBranch:
         assert mock_run.call_count == 2
         mock_run.assert_called_with(
             ["git", "switch", "feature"],
-            capture_output=True, text=True, cwd=cli.repo_dir,
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
         )
 
     @patch("subprocess.run")
     def test_both_fail_raises(self, mock_run):
-        fail = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="fatal")
+        fail = subprocess.CompletedProcess(
+            args=[], returncode=1, stdout="", stderr="fatal"
+        )
         mock_run.return_value = fail
 
         cli = GitCLI("/tmp/repo")
@@ -101,12 +117,21 @@ class TestCommitFile:
         assert mock_run.call_count == 2
         calls = mock_run.call_args_list
         assert calls[0][0][0] == ["git", "add", "README.md"]
-        assert calls[1][0][0] == ["git", "commit", "-m", "Merging all contributors info from across the org"]
+        assert calls[1][0][0] == [
+            "git",
+            "commit",
+            "-m",
+            "Merging all contributors info from across the org",
+        ]
 
     @patch("subprocess.run")
     def test_commit_failure_raises(self, mock_run):
-        success = subprocess.CompletedProcess(args=[], returncode=0, stdout="", stderr="")
-        fail = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="nothing to commit")
+        success = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout="", stderr=""
+        )
+        fail = subprocess.CompletedProcess(
+            args=[], returncode=1, stdout="", stderr="nothing to commit"
+        )
         mock_run.side_effect = [success, fail]
 
         cli = GitCLI("/tmp/repo")
@@ -124,7 +149,9 @@ class TestPushBranch:
         cli.push_branch("feature")
         mock_run.assert_called_once_with(
             ["git", "push", "--set-upstream", "--force", "origin", "feature"],
-            capture_output=True, text=True, cwd=cli.repo_dir,
+            capture_output=True,
+            text=True,
+            cwd=cli.repo_dir,
         )
 
     @patch("subprocess.run")

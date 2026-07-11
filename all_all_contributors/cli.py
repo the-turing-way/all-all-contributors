@@ -42,14 +42,16 @@ def load_excluded_repos() -> set:
     return set(excluded)
 
 
-def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributorsrc", full_file: bool = False) -> list[dict]:
-    """ Read in the target contributors file in the target repo.
+def read_contributors_file(
+    dirpath: str = ".", filename: str = ".all-contributorsrc", full_file: bool = False
+) -> list[dict]:
+    """Read in the target contributors file in the target repo.
 
     Args:
         dirpath (str): The directory path to the contributors file
         filename (str): The name of the contributors file
         full_file (bool): If True, return the full file contents. If False, return only the contributors list.
-    
+
     Returns:
         list[dict]: A list of contributor dictionaries
     Raises:
@@ -58,22 +60,25 @@ def read_contributors_file(dirpath: str = ".", filename: str = ".all-contributor
     filepath = Path(dirpath) / filename
 
     if not filepath.is_file():
-        print(f"Warning: {filepath} does not exist, returning empty list", file=sys.stderr)
+        print(
+            f"Warning: {filepath} does not exist, returning empty list", file=sys.stderr
+        )
         return []
-    
+
     try:
         with open(filepath) as f:
             contents = json.load(f)
     except json.JSONDecodeError as ex:
-        raise json.JSONDecodeError(
-            f"{filepath}: {ex.msg}", ex.doc, ex.pos
-        ) from ex
+        raise json.JSONDecodeError(f"{filepath}: {ex.msg}", ex.doc, ex.pos) from ex
 
     if full_file:
         return contents
 
     if "contributors" not in contents.keys():
-        print(f"Warning: {filepath} does not contain a 'contributors' key, returning empty list", file=sys.stderr)
+        print(
+            f"Warning: {filepath} does not contain a 'contributors' key, returning empty list",
+            file=sys.stderr,
+        )
         return []
 
     return contents["contributors"]
@@ -152,7 +157,7 @@ def main(
 
         aac_file_contents = read_contributors_file(full_file=True)
         updated_contents = inject_config(aac_file_contents, merged_contributors)
-        
+
         # Write updated file
         with open(target_filepath, "w") as f:
             json.dump(updated_contents, f, indent=2)
@@ -160,7 +165,7 @@ def main(
         if not git_cli.check_for_changes():
             print("No changes to commit.")
             raise typer.Exit(code=0)
-    
+
         git_cli.commit_file(target_filepath)
         git_cli.push_branch(github_api.head_branch)
         github_api.create_update_pull_request()
