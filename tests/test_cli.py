@@ -9,6 +9,8 @@ class TestCli:
         assert result.exit_code == 1
         assert "Environment variable INPUT_GITHUB_TOKEN is not defined" in result.stdout
 
+    @patch("all_all_contributors.cli.run_all_contributors_generate")
+    @patch("all_all_contributors.cli.verify_all_contributors_environment")
     @patch("all_all_contributors.cli.GitCLI")
     @patch("all_all_contributors.cli.GitHubAPI")
     @patch("all_all_contributors.cli.read_contributors_file")
@@ -17,6 +19,8 @@ class TestCli:
         mock_read_contributors,
         mock_github_api_cls,
         mock_git_cli_cls,
+        mock_verify_env,
+        mock_run_generate,
         runner,
         github_token,
         tmp_path,
@@ -114,6 +118,7 @@ class TestCli:
         mock_api.get_all_repos.assert_called_once()
         mock_api.create_update_pull_request.assert_called_once()
 
+    @patch("all_all_contributors.cli.verify_all_contributors_environment")
     @patch("all_all_contributors.cli.GitCLI")
     @patch("all_all_contributors.cli.GitHubAPI")
     @patch("all_all_contributors.cli.read_contributors_file")
@@ -122,6 +127,7 @@ class TestCli:
         mock_read_contributors,
         mock_github_api_cls,
         mock_git_cli_cls,
+        mock_verify_env,
         runner,
         github_token,
     ):
