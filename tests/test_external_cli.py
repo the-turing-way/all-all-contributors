@@ -3,7 +3,12 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from all_all_contributors.git_cli import GitCLI, GitCLIError
+from all_all_contributors.external_cli import (
+    GitCLI,
+    ExternalCLIError,
+    run_all_contributors_generate,
+    verify_all_contributors_environment,
+)
 
 
 class TestRun:
@@ -13,9 +18,9 @@ class TestRun:
             args=["git", "status"], returncode=1, stdout="", stderr="something broke"
         )
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             cli._run("status")
-        assert exc_info.value.command == "status"
+        assert exc_info.value.command == "git status"
         assert exc_info.value.stderr == "something broke"
 
 
@@ -123,22 +128,22 @@ class TestCreateBranch:
         mock_run.return_value = fail
 
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError):
+        with pytest.raises(ExternalCLIError):
             cli.create_branch("feature", "main")
 
 
-class TestCommitFile:
+class TestCommitFiles:
     @patch("subprocess.run")
     def test_successful_commit(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        cli.commit_file("README.md")  # should not raise
+        cli.commit_files(["README.md", "src/app.py"])  # should not raise
 
         assert mock_run.call_count == 2
         calls = mock_run.call_args_list
-        assert calls[0][0][0] == ["git", "add", "README.md"]
+        assert calls[0][0][0] == ["git", "add", "README.md", "src/app.py"]
         assert calls[1][0][0] == [
             "git",
             "commit",
@@ -157,8 +162,8 @@ class TestCommitFile:
         mock_run.side_effect = [success, fail]
 
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError):
-            cli.commit_file("README.md")
+        with pytest.raises(ExternalCLIError):
+            cli.commit_files(["README.md"])
 
 
 class TestPushBranch:
@@ -182,7 +187,7 @@ class TestPushBranch:
             args=[], returncode=1, stdout="", stderr="permission denied"
         )
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             cli.push_branch("feature")
         assert "permission denied" in exc_info.value.stderr
 
@@ -236,12 +241,58 @@ class TestCheckForChanges:
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        assert cli.check_for_changes() is False
+        assert cli.check_for_changes() == []
 
     @patch("subprocess.run")
     def test_has_changes(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
-            args=[], returncode=1, stdout="", stderr=""
+            args=[], returncode=0, stdout="README.md\nsrc/app.py\n", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        assert cli.check_for_changes() is True
+        assert cli.check_for_changes() == ["README.md", "src/app.py"]
+
+
+class TestRunAllContributorsGenerate:
+    @patch("subprocess.run")
+    def test_success(self, mock_run):
+        mock_run.return_value = subprocess.CompletedProcess(
+            args=["all-contributors", "generate"],
+            returncode=0,
+            stdout="",
+            stderr="",
+        )
+        run_all_contributors_generate("/tmp/repo")  # should not raise
+
+    @patch("shutil.which", return_value=None)
+    def test_not_on_path(self, mock_which):
+        with pytest.raises(ExternalCLIError) as exc_info:
+            verify_all_contributors_environment()
+        assert "not installed" in exc_info.value.stderr
+
+    @patch("os.access", return_value=False)
+    @patch("shutil.which", return_value="/usr/local/bin/all-contributors")
+    def test_not_executable(self, mock_which, mock_access):
+        with pytest.raises(ExternalCLIError) as exc_info:
+            verify_all_contributors_environment()
+        assert "execute permissions" in exc_info.value.stderr
+
+    @patch("subprocess.run")
+    def test_failure_with_stderr(self, mock_run):
+        mock_run.return_value = subprocess.CompletedProcess(
+            args=["all-contributors", "generate"],
+            returncode=1,
+            stdout="",
+            stderr="Error: no config file found",
+        )
+        with pytest.raises(ExternalCLIError) as exc_info:
+            run_all_contributors_generate("/tmp/repo")
+        assert "no config file found" in exc_info.value.stderr
+
+    @patch(
+        "subprocess.run",
+        side_effect=subprocess.TimeoutExpired("all-contributors", 30),
+    )
+    def test_timeout(self, mock_run):
+        with pytest.raises(ExternalCLIError) as exc_info:
+            run_all_contributors_generate("/tmp/repo")
+        assert "timed out" in exc_info.value.stderr
