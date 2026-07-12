@@ -241,15 +241,15 @@ class TestCheckForChanges:
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        assert cli.check_for_changes() is False
+        assert cli.check_for_changes() == []
 
     @patch("subprocess.run")
     def test_has_changes(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
-            args=[], returncode=1, stdout="", stderr=""
+            args=[], returncode=0, stdout="README.md\nsrc/app.py\n", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        assert cli.check_for_changes() is True
+        assert cli.check_for_changes() == ["README.md", "src/app.py"]
 
 
 class TestRunAllContributorsGenerate:

@@ -86,15 +86,10 @@ class GitCLI:
                 # Branch already exists locally
                 self._run("switch", head_branch)
 
-    def check_for_changes(self) -> bool:
-        """Return True if there are unstaged changes."""
-        result = subprocess.run(
-            ["git", "diff", "--quiet"],
-            capture_output=True,
-            text=True,
-            cwd=self.repo_dir,
-        )
-        return result.returncode != 0
+    def check_for_changes(self) -> list[str]:
+        """Return list of files with unstaged changes (empty list means no changes)."""
+        result = self._run("diff", "--name-only")
+        return [f for f in result.stdout.splitlines() if f]
 
     def commit_file(
         self,
