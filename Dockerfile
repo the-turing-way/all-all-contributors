@@ -23,11 +23,8 @@ WORKDIR /app
 # Copy repository contents into the working directory
 COPY . /app
 
-# Update pip
-RUN pip install -U pip
-
-# Install package
-RUN pip install .
+# Update pip and install package
+RUN pip install -U pip && pip install .
 
 # Set entrypoint
 ENTRYPOINT ["all-all-contributors"]
