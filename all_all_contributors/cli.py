@@ -8,7 +8,7 @@ from typing import Annotated
 import typer
 import requests
 
-from .git_cli import GitCLI, GitCLIError
+from .git_cli import GitCLI, GitCLIError, verify_all_contributors_environment, run_all_contributors_generate
 from .github_api import GitHubAPI
 from .inject import inject_config
 from .merge import merge_contributors
@@ -135,6 +135,7 @@ def main(
 
     git_cli = GitCLI(repo_dir=repo_dir)
     git_cli.verify_environment()
+    verify_all_contributors_environment()
 
     github_api = GitHubAPI(
         organisation,
@@ -170,6 +171,8 @@ def main(
         output_path = Path(repo_dir) / target_filepath
         with open(output_path, "w") as f:
             json.dump(updated_contents, f, indent=2)
+
+        run_all_contributors_generate(repo_dir=repo_dir)
 
         if not git_cli.check_for_changes():
             print("No changes to commit.")
