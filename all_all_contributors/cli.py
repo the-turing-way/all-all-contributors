@@ -148,6 +148,7 @@ def main(
         github_token,
         target_filepath=target_filepath,
         base_branch=base_branch,
+        head_branch=head_branch,
     )
 
     try:
