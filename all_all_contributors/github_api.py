@@ -99,7 +99,7 @@ class GitHubAPI:
             (
                 (indx, match)
                 for (indx, match) in enumerate(matches)
-                if self.head_branch in match
+                if match.split(":")[-1].startswith(self.head_branch)
             ),
             (None, None),
         )
