@@ -175,12 +175,12 @@ class TestCli:
         github_token,
     ):
         """Req 8.5: GitCLI fatal error → non-zero exit"""
-        from all_all_contributors.git_cli import GitCLIError
+        from all_all_contributors.external_cli import ExternalCLIError
 
         mock_git = MagicMock()
         mock_git_cli_cls.return_value = mock_git
-        mock_git.create_branch.side_effect = GitCLIError(
-            "switch -c branch main", "fatal: not a git repository"
+        mock_git.create_branch.side_effect = ExternalCLIError(
+            "git switch -c branch main", "fatal: not a git repository"
         )
 
         mock_api = MagicMock()

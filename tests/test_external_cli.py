@@ -3,9 +3,9 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from all_all_contributors.git_cli import (
+from all_all_contributors.external_cli import (
     GitCLI,
-    GitCLIError,
+    ExternalCLIError,
     run_all_contributors_generate,
     verify_all_contributors_environment,
 )
@@ -18,9 +18,9 @@ class TestRun:
             args=["git", "status"], returncode=1, stdout="", stderr="something broke"
         )
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             cli._run("status")
-        assert exc_info.value.command == "status"
+        assert exc_info.value.command == "git status"
         assert exc_info.value.stderr == "something broke"
 
 
@@ -128,7 +128,7 @@ class TestCreateBranch:
         mock_run.return_value = fail
 
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError):
+        with pytest.raises(ExternalCLIError):
             cli.create_branch("feature", "main")
 
 
@@ -162,7 +162,7 @@ class TestCommitFile:
         mock_run.side_effect = [success, fail]
 
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError):
+        with pytest.raises(ExternalCLIError):
             cli.commit_file("README.md")
 
 
@@ -187,7 +187,7 @@ class TestPushBranch:
             args=[], returncode=1, stdout="", stderr="permission denied"
         )
         cli = GitCLI("/tmp/repo")
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             cli.push_branch("feature")
         assert "permission denied" in exc_info.value.stderr
 
@@ -265,14 +265,14 @@ class TestRunAllContributorsGenerate:
 
     @patch("shutil.which", return_value=None)
     def test_not_on_path(self, mock_which):
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             verify_all_contributors_environment()
         assert "not installed" in exc_info.value.stderr
 
     @patch("os.access", return_value=False)
     @patch("shutil.which", return_value="/usr/local/bin/all-contributors")
     def test_not_executable(self, mock_which, mock_access):
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             verify_all_contributors_environment()
         assert "execute permissions" in exc_info.value.stderr
 
@@ -284,7 +284,7 @@ class TestRunAllContributorsGenerate:
             stdout="",
             stderr="Error: no config file found",
         )
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             run_all_contributors_generate("/tmp/repo")
         assert "no config file found" in exc_info.value.stderr
 
@@ -293,6 +293,6 @@ class TestRunAllContributorsGenerate:
         side_effect=subprocess.TimeoutExpired("all-contributors", 30),
     )
     def test_timeout(self, mock_run):
-        with pytest.raises(GitCLIError) as exc_info:
+        with pytest.raises(ExternalCLIError) as exc_info:
             run_all_contributors_generate("/tmp/repo")
         assert "timed out" in exc_info.value.stderr

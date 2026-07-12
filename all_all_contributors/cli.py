@@ -8,7 +8,7 @@ from typing import Annotated
 import typer
 import requests
 
-from .git_cli import GitCLI, GitCLIError, verify_all_contributors_environment, run_all_contributors_generate
+from .external_cli import GitCLI, ExternalCLIError, verify_all_contributors_environment, run_all_contributors_generate
 from .github_api import GitHubAPI
 from .inject import inject_config
 from .merge import merge_contributors
@@ -182,8 +182,8 @@ def main(
         git_cli.push_branch(github_api.head_branch)
         github_api.create_update_pull_request()
 
-    except GitCLIError as e:
-        print(f"Git error: {e}", file=sys.stderr)
+    except ExternalCLIError as e:
+        print(f"External CLI error: {e}", file=sys.stderr)
         raise typer.Exit(code=1)
     except requests.HTTPError as e:
         print(f"GitHub API error: {e}", file=sys.stderr)

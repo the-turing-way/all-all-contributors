@@ -5,13 +5,13 @@ import sys
 from pathlib import Path
 
 
-class GitCLIError(Exception):
-    """Raised when a git subprocess exits non-zero."""
+class ExternalCLIError(Exception):
+    """Raised when an external CLI subprocess exits non-zero."""
 
     def __init__(self, command: str, stderr: str):
         self.command = command
         self.stderr = stderr
-        super().__init__(f"git {command} failed: {stderr}")
+        super().__init__(f"{command} failed: {stderr}")
 
 
 class GitCLI:
@@ -21,7 +21,7 @@ class GitCLI:
         self.repo_dir = Path(repo_dir)
 
     def _run(self, *args: str) -> subprocess.CompletedProcess:
-        """Run a git command, raise GitCLIError on non-zero exit."""
+        """Run a git command, raise ExternalCLIError on non-zero exit."""
         result = subprocess.run(
             ["git", *args],
             capture_output=True,
@@ -30,7 +30,7 @@ class GitCLI:
         )
 
         if result.returncode != 0:
-            raise GitCLIError(" ".join(args), result.stderr.strip())
+            raise ExternalCLIError(f"git {' '.join(args)}", result.stderr.strip())
 
         return result
 
@@ -78,11 +78,11 @@ class GitCLI:
         """Create a new branch from base_branch, or switch to it if it already exists."""
         try:
             self._run("switch", "-c", head_branch, base_branch)
-        except GitCLIError:
+        except ExternalCLIError:
             # base_branch ref may not exist in shallow clones; try from HEAD
             try:
                 self._run("switch", "-c", head_branch)
-            except GitCLIError:
+            except ExternalCLIError:
                 # Branch already exists locally
                 self._run("switch", head_branch)
 
@@ -116,19 +116,19 @@ class GitCLI:
 def verify_all_contributors_environment() -> None:
     """Checks the binary is on PATH and executable first.
 
-    Raises GitCLIError on any failure.
+    Raises ExternalCLIError on any failure.
     """
     path = shutil.which("all-contributors")
     if path is None:
-        raise GitCLIError("", "all-contributors is not installed or not on PATH")
+        raise ExternalCLIError("which all-contributors", "all-contributors is not installed or not on PATH")
     if not os.access(path, os.X_OK):
-        raise GitCLIError("", f"all-contributors lacks execute permissions: {path}")
+        raise ExternalCLIError("", f"all-contributors lacks execute permissions: {path}")
 
 
 def run_all_contributors_generate(repo_dir: str = ".") -> None:
     """Run `all-contributors generate` in repo_dir.
 
-    Raises GitCLIError on any failure.
+    Raises ExternalCLIError on any failure.
     """
     try:
         result = subprocess.run(
@@ -139,10 +139,10 @@ def run_all_contributors_generate(repo_dir: str = ".") -> None:
             timeout=30,
         )
     except subprocess.TimeoutExpired:
-        raise GitCLIError(
-            "generate", "all-contributors generate timed out after 30 seconds"
+        raise ExternalCLIError(
+            "all-contributors generate", "all-contributors generate timed out after 30 seconds"
         )
 
     if result.returncode != 0:
         detail = result.stderr.strip() or f"exit code {result.returncode}"
-        raise GitCLIError("generate", f"all-contributors generate failed: {detail}")
+        raise ExternalCLIError("all-contributors generate", f"all-contributors generate failed: {detail}")
