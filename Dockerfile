@@ -1,6 +1,7 @@
 # Stage 1: Install all-contributors-cli
 FROM node:22-slim AS builder
-RUN npm install -g all-contributors-cli
+ARG ALL_CONTRIBUTORS_VERSION=6.26.1
+RUN npm install -g all-contributors-cli@${ALL_CONTRIBUTORS_VERSION}
 
 # Stage 2: Python runtime
 FROM python:3.14.6-slim
