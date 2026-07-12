@@ -120,9 +120,13 @@ def verify_all_contributors_environment() -> None:
     """
     path = shutil.which("all-contributors")
     if path is None:
-        raise ExternalCLIError("which all-contributors", "all-contributors is not installed or not on PATH")
+        raise ExternalCLIError(
+            "which all-contributors", "all-contributors is not installed or not on PATH"
+        )
     if not os.access(path, os.X_OK):
-        raise ExternalCLIError("", f"all-contributors lacks execute permissions: {path}")
+        raise ExternalCLIError(
+            "", f"all-contributors lacks execute permissions: {path}"
+        )
 
 
 def run_all_contributors_generate(repo_dir: str = ".") -> None:
@@ -140,9 +144,12 @@ def run_all_contributors_generate(repo_dir: str = ".") -> None:
         )
     except subprocess.TimeoutExpired:
         raise ExternalCLIError(
-            "all-contributors generate", "all-contributors generate timed out after 30 seconds"
+            "all-contributors generate",
+            "all-contributors generate timed out after 30 seconds",
         )
 
     if result.returncode != 0:
         detail = result.stderr.strip() or f"exit code {result.returncode}"
-        raise ExternalCLIError("all-contributors generate", f"all-contributors generate failed: {detail}")
+        raise ExternalCLIError(
+            "all-contributors generate", f"all-contributors generate failed: {detail}"
+        )

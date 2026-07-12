@@ -8,7 +8,12 @@ from typing import Annotated
 import typer
 import requests
 
-from .external_cli import GitCLI, ExternalCLIError, verify_all_contributors_environment, run_all_contributors_generate
+from .external_cli import (
+    GitCLI,
+    ExternalCLIError,
+    verify_all_contributors_environment,
+    run_all_contributors_generate,
+)
 from .github_api import GitHubAPI
 from .inject import inject_config
 from .merge import merge_contributors
