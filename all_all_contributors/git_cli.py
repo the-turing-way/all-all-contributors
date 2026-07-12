@@ -124,3 +124,25 @@ def verify_all_contributors_environment() -> None:
     if not os.access(path, os.X_OK):
         raise GitCLIError("", f"all-contributors lacks execute permissions: {path}")
 
+
+def run_all_contributors_generate(repo_dir: str = ".") -> None:
+    """Run `all-contributors generate` in repo_dir.
+
+    Raises GitCLIError on any failure.
+    """
+    try:
+        result = subprocess.run(
+            ["all-contributors", "generate"],
+            capture_output=True,
+            text=True,
+            cwd=repo_dir,
+            timeout=30,
+        )
+    except subprocess.TimeoutExpired:
+        raise GitCLIError(
+            "generate", "all-contributors generate timed out after 30 seconds"
+        )
+
+    if result.returncode != 0:
+        detail = result.stderr.strip() or f"exit code {result.returncode}"
+        raise GitCLIError("generate", f"all-contributors generate failed: {detail}")
