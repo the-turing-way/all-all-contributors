@@ -179,11 +179,12 @@ def main(
 
         run_all_contributors_generate(repo_dir=repo_dir)
 
-        if not git_cli.check_for_changes():
+        changed_files = git_cli.check_for_changes()
+        if not changed_files:
             print("No changes to commit.")
             raise typer.Exit(code=0)
 
-        git_cli.commit_file(target_filepath)
+        git_cli.commit_files(changed_files)
         git_cli.push_branch(github_api.head_branch)
         github_api.create_update_pull_request()
 

@@ -29,7 +29,7 @@ class TestCli:
         # Set up GitCLI mock
         mock_git = MagicMock()
         mock_git_cli_cls.return_value = mock_git
-        mock_git.check_for_changes.return_value = True
+        mock_git.check_for_changes.return_value = [".all-contributorsrc"]
 
         # Set up GitHubAPI mock
         mock_api = MagicMock()
@@ -110,7 +110,7 @@ class TestCli:
         mock_git.create_branch.assert_called_once_with(
             "merged-all-contributors/abcd", "main"
         )
-        mock_git.commit_file.assert_called_once_with(".all-contributorsrc")
+        mock_git.commit_files.assert_called_once_with([".all-contributorsrc"])
         mock_git.push_branch.assert_called_once_with("merged-all-contributors/abcd")
 
         # Verify GitHub API orchestration
@@ -159,7 +159,7 @@ class TestCli:
         )
 
         assert result.exit_code == 0
-        mock_git.commit_file.assert_not_called()
+        mock_git.commit_files.assert_not_called()
         mock_git.push_branch.assert_not_called()
         mock_api.create_update_pull_request.assert_not_called()
 

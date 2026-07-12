@@ -132,18 +132,18 @@ class TestCreateBranch:
             cli.create_branch("feature", "main")
 
 
-class TestCommitFile:
+class TestCommitFiles:
     @patch("subprocess.run")
     def test_successful_commit(self, mock_run):
         mock_run.return_value = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="", stderr=""
         )
         cli = GitCLI("/tmp/repo")
-        cli.commit_file("README.md")  # should not raise
+        cli.commit_files(["README.md", "src/app.py"])  # should not raise
 
         assert mock_run.call_count == 2
         calls = mock_run.call_args_list
-        assert calls[0][0][0] == ["git", "add", "README.md"]
+        assert calls[0][0][0] == ["git", "add", "README.md", "src/app.py"]
         assert calls[1][0][0] == [
             "git",
             "commit",
@@ -163,7 +163,7 @@ class TestCommitFile:
 
         cli = GitCLI("/tmp/repo")
         with pytest.raises(ExternalCLIError):
-            cli.commit_file("README.md")
+            cli.commit_files(["README.md"])
 
 
 class TestPushBranch:

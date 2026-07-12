@@ -91,12 +91,12 @@ class GitCLI:
         result = self._run("diff", "--name-only")
         return [f for f in result.stdout.splitlines() if f]
 
-    def commit_file(
+    def commit_files(
         self,
-        filepath: str,
+        filepaths: list[str],
         message: str = "Merging all contributors info from across the org",
     ) -> None:
-        self._run("add", filepath)
+        self._run("add", *filepaths)
         self._run("commit", "-m", message)
 
     def push_branch(self, branch_name: str) -> None:
