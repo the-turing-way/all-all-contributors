@@ -1,3 +1,5 @@
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -109,3 +111,16 @@ class GitCLI:
         existing remote branches in one call.
         """
         self._run("push", "--set-upstream", "--force", "origin", branch_name)
+
+
+def verify_all_contributors_environment() -> None:
+    """Checks the binary is on PATH and executable first.
+
+    Raises GitCLIError on any failure.
+    """
+    path = shutil.which("all-contributors")
+    if path is None:
+        raise GitCLIError("", "all-contributors is not installed or not on PATH")
+    if not os.access(path, os.X_OK):
+        raise GitCLIError("", f"all-contributors lacks execute permissions: {path}")
+
