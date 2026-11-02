@@ -4,7 +4,7 @@ ARG ALL_CONTRIBUTORS_VERSION=6.26.1
 RUN npm install -g all-contributors-cli@${ALL_CONTRIBUTORS_VERSION}
 
 # Stage 2: Python runtime
-FROM python:3.14.6-slim
+FROM python:3.15.0-slim
 
 # Copy node binary + all-contributors artifacts from builder
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node
