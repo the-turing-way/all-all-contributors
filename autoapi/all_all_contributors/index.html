@@ -575,6 +575,34 @@
   
   
     <li class="md-nav__item">
+      <a href="external_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    external_cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="git_cli/" class="md-nav__link">
         
   
@@ -854,6 +882,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../tests/test_external_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_external_cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tests/test_git_cli/" class="md-nav__link">
         
   
@@ -1104,6 +1160,117 @@
     <span class="md-ellipsis">
       
         read_contributors_file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        external_cli
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="external_cli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.ExternalCLIError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExternalCLIError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.GitCLI" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitCLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GitCLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.GitCLI.check_for_changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        check_for_changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.GitCLI.create_branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.GitCLI.push_branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        push_branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.GitCLI.verify_environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        verify_environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.run_all_contributors_generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_all_contributors_generate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all_all_contributors.external_cli.verify_all_contributors_environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        verify_all_contributors_environment
       
     </span>
   </a>
@@ -1552,19 +1719,19 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>all_all_contributors/cli.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.get_github_token--source--__span-0-19"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-19" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_github_token</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-20"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-20" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-20"></a><span class="w">    </span><span class="sd">"""Read a GitHub token from the environment"""</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-21"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-21" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-21"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">"INPUT_GITHUB_TOKEN"</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-22"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-22" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-22"></a>    <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-23"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-23" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-23"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"Environment variable INPUT_GITHUB_TOKEN is not defined"</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-24"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-24" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-24"></a>        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-25"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-25" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-25"></a>    <span class="k">return</span> <span class="n">token</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.get_github_token--source--__codelineno-0-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.get_github_token--source--__span-0-24"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-24" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_github_token</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-25"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-25" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-25"></a><span class="w">    </span><span class="sd">"""Read a GitHub token from the environment"""</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-26"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-26" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-26"></a>    <span class="n">token</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">"INPUT_GITHUB_TOKEN"</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-27"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-27" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-27"></a>    <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-28"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-28" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-28"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"Environment variable INPUT_GITHUB_TOKEN is not defined"</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-29"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-29" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-29"></a>        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.get_github_token--source--__span-0-30"><a id="all_all_contributors.cli.get_github_token--source--__codelineno-0-30" name="all_all_contributors.cli.get_github_token--source--__codelineno-0-30"></a>    <span class="k">return</span> <span class="n">token</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1610,12 +1777,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>all_all_contributors/cli.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33">33</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33">33</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-34">34</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-35">35</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-36">36</a></span>
@@ -1624,21 +1786,26 @@
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-39">39</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-40">40</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-28"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-28" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_excluded_repos</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-29"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-29" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-29"></a><span class="w">    </span><span class="sd">"""Load excluded repositories from a file</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-30"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-30" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-30"></a>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-31"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-31" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-31"></a><span class="sd">    Returns:</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-32"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-32" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-32"></a><span class="sd">        set: A set of excluded repository names</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-33"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33"></a><span class="sd">    """</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-34"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-34" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-34"></a>    <span class="n">ignore_file</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">"INPUT_IGNORE_FILE"</span><span class="p">,</span> <span class="s2">".repoignore"</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-35"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-35" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-35"></a>    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">):</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-36"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-36" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-36"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-37"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-37" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-37"></a>            <span class="n">excluded</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-38"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-38" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-38"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-39"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-39" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-39"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[skipping] No file found: </span><span class="si">{</span><span class="n">ignore_file</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-40"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-40" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-40"></a>        <span class="n">excluded</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-41"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-41" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-41"></a>
-</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-42"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42"></a>    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-33"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-33"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_excluded_repos</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-34"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-34" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-34"></a><span class="w">    </span><span class="sd">"""Load excluded repositories from a file</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-35"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-35" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-35"></a>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-36"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-36" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-36"></a><span class="sd">    Returns:</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-37"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-37" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-37"></a><span class="sd">        set: A set of excluded repository names</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-38"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-38" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-38"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-39"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-39" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-39"></a>    <span class="n">ignore_file</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">"INPUT_IGNORE_FILE"</span><span class="p">,</span> <span class="s2">".repoignore"</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-40"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-40" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-40"></a>    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">):</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-41"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-41" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-41"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ignore_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-42"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-42"></a>            <span class="n">excluded</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-43"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-43" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-43"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-44"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-44" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-44"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[skipping] No file found: </span><span class="si">{</span><span class="n">ignore_file</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-45"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-45" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-45"></a>        <span class="n">excluded</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-46"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-46" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-46"></a>
+</span><span id="all_all_contributors.cli.load_excluded_repos--source--__span-0-47"><a id="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-47" name="all_all_contributors.cli.load_excluded_repos--source--__codelineno-0-47"></a>    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1749,12 +1916,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>all_all_contributors/cli.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50">50</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50">50</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-51">51</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-52">52</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-53">53</a></span>
@@ -1788,46 +1950,695 @@
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-81">81</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-82">82</a></span>
 <span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-83">83</a></span>
-<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84">84</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-45"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-45" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-45"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_contributors_file</span><span class="p">(</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-46"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-46" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-46"></a>    <span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">".all-contributorsrc"</span><span class="p">,</span> <span class="n">full_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-47"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-47" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-47"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-48"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-48" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-48"></a><span class="w">    </span><span class="sd">"""Read in the target contributors file in the target repo.</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-49"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-49" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-49"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-50"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50"></a><span class="sd">    Args:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-51"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-51" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-51"></a><span class="sd">        dirpath (str): The directory path to the contributors file</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-52"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-52" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-52"></a><span class="sd">        filename (str): The name of the contributors file</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-53"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-53" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-53"></a><span class="sd">        full_file (bool): If True, return the full file contents. If False, return only the contributors list.</span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#all_all_contributors.cli.read_contributors_file--source--__codelineno-0-89">89</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-50"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_contributors_file</span><span class="p">(</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-51"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-51" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-51"></a>    <span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">".all-contributorsrc"</span><span class="p">,</span> <span class="n">full_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-52"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-52" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-52"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-53"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-53" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-53"></a><span class="w">    </span><span class="sd">"""Read in the target contributors file in the target repo.</span>
 </span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-54"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-54" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-54"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-55"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-55" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-55"></a><span class="sd">    Returns:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-56"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-56" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-56"></a><span class="sd">        list[dict]: A list of contributor dictionaries</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-57"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-57" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-57"></a><span class="sd">    Raises:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-58"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-58" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-58"></a><span class="sd">        json.JSONDecodeError: If the file is not valid JSON</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-59"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-59" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-59"></a><span class="sd">    """</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-60"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-60" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-60"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">filename</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-61"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-61" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-61"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-62"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-62" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-62"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-63"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-63" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-63"></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-64"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-64" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-64"></a>            <span class="sa">f</span><span class="s2">"Warning: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2"> does not exist, returning empty list"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-65"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-65" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-65"></a>        <span class="p">)</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-66"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-66" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-66"></a>        <span class="k">return</span> <span class="p">[]</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-67"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-67" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-67"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-68"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-68" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-68"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-69"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-69" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-69"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-70"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-70" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-70"></a>            <span class="n">contents</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-71"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-71" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-71"></a>    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-72"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-72" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-72"></a>        <span class="k">raise</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ex</span><span class="o">.</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">doc</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">ex</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-73"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-73" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-73"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-74"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-74" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-74"></a>    <span class="k">if</span> <span class="n">full_file</span><span class="p">:</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-75"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-75" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-75"></a>        <span class="k">return</span> <span class="n">contents</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-76"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-76" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-76"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-77"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-77" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-77"></a>    <span class="k">if</span> <span class="s2">"contributors"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">contents</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-78"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-78" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-78"></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-79"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-79" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-79"></a>            <span class="sa">f</span><span class="s2">"Warning: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2"> does not contain a 'contributors' key, returning empty list"</span><span class="p">,</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-80"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-80" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-80"></a>            <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-81"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-81" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-81"></a>        <span class="p">)</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-82"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-82" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-82"></a>        <span class="k">return</span> <span class="p">[]</span>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-83"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-83" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-83"></a>
-</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-84"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84"></a>    <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="s2">"contributors"</span><span class="p">]</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-55"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-55" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-55"></a><span class="sd">    Args:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-56"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-56" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-56"></a><span class="sd">        dirpath (str): The directory path to the contributors file</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-57"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-57" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-57"></a><span class="sd">        filename (str): The name of the contributors file</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-58"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-58" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-58"></a><span class="sd">        full_file (bool): If True, return the full file contents. If False, return only the contributors list.</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-59"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-59" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-59"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-60"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-60" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-60"></a><span class="sd">    Returns:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-61"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-61" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-61"></a><span class="sd">        list[dict]: A list of contributor dictionaries</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-62"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-62" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-62"></a><span class="sd">    Raises:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-63"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-63" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-63"></a><span class="sd">        json.JSONDecodeError: If the file is not valid JSON</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-64"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-64" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-64"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-65"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-65" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-65"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">filename</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-66"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-66" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-66"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-67"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-67" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-67"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-68"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-68" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-68"></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-69"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-69" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-69"></a>            <span class="sa">f</span><span class="s2">"Warning: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2"> does not exist, returning empty list"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-70"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-70" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-70"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-71"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-71" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-71"></a>        <span class="k">return</span> <span class="p">[]</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-72"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-72" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-72"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-73"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-73" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-73"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-74"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-74" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-74"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-75"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-75" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-75"></a>            <span class="n">contents</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-76"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-76" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-76"></a>    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-77"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-77" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-77"></a>        <span class="k">raise</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ex</span><span class="o">.</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">doc</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">ex</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-78"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-78" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-78"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-79"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-79" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-79"></a>    <span class="k">if</span> <span class="n">full_file</span><span class="p">:</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-80"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-80" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-80"></a>        <span class="k">return</span> <span class="n">contents</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-81"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-81" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-81"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-82"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-82" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-82"></a>    <span class="k">if</span> <span class="s2">"contributors"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">contents</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-83"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-83" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-83"></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-84"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-84"></a>            <span class="sa">f</span><span class="s2">"Warning: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2"> does not contain a 'contributors' key, returning empty list"</span><span class="p">,</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-85"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-85" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-85"></a>            <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-86"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-86" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-86"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-87"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-87" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-87"></a>        <span class="k">return</span> <span class="p">[]</span>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-88"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-88" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-88"></a>
+</span><span id="all_all_contributors.cli.read_contributors_file--source--__span-0-89"><a id="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-89" name="all_all_contributors.cli.read_contributors_file--source--__codelineno-0-89"></a>    <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="s2">"contributors"</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="all_all_contributors.external_cli" class="doc doc-heading">
+            <code>external_cli</code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="all_all_contributors.external_cli.ExternalCLIError" class="doc doc-heading">
+            <code>ExternalCLIError</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Raised when an external CLI subprocess exits non-zero.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-8"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-8" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExternalCLIError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-9"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-9" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-9"></a><span class="w">    </span><span class="sd">"""Raised when an external CLI subprocess exits non-zero."""</span>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-10"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-10" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-10"></a>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-11"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-11" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-11"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stderr</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-12"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-12" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="n">command</span>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-13"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-13" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">stderr</span>
+</span><span id="all_all_contributors.external_cli.ExternalCLIError--source--__span-0-14"><a id="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-14" name="all_all_contributors.external_cli.ExternalCLIError--source--__codelineno-0-14"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="all_all_contributors.external_cli.GitCLI" class="doc doc-heading">
+            <code>GitCLI</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Thin wrapper around local git CLI commands.</p>
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-17"> 17</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-18"> 18</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-19"> 19</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-20"> 20</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-21"> 21</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-22"> 22</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-23"> 23</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-24"> 24</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-25"> 25</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-26"> 26</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-27"> 27</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-28"> 28</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-29"> 29</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-30"> 30</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-31"> 31</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-32"> 32</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-33"> 33</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-34"> 34</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-35"> 35</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-36"> 36</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-37"> 37</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-38"> 38</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-39"> 39</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-40"> 40</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-41"> 41</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-42"> 42</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-43"> 43</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-44"> 44</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-45"> 45</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-46"> 46</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-47"> 47</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-48"> 48</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-49"> 49</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-50"> 50</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-51"> 51</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-52"> 52</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-53"> 53</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-54"> 54</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-55"> 55</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-56"> 56</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-57"> 57</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-58"> 58</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-59"> 59</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-60"> 60</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-61"> 61</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-62"> 62</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-63"> 63</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-64"> 64</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-65"> 65</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-66"> 66</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-67"> 67</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-68"> 68</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-69"> 69</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-70"> 70</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-71"> 71</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-72"> 72</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-73"> 73</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-74"> 74</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-75"> 75</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-76"> 76</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-77"> 77</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-78"> 78</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-79"> 79</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-80"> 80</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-81"> 81</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-82"> 82</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-83"> 83</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-84"> 84</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-85"> 85</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-86"> 86</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-87"> 87</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-88"> 88</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-89"> 89</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-90"> 90</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-91"> 91</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-92"> 92</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-93"> 93</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-94"> 94</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-95"> 95</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-100">100</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-101">101</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-104">104</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-105">105</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-106">106</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-107">107</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI--source--__codelineno-0-108">108</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-17"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-17" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">GitCLI</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-18"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-18" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-18"></a><span class="w">    </span><span class="sd">"""Thin wrapper around local git CLI commands."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-19"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-19" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-19"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-20"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-20" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-20"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repo_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">):</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-21"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-21" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">repo_dir</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-22"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-22" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-22"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-23"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-23" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-23"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-24"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-24" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-24"></a><span class="w">        </span><span class="sd">"""Run a git command, raise ExternalCLIError on non-zero exit."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-25"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-25" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-25"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-26"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-26" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-26"></a>            <span class="p">[</span><span class="s2">"git"</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-27"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-27" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-27"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-28"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-28" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-28"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-29"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-29" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-29"></a>            <span class="n">cwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-30"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-30" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-30"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-31"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-31" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-31"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-32"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-32" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-32"></a>        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-33"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-33" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-33"></a>            <span class="k">raise</span> <span class="n">ExternalCLIError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"git </span><span class="si">{</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-34"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-34" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-34"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-35"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-35" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-35"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-36"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-36" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-36"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-37"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-37" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">verify_environment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-38"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-38" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-38"></a><span class="w">        </span><span class="sd">"""Check git is available, we're inside a repo, and committer identity is set."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-39"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-39" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-39"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-40"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-40" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-40"></a>            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">"git"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-41"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-41" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-41"></a>        <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">)</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-42"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-42" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-42"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">"Error: git must be installed and available on PATH"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-43"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-43" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-43"></a>            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-44"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-44" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-44"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-45"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-45" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-45"></a>        <span class="c1"># Mark repo_dir as safe to handle ownership mismatches in containers</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-46"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-46" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-46"></a>        <span class="n">abs_repo</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-47"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-47" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-47"></a>        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-48"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-48" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-48"></a>            <span class="p">[</span><span class="s2">"git"</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">,</span> <span class="s2">"--global"</span><span class="p">,</span> <span class="s2">"--add"</span><span class="p">,</span> <span class="s2">"safe.directory"</span><span class="p">,</span> <span class="n">abs_repo</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-49"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-49" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-49"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-50"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-50" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-50"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-51"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-51" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-51"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-52"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-52" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-52"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-53"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-53" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-53"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span> <span class="o">/</span> <span class="s2">".git"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-54"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-54" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-54"></a>            <span class="nb">print</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-55"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-55" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-55"></a>                <span class="s2">"Error: target repository must be cloned locally before running this tool"</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-56"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-56" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-56"></a>                <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-57"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-57" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-57"></a>            <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-58"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-58" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-58"></a>            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-59"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-59" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-59"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-60"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-60" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-60"></a>        <span class="c1"># Ensure committer identity is configured (required for commits in CI)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-61"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-61" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-61"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">"user.name"</span><span class="p">,</span> <span class="s2">"all-all-contributors[bot]"</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-62"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-62" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-62"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-63"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-63" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-63"></a>            <span class="s2">"user.email"</span><span class="p">,</span> <span class="s2">"all-all-contributors[bot]@users.noreply.github.com"</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-64"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-64" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-64"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-65"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-65" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-65"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-66"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-66" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-66"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_git_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-67"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-67" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-67"></a><span class="w">        </span><span class="sd">"""Set a git config value if not already configured."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-68"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-68" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-68"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-69"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-69" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-69"></a>            <span class="p">[</span><span class="s2">"git"</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">,</span> <span class="n">key</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-70"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-70" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-70"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-71"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-71" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-71"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-72"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-72" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-72"></a>            <span class="n">cwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-73"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-73" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-73"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-74"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-74" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-74"></a>        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-75"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-75" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-75"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"--global"</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-76"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-76" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-76"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-77"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-77" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-77"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-78"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-78" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-78"></a><span class="w">        </span><span class="sd">"""Create a new branch from base_branch, or switch to it if it already exists."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-79"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-79" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-79"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-80"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-80" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-80"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">,</span> <span class="n">base_branch</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-81"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-81" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-81"></a>        <span class="k">except</span> <span class="n">ExternalCLIError</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-82"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-82" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-82"></a>            <span class="c1"># base_branch ref may not exist in shallow clones; try from HEAD</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-83"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-83" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-83"></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-84"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-84" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-84"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-85"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-85" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-85"></a>            <span class="k">except</span> <span class="n">ExternalCLIError</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-86"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-86" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-86"></a>                <span class="c1"># Branch already exists locally</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-87"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-87" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-87"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-88"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-88" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-88"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-89"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-89" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-89"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_for_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-90"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-90" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-90"></a><span class="w">        </span><span class="sd">"""Return list of files with unstaged changes (empty list means no changes)."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-91"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-91" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-91"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"diff"</span><span class="p">,</span> <span class="s2">"--name-only"</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-92"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-92" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-92"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">f</span><span class="p">]</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-93"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-93" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-93"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-94"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-94" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-94"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">commit_files</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-95"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-95" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-95"></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-96"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-96" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-96"></a>        <span class="n">filepaths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-97"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-97" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-97"></a>        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Merging all contributors info from across the org"</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-98"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-98" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-98"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-99"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-99" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-99"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"add"</span><span class="p">,</span> <span class="o">*</span><span class="n">filepaths</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-100"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-100" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-100"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"commit"</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-101"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-101" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-101"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-102"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-102" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-102"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">push_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-103"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-103" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-103"></a><span class="w">        </span><span class="sd">"""Push branch to origin, force-push if remote branch exists.</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-104"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-104" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-104"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-105"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-105" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-105"></a><span class="sd">        Using both `--force` and `--set-upstream` handles both new and</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-106"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-106" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-106"></a><span class="sd">        existing remote branches in one call.</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-107"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-107" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-107"></a><span class="sd">        """</span>
+</span><span id="all_all_contributors.external_cli.GitCLI--source--__span-0-108"><a id="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-108" name="all_all_contributors.external_cli.GitCLI--source--__codelineno-0-108"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"push"</span><span class="p">,</span> <span class="s2">"--set-upstream"</span><span class="p">,</span> <span class="s2">"--force"</span><span class="p">,</span> <span class="s2">"origin"</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="all_all_contributors.external_cli.GitCLI.check_for_changes" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">check_for_changes</span><span class="p">()</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return list of files with unstaged changes (empty list means no changes).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-92">92</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__span-0-89"><a id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-89" name="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="nf">check_for_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__span-0-90"><a id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-90" name="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-90"></a><span class="w">    </span><span class="sd">"""Return list of files with unstaged changes (empty list means no changes)."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__span-0-91"><a id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-91" name="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-91"></a>    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"diff"</span><span class="p">,</span> <span class="s2">"--name-only"</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__span-0-92"><a id="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-92" name="all_all_contributors.external_cli.GitCLI.check_for_changes--source--__codelineno-0-92"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">f</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="all_all_contributors.external_cli.GitCLI.create_branch" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_branch</span><span class="p">(</span><span class="n">head_branch</span><span class="p">,</span> <span class="n">base_branch</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Create a new branch from base_branch, or switch to it if it already exists.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-77"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-77" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-77"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-78"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-78" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-78"></a><span class="w">    </span><span class="sd">"""Create a new branch from base_branch, or switch to it if it already exists."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-79"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-79" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-79"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-80"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-80" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-80"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">,</span> <span class="n">base_branch</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-81"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-81" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-81"></a>    <span class="k">except</span> <span class="n">ExternalCLIError</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-82"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-82" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-82"></a>        <span class="c1"># base_branch ref may not exist in shallow clones; try from HEAD</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-83"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-83" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-83"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-84"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-84" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-84"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-85"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-85" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-85"></a>        <span class="k">except</span> <span class="n">ExternalCLIError</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-86"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-86" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-86"></a>            <span class="c1"># Branch already exists locally</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.create_branch--source--__span-0-87"><a id="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-87" name="all_all_contributors.external_cli.GitCLI.create_branch--source--__codelineno-0-87"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"switch"</span><span class="p">,</span> <span class="n">head_branch</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="all_all_contributors.external_cli.GitCLI.push_branch" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">push_branch</span><span class="p">(</span><span class="n">branch_name</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Push branch to origin, force-push if remote branch exists.</p>
+<p>Using both <code>--force</code> and <code>--set-upstream</code> handles both new and
+existing remote branches in one call.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-104">104</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-105">105</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-106">106</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-107">107</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-108">108</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-102"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-102" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-102"></a><span class="k">def</span><span class="w"> </span><span class="nf">push_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-103"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-103" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-103"></a><span class="w">    </span><span class="sd">"""Push branch to origin, force-push if remote branch exists.</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-104"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-104" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-104"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-105"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-105" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-105"></a><span class="sd">    Using both `--force` and `--set-upstream` handles both new and</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-106"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-106" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-106"></a><span class="sd">    existing remote branches in one call.</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-107"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-107" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-107"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.push_branch--source--__span-0-108"><a id="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-108" name="all_all_contributors.external_cli.GitCLI.push_branch--source--__codelineno-0-108"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="s2">"push"</span><span class="p">,</span> <span class="s2">"--set-upstream"</span><span class="p">,</span> <span class="s2">"--force"</span><span class="p">,</span> <span class="s2">"origin"</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="all_all_contributors.external_cli.GitCLI.verify_environment" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">verify_environment</span><span class="p">()</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Check git is available, we're inside a repo, and committer identity is set.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-64">64</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-37"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-37" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_environment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-38"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-38" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-38"></a><span class="w">    </span><span class="sd">"""Check git is available, we're inside a repo, and committer identity is set."""</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-39"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-39" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-39"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-40"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-40" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-40"></a>        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">"git"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-41"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-41" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-41"></a>    <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">)</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-42"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-42" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-42"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"Error: git must be installed and available on PATH"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-43"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-43" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-43"></a>        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-44"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-44" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-44"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-45"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-45" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-45"></a>    <span class="c1"># Mark repo_dir as safe to handle ownership mismatches in containers</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-46"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-46" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-46"></a>    <span class="n">abs_repo</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-47"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-47" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-47"></a>    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-48"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-48" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-48"></a>        <span class="p">[</span><span class="s2">"git"</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">,</span> <span class="s2">"--global"</span><span class="p">,</span> <span class="s2">"--add"</span><span class="p">,</span> <span class="s2">"safe.directory"</span><span class="p">,</span> <span class="n">abs_repo</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-49"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-49" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-49"></a>        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-50"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-50" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-50"></a>        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-51"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-51" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-51"></a>    <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-52"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-52" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-52"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-53"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-53" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-53"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repo_dir</span> <span class="o">/</span> <span class="s2">".git"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-54"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-54" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-54"></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-55"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-55" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-55"></a>            <span class="s2">"Error: target repository must be cloned locally before running this tool"</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-56"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-56" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-56"></a>            <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-57"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-57" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-57"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-58"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-58" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-58"></a>        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-59"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-59" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-59"></a>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-60"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-60" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-60"></a>    <span class="c1"># Ensure committer identity is configured (required for commits in CI)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-61"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-61" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-61"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span><span class="s2">"user.name"</span><span class="p">,</span> <span class="s2">"all-all-contributors[bot]"</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-62"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-62" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-62"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_git_config</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-63"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-63" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-63"></a>        <span class="s2">"user.email"</span><span class="p">,</span> <span class="s2">"all-all-contributors[bot]@users.noreply.github.com"</span>
+</span><span id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__span-0-64"><a id="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-64" name="all_all_contributors.external_cli.GitCLI.verify_environment--source--__codelineno-0-64"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="all_all_contributors.external_cli.run_all_contributors_generate" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">run_all_contributors_generate</span><span class="p">(</span><span class="n">repo_dir</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Run <code>all-contributors generate</code> in repo_dir.</p>
+<p>Raises ExternalCLIError on any failure.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-127">127</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-128">128</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-129">129</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-130">130</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-131">131</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-132">132</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-133">133</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-134">134</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-135">135</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-136">136</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-137">137</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-138">138</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-139">139</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-140">140</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-141">141</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-142">142</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-143">143</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-144">144</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-145">145</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-146">146</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-147">147</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-148">148</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-149">149</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-150">150</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-127"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-127" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-127"></a><span class="k">def</span><span class="w"> </span><span class="nf">run_all_contributors_generate</span><span class="p">(</span><span class="n">repo_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-128"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-128" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-128"></a><span class="w">    </span><span class="sd">"""Run `all-contributors generate` in repo_dir.</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-129"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-129" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-129"></a>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-130"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-130" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-130"></a><span class="sd">    Raises ExternalCLIError on any failure.</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-131"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-131" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-131"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-132"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-132" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-132"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-133"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-133" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-133"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-134"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-134" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-134"></a>            <span class="p">[</span><span class="s2">"all-contributors"</span><span class="p">,</span> <span class="s2">"generate"</span><span class="p">],</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-135"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-135" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-135"></a>            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-136"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-136" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-136"></a>            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-137"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-137" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-137"></a>            <span class="n">cwd</span><span class="o">=</span><span class="n">repo_dir</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-138"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-138" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-138"></a>            <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-139"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-139" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-139"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-140"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-140" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-140"></a>    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-141"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-141" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-141"></a>        <span class="k">raise</span> <span class="n">ExternalCLIError</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-142"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-142" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-142"></a>            <span class="s2">"all-contributors generate"</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-143"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-143" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-143"></a>            <span class="s2">"all-contributors generate timed out after 30 seconds"</span><span class="p">,</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-144"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-144" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-144"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-145"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-145" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-145"></a>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-146"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-146" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-146"></a>    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-147"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-147" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-147"></a>        <span class="n">detail</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"exit code </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">returncode</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-148"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-148" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-148"></a>        <span class="k">raise</span> <span class="n">ExternalCLIError</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-149"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-149" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-149"></a>            <span class="s2">"all-contributors generate"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"all-contributors generate failed: </span><span class="si">{</span><span class="n">detail</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="all_all_contributors.external_cli.run_all_contributors_generate--source--__span-0-150"><a id="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-150" name="all_all_contributors.external_cli.run_all_contributors_generate--source--__codelineno-0-150"></a>        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="all_all_contributors.external_cli.verify_all_contributors_environment" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">verify_all_contributors_environment</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks the binary is on PATH and executable first.</p>
+<p>Raises ExternalCLIError on any failure.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>all_all_contributors/external_cli.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-111">111</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-112">112</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-113">113</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-114">114</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-115">115</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-116">116</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-117">117</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-118">118</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-119">119</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-120">120</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-121">121</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-122">122</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-123">123</a></span>
+<span class="normal"><a href="#all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-124">124</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-111"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-111" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-111"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_all_contributors_environment</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-112"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-112" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-112"></a><span class="w">    </span><span class="sd">"""Checks the binary is on PATH and executable first.</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-113"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-113" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-113"></a>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-114"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-114" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-114"></a><span class="sd">    Raises ExternalCLIError on any failure.</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-115"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-115" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-115"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-116"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-116" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-116"></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">"all-contributors"</span><span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-117"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-117" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-117"></a>    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-118"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-118" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-118"></a>        <span class="k">raise</span> <span class="n">ExternalCLIError</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-119"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-119" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-119"></a>            <span class="s2">"which all-contributors"</span><span class="p">,</span> <span class="s2">"all-contributors is not installed or not on PATH"</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-120"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-120" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-120"></a>        <span class="p">)</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-121"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-121" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-121"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">):</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-122"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-122" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-122"></a>        <span class="k">raise</span> <span class="n">ExternalCLIError</span><span class="p">(</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-123"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-123" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-123"></a>            <span class="s2">""</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"all-contributors lacks execute permissions: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__span-0-124"><a id="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-124" name="all_all_contributors.external_cli.verify_all_contributors_environment--source--__codelineno-0-124"></a>        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2709,7 +3520,7 @@ existing remote branches in one call.</p>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-99"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-99" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-99"></a>            <span class="p">(</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-100"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-100" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-100"></a>                <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-101"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-101" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-101"></a>                <span class="k">for</span> <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
-</span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span> <span class="ow">in</span> <span class="n">match</span>
+</span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102"></a>                <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-103"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-103" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-103"></a>            <span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-104"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-104" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-104"></a>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-105"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-105" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-105"></a>        <span class="p">)</span>
@@ -3175,7 +3986,7 @@ to the combined <code>.all-contributorsrc</code> file.
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-99"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-99" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-99"></a>        <span class="p">(</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-100"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-100" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-100"></a>            <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-101"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-101" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-101"></a>            <span class="k">for</span> <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
-</span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span> <span class="ow">in</span> <span class="n">match</span>
+</span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102"></a>            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-103"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-103" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-103"></a>        <span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-104"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-104" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-104"></a>        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-105"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-105" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-105"></a>    <span class="p">)</span>

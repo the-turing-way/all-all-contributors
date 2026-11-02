@@ -575,6 +575,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../external_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    external_cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../git_cli/" class="md-nav__link">
         
   
@@ -960,6 +988,34 @@
     
   
     test_cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tests/test_external_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test_external_cli
   
 
     
@@ -1608,7 +1664,7 @@
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-99"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-99" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-99"></a>            <span class="p">(</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-100"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-100" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-100"></a>                <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-101"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-101" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-101"></a>                <span class="k">for</span> <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
-</span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span> <span class="ow">in</span> <span class="n">match</span>
+</span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-102"></a>                <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-103"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-103" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-103"></a>            <span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-104"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-104" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-104"></a>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI--source--__span-0-105"><a id="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-105" name="all_all_contributors.github_api.GitHubAPI--source--__codelineno-0-105"></a>        <span class="p">)</span>
@@ -2074,7 +2130,7 @@ to the combined <code>.all-contributorsrc</code> file.
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-99"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-99" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-99"></a>        <span class="p">(</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-100"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-100" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-100"></a>            <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-101"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-101" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-101"></a>            <span class="k">for</span> <span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
-</span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span> <span class="ow">in</span> <span class="n">match</span>
+</span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-102"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-102"></a>            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head_branch</span><span class="p">)</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-103"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-103" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-103"></a>        <span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-104"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-104" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-104"></a>        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
 </span><span id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__span-0-105"><a id="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-105" name="all_all_contributors.github_api.GitHubAPI.find_existing_pull_request--source--__codelineno-0-105"></a>    <span class="p">)</span>
