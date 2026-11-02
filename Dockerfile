@@ -2,7 +2,7 @@
 # - https://github.com/sgibson91/bump-helm-deps-action/blob/main/Dockerfile
 
 # Use a Python slim image
-FROM python:3.14.6-slim
+FROM python:3.15.0-slim
 
 # Install git
 RUN apt-get update \
