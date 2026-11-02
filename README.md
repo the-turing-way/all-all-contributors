@@ -30,9 +30,20 @@ This project will provide a way to fetch all of the `.all-contributorsrc` files 
 | `organisation` | The name of the GitHub organisation to collect all-contributors from | **YES** |
 | `target_repo` | The name of the repository within the GitHub organisation where the merged all-contributors file will live | **YES** |
 | `github_token` | A GitHub token with permissions to write to the contents of the target repo and open pull requests. | **YES** |
-| `target_filepath` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
+| `target_filepath` | The filepath to the `.all-contributorsrc` file in the target repo. Defaults to: `.all-contributorsrc`. | no |
+| `ignore_file` | Path to a plain text file containing a list of repos within the organisation to exclude from the merge. Defaults to: `.repoignore`. | no |
 | `base_branch` | The name of the branch on the target repo to open pull requests against. Defaults to: `main`. | no |
-| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merge-all-contributors`. | no |
+| `head_branch` | A prefix to prepend to head branches when opening pull requests. Defaults to: `merged-all-contributors`. | no |
+
+### CLI Usage
+
+The tool can also be run standalone outside of GitHub Actions:
+
+```console
+all-all-contributors MY_ORG MY_REPO --repo-dir /path/to/local/clone
+```
+
+All action inputs are also available as CLI arguments. Use `--help` for details. The `--repo-dir` option (env: `INPUT_REPO_DIR`) specifies the path to the local clone of the target repository (defaults to `.`).
 
 ### Permissions
 
@@ -89,6 +100,45 @@ If you cannot enable GitHub Actions to create pull requests (due to organization
    ```
 
 **Security Note:** Personal Access Tokens have broader permissions than `GITHUB_TOKEN`. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.
+
+## Versioning and Releases
+
+This action follows [Semantic Versioning](https://semver.org/). When referencing the action in your workflows, you can pin to different version levels:
+
+### Recommended: Major Version
+
+```yaml
+uses: the-turing-way/all-all-contributors@v1
+```
+
+**Best for most users.** Automatically receives:
+- ✅ Bug fixes (patch updates)
+- ✅ New features (minor updates)
+- ❌ Breaking changes (major updates require manual upgrade)
+
+### Specific Version
+
+```yaml
+uses: the-turing-way/all-all-contributors@v1.2.3
+```
+
+**Best for maximum stability.** Pins to an exact version. You control when to update.
+
+### Latest Development
+
+```yaml
+uses: the-turing-way/all-all-contributors@main
+```
+
+**Not recommended for production.** Gets the latest code from the main branch. May include unreleased features or bugs.
+
+### Version Format
+
+- **v1.2.3** - Exact version (patch release)
+- **v1.2** - Latest patch within minor version
+- **v1** - Latest minor and patch within major version (recommended)
+
+For maintainers releasing new versions, see [Release Instructions](docs/developer/RELEASE.md).
 
 ## Contributors ✨
 
