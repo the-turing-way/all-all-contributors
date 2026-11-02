@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -530,7 +530,7 @@
   <span class="md-ellipsis">
     
   
-    __about__
+    _about_
   
 
     
@@ -1160,6 +1160,30 @@ The <a href="https://docs.github.com/en/actions/security-guides/automatic-token-
 </li>
 </ol>
 <p><strong>Security Note:</strong> Personal Access Tokens have broader permissions than <code>GITHUB_TOKEN</code>. Only use this approach if the GitHub Actions setting cannot be enabled, and ensure the PAT is stored securely as a repository secret.</p>
+<h2 id="versioning-and-releases">Versioning and Releases</h2>
+<p>This action follows <a href="https://semver.org/">Semantic Versioning</a>. When referencing the action in your workflows, you can pin to different version levels:</p>
+<h3 id="recommended-major-version">Recommended: Major Version</h3>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the-turing-way/all-all-contributors@v1</span>
+</span></code></pre></div>
+<p><strong>Best for most users.</strong> Automatically receives:
+- ✅ Bug fixes (patch updates)
+- ✅ New features (minor updates)
+- ❌ Breaking changes (major updates require manual upgrade)</p>
+<h3 id="specific-version">Specific Version</h3>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the-turing-way/all-all-contributors@v1.2.3</span>
+</span></code></pre></div>
+<p><strong>Best for maximum stability.</strong> Pins to an exact version. You control when to update.</p>
+<h3 id="latest-development">Latest Development</h3>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the-turing-way/all-all-contributors@main</span>
+</span></code></pre></div>
+<p><strong>Not recommended for production.</strong> Gets the latest code from the main branch. May include unreleased features or bugs.</p>
+<h3 id="version-format">Version Format</h3>
+<ul>
+<li><strong>v1.2.3</strong> - Exact version (patch release)</li>
+<li><strong>v1.2</strong> - Latest patch within minor version</li>
+<li><strong>v1</strong> - Latest minor and patch within major version (recommended)</li>
+</ul>
+<p>For maintainers releasing new versions, see <a href="docs/developer/RELEASE.md">Release Instructions</a>.</p>
 <h2 id="contributors">Contributors ✨</h2>
 <p>This project started at the <a href="https://www.software.ac.uk/workshop/collaborations-workshop-2025-cw25">2025 SSI Collaboration Workshop Hack Day</a>.</p>
 <p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>
@@ -1235,10 +1259,10 @@ The <a href="https://docs.github.com/en/actions/security-guides/automatic-token-
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "content.action.edit"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "content.action.edit"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

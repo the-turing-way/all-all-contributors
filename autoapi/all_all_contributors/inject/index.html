@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -27,10 +27,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -526,7 +526,7 @@
   <span class="md-ellipsis">
     
   
-    __about__
+    _about_
   
 
     
@@ -1207,33 +1207,33 @@ JSON dict with a new list</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>all_all_contributors/inject.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">inject_config</span><span class="p">(</span><span class="n">all_contributors_rc</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">contributors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="sd">"""Replace the 'contributors' field of an all contributors configuration</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    JSON dict with a new list</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">        dict: Updated .all-contributorsrc config in JSON dict format</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="sd">    """</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="k">if</span> <span class="s2">"contributors"</span> <span class="ow">in</span> <span class="n">all_contributors_rc</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="n">all_contributors_rc</span><span class="p">[</span><span class="s2">"contributors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">contributors</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"All contributors file is missing 'contributors' field"</span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">validate_all_contributors_rc</span><span class="p">(</span><span class="n">all_contributors_rc</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="k">return</span> <span class="n">all_contributors_rc</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#all_all_contributors.inject.inject_config--source--__codelineno-0-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="all_all_contributors.inject.inject_config--source--__span-0-8"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-8" name="all_all_contributors.inject.inject_config--source--__codelineno-0-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">inject_config</span><span class="p">(</span><span class="n">all_contributors_rc</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">contributors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-9"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-9" name="all_all_contributors.inject.inject_config--source--__codelineno-0-9"></a><span class="w">    </span><span class="sd">"""Replace the 'contributors' field of an all contributors configuration</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-10"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-10" name="all_all_contributors.inject.inject_config--source--__codelineno-0-10"></a><span class="sd">    JSON dict with a new list</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-11"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-11" name="all_all_contributors.inject.inject_config--source--__codelineno-0-11"></a>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-12"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-12" name="all_all_contributors.inject.inject_config--source--__codelineno-0-12"></a><span class="sd">    Returns:</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-13"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-13" name="all_all_contributors.inject.inject_config--source--__codelineno-0-13"></a><span class="sd">        dict: Updated .all-contributorsrc config in JSON dict format</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-14"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-14" name="all_all_contributors.inject.inject_config--source--__codelineno-0-14"></a><span class="sd">    """</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-15"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-15" name="all_all_contributors.inject.inject_config--source--__codelineno-0-15"></a>    <span class="k">if</span> <span class="s2">"contributors"</span> <span class="ow">in</span> <span class="n">all_contributors_rc</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-16"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-16" name="all_all_contributors.inject.inject_config--source--__codelineno-0-16"></a>        <span class="n">all_contributors_rc</span><span class="p">[</span><span class="s2">"contributors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">contributors</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-17"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-17" name="all_all_contributors.inject.inject_config--source--__codelineno-0-17"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-18"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-18" name="all_all_contributors.inject.inject_config--source--__codelineno-0-18"></a>        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"All contributors file is missing 'contributors' field"</span><span class="p">)</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-19"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-19" name="all_all_contributors.inject.inject_config--source--__codelineno-0-19"></a>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-20"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-20" name="all_all_contributors.inject.inject_config--source--__codelineno-0-20"></a>    <span class="n">validate_all_contributors_rc</span><span class="p">(</span><span class="n">all_contributors_rc</span><span class="p">)</span>
+</span><span id="all_all_contributors.inject.inject_config--source--__span-0-21"><a id="all_all_contributors.inject.inject_config--source--__codelineno-0-21" name="all_all_contributors.inject.inject_config--source--__codelineno-0-21"></a>    <span class="k">return</span> <span class="n">all_contributors_rc</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1296,10 +1296,10 @@ JSON dict with a new list</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
