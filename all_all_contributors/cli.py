@@ -8,7 +8,12 @@ from typing import Annotated
 import typer
 import requests
 
-from .git_cli import GitCLI, GitCLIError
+from .external_cli import (
+    GitCLI,
+    ExternalCLIError,
+    verify_all_contributors_environment,
+    run_all_contributors_generate,
+)
 from .github_api import GitHubAPI
 from .inject import inject_config
 from .merge import merge_contributors
@@ -135,6 +140,7 @@ def main(
 
     git_cli = GitCLI(repo_dir=repo_dir)
     git_cli.verify_environment()
+    verify_all_contributors_environment()
 
     github_api = GitHubAPI(
         organisation,
@@ -142,6 +148,7 @@ def main(
         github_token,
         target_filepath=target_filepath,
         base_branch=base_branch,
+        head_branch=head_branch,
     )
 
     try:
@@ -171,16 +178,19 @@ def main(
         with open(output_path, "w") as f:
             json.dump(updated_contents, f, indent=2)
 
-        if not git_cli.check_for_changes():
+        run_all_contributors_generate(repo_dir=repo_dir)
+
+        changed_files = git_cli.check_for_changes()
+        if not changed_files:
             print("No changes to commit.")
             raise typer.Exit(code=0)
 
-        git_cli.commit_file(target_filepath)
+        git_cli.commit_files(changed_files)
         git_cli.push_branch(github_api.head_branch)
         github_api.create_update_pull_request()
 
-    except GitCLIError as e:
-        print(f"Git error: {e}", file=sys.stderr)
+    except ExternalCLIError as e:
+        print(f"External CLI error: {e}", file=sys.stderr)
         raise typer.Exit(code=1)
     except requests.HTTPError as e:
         print(f"GitHub API error: {e}", file=sys.stderr)
