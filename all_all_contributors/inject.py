@@ -1,5 +1,3 @@
-import json
-from pathlib import Path
 from typing import Any
 
 from .validate import validate_all_contributors_rc
